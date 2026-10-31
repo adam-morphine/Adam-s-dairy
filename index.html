@@ -10,10 +10,12 @@
 body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:8px}
 h1{font-size:18px;margin:0 0 2px}
 .sub{color:var(--mut);font-size:11px;margin:0 0 8px}
+#intro{margin:0 0 8px}
 .off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:10px;padding:3px 8px;border-radius:999px;margin-bottom:6px}
 .off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
-.tip{color:var(--acc2);font-size:10px;margin:0 0 8px}
-.warn{color:#fca5a5;font-size:10px;margin:0 0 8px;line-height:1.4}
+.tip{color:var(--acc2);font-size:10px;margin:0 0 6px}
+.warn{color:#fca5a5;font-size:10px;margin:0 0 6px;line-height:1.4}
+.ix{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:4px 10px;font-size:11px;cursor:pointer;margin-top:2px}
 .bar{display:flex;gap:6px;margin-bottom:6px}
 .bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:14px}
 .bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:16px;cursor:pointer}
@@ -81,9 +83,13 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
 <p class="sub">Saaf register • detail alag window (ⓘ) • 100% offline</p>
-<div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-<p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Case ki poori detail dekhni ho to us line ke ⓘ dabao — nayi window khulegi.</p>
-<p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number & title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
+
+<div id="intro" hidden>
+  <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
+  <p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Case ki poori detail dekhni ho to us line ke ⓘ dabao — nayi window khulegi.</p>
+  <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number &amp; title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
+  <button class="ix" type="button" id="ix">✕ Samajh gaya (dobara nahi dikhega)</button>
+</div>
 
 <div class="bar">
   <input id="q" type="search" placeholder="Search: case no, party, court, dhara, thana, number…">
@@ -108,7 +114,7 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       <div class="full"><label>Col4 ↓ Dhara / Section — dropdown se chuno YA khud likho</label>
         <select id="secPick" style="margin-bottom:6px"></select>
         <input name="section" placeholder="e.g. BNS 103 / IPC 302 / Order 39 R.1 CPC / 138 NI Act">
-        <p class="hint">Dropdown sirf typing ka shortcut hai; neeche wale box me jo likha hai wahi save & search hoga.</p>
+        <p class="hint">Dropdown sirf typing ka shortcut hai; neeche wale box me jo likha hai wahi save &amp; search hoga.</p>
       </div>
       <div><label>Col5 ↑ Next date</label><input name="nextDate" type="date"></div>
       <div><label>Col5 ↓ Next proceeding</label><input name="nextProc" placeholder="Evidence…"></div>
@@ -160,7 +166,7 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </div>
 
 <script>
-var KEY='adam_diary_v1', SKEY='adam_sections_v1';
+var KEY='adam_diary_v1', SKEY='adam_sections_v1', IKEY='adam_intro_v1';
 var SEED=[
  "IPC 302 – Murder","IPC 304 – Culpable homicide not amounting to murder","IPC 307 – Attempt to murder",
  "IPC 323 – Voluntarily causing hurt","IPC 354 – Outraging modesty of woman","IPC 376 – Rape",
@@ -179,6 +185,7 @@ var q=document.getElementById('q'),clr=document.getElementById('clr'),list=docum
 var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),fs=document.getElementById('fs');
 var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
 var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
+var intro=document.getElementById('intro'),ix=document.getElementById('ix');
 var form=document.querySelector('details.main');
 var editId=null, openId=null;
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'];
@@ -231,6 +238,11 @@ function render(){
       +'</tr>';
   }).join('');
 }
+/* pehli baar hi intro dikhao, phir kabhi nahi */
+(function(){
+  if(!localStorage.getItem(IKEY)){ intro.removeAttribute('hidden'); localStorage.setItem(IKEY,'1'); }
+  if(ix) ix.addEventListener('click',function(){ intro.setAttribute('hidden',''); });
+})();
 secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
 libAddBtn.addEventListener('click',function(){
   var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
