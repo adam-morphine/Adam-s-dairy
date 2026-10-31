@@ -20,6 +20,22 @@ h1{font-size:18px;margin:0 0 2px}
 .bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:14px}
 .bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:16px;cursor:pointer}
 .count{color:var(--mut);font-size:11px;margin:0 0 8px}
+.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;margin-bottom:10px}
+.cal-hd{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.cal-hd button{background:#0f172a;border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:5px 9px;font-size:13px;cursor:pointer}
+.cal-hd .cal-today{color:var(--acc);font-weight:700}
+.cal-m{flex:1;text-align:center;font-weight:700;font-size:13px}
+.cal-jump{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.cal-jump label{font-size:10px;color:var(--mut)}
+.cal-jump input{flex:1;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:6px 8px;border-radius:8px;font-size:12px;font-family:inherit}
+.cal-wd,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-wd div{text-align:center;font-size:9px;color:var(--mut);padding:2px 0;text-transform:uppercase}
+.cal-c{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#0f172a66;border:1px solid transparent;border-radius:8px;font-size:12px;cursor:pointer;color:var(--txt)}
+.cal-c.blank{background:transparent;cursor:default}
+.cal-c.td{border-color:var(--line)}
+.cal-c.sel{background:var(--acc2);color:#06283d;font-weight:700}
+.cal-c .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.cal-c.sel .dot{background:#052e16}
 details.main{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
 details.main>summary{padding:11px 12px;font-weight:600;cursor:pointer;list-style:none;font-size:14px}
 details.main>summary::-webkit-details-marker{display:none}
@@ -36,7 +52,7 @@ textarea{resize:vertical;min-height:40px}
 .btnrow{display:flex;gap:8px;padding:0 12px 12px}
 .go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
 .cancelbtn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:11px 14px;font-size:13px;cursor:pointer}
-table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:10px}
 table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
 table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:8.5px}
 table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:7.5px}
@@ -76,29 +92,53 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 .mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-top:6px}
 .mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
 .hint{font-size:9px;color:var(--mut);margin-top:3px}
-@media(orientation:landscape){table.reg{font-size:12px}td.sr{font-size:14px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}}
+@media(orientation:landscape){table.reg{font-size:12px}td.sr{font-size:14px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}.cal-c{font-size:13px}}
 @media(max-width:380px){.inner{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Saaf register • detail alag window (ⓘ) • 100% offline</p>
+<p class="sub">Date-wise register • calendar upar • naya case neeche • 100% offline</p>
 
 <div id="intro" hidden>
   <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-  <p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Case ki poori detail dekhni ho to us line ke ⓘ dabao — nayi window khulegi.</p>
+  <p class="tip">💡 Upar calendar se kisi bhi date pe jao — us din ke cases dikhenge. Naya case banane ke liye sabse neeche ➕ Naya case kholo.</p>
   <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number &amp; title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
   <button class="ix" type="button" id="ix">✕ Samajh gaya (dobara nahi dikhega)</button>
 </div>
 
 <div class="bar">
-  <input id="q" type="search" placeholder="Search: case no, party, court, dhara, thana, number…">
+  <input id="q" type="search" placeholder="Search (isi date ke cases me): case no, party, court, dhara, thana…">
   <button id="clr" title="Clear search">✕</button>
 </div>
 <p class="count" id="count"></p>
 
+<div class="cal" id="cal">
+  <div class="cal-hd">
+    <button type="button" data-nav="-1">◀</button>
+    <div class="cal-m" id="calM">—</div>
+    <button type="button" data-nav="1">▶</button>
+    <button type="button" class="cal-today" data-nav="0">Aaj</button>
+  </div>
+  <div class="cal-jump">
+    <label>Kisi bhi date pe jao</label>
+    <input type="date" id="jump">
+  </div>
+  <div class="cal-wd" id="calWd"></div>
+  <div class="cal-g" id="calG"></div>
+</div>
+
+<table class="reg" id="tbl">
+  <colgroup><col style="width:5%"><col style="width:14%"><col style="width:15%"><col style="width:25%"><col style="width:13%"><col style="width:22%"><col style="width:6%"></colgroup>
+  <thead>
+    <tr><td class="sr">Sr</td><td>Last date</td><td>Court</td><td>पार्टी v/s पार्टी</td><td>Police station</td><td>Next date</td><td class="act"></td></tr>
+    <tr><td class="sr"></td><td>Pervious proceeding</td><td>Case number</td><td>Today proceedings</td><td>Dhara</td><td>Next proceeding</td><td class="act">ⓘ</td></tr>
+  </thead>
+  <tbody id="list"></tbody>
+</table>
+
 <details class="main">
-  <summary><span id="fs">➕ Naya case darj karo</span> <span class="ar">▾</span></summary>
+  <summary><span id="fs">➕ Naya case</span> <span class="ar">▾</span></summary>
 
   <details class="grp" open><summary><b>Face</b> • 5 column (sketch ka order)</summary>
     <div class="inner">
@@ -116,7 +156,7 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
         <input name="section" placeholder="e.g. BNS 103 / IPC 302 / Order 39 R.1 CPC / 138 NI Act">
         <p class="hint">Dropdown sirf typing ka shortcut hai; neeche wale box me jo likha hai wahi save &amp; search hoga.</p>
       </div>
-      <div><label>Col5 ↑ Next date</label><input name="nextDate" type="date"></div>
+      <div><label>Col5 ↑ Next date (khali chhodo to = chuni hui date)</label><input name="nextDate" type="date"></div>
       <div><label>Col5 ↓ Next proceeding</label><input name="nextProc" placeholder="Evidence…"></div>
     </div>
   </details>
@@ -152,15 +192,6 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
   </div>
 </details>
 
-<table class="reg" id="tbl">
-  <colgroup><col style="width:5%"><col style="width:14%"><col style="width:15%"><col style="width:25%"><col style="width:13%"><col style="width:22%"><col style="width:6%"></colgroup>
-  <thead>
-    <tr><td class="sr">Sr</td><td>Last date</td><td>Court</td><td>पार्टी v/s पार्टी</td><td>Police station</td><td>Next date</td><td class="act"></td></tr>
-    <tr><td class="sr"></td><td>Pervious proceeding</td><td>Case number</td><td>Today proceedings</td><td>Dhara</td><td>Next proceeding</td><td class="act">ⓘ</td></tr>
-  </thead>
-  <tbody id="list"></tbody>
-</table>
-
 <div class="modal-bg" id="mbg">
   <div class="modal" id="modal"></div>
 </div>
@@ -186,8 +217,19 @@ var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById
 var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
 var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
 var intro=document.getElementById('intro'),ix=document.getElementById('ix');
+var calM=document.getElementById('calM'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
 var form=document.querySelector('details.main');
 var editId=null, openId=null;
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var WD=['र','सो','मं','बु','गु','शु','श'];
+function pad2(n){return (n<10?'0':'')+n}
+function isoOf(y,m0,d){return y+'-'+pad2(m0+1)+'-'+pad2(d)}
+function todayISO(){var t=new Date();return isoOf(t.getFullYear(),t.getMonth(),t.getDate())}
+function parseISO(s){var p=(s||'').split('-');return {y:+p[0],m0:(+p[1])-1,d:+p[2]}}
+var selDate=todayISO();
+var vv=parseISO(selDate); var viewY=vv.y, viewM=vv.m0;
+function caseDatesSet(){var s={};for(var i=0;i<cases.length;i++){var nd=cases[i].nextDate;if(nd)s[nd]=1;}return s}
+function fmtLong(iso){var p=parseISO(iso);if(!p.y)return '—';return pad2(p.d)+' '+MONTHS[p.m0]+' '+p.y}
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'];
 function F(n){return form.querySelector('[name="'+n+'"]')}
 function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
@@ -218,11 +260,30 @@ function openModal(id){
     +'<div class="mrow"><button class="mbtn e" type="button" data-act="edit">✏️ Edit karo</button><button class="mbtn d" type="button" data-act="del">🗑 Delete</button></div>';
   mbg.classList.add('on');
 }
+function renderCal(){
+  calM.textContent=MONTHS[viewM]+' '+viewY;
+  jump.value=selDate;
+  var has=caseDatesSet(), tis=todayISO();
+  var first=new Date(viewY,viewM,1).getDay();
+  var dim=new Date(viewY,viewM+1,0).getDate();
+  var h='';
+  for(var i=0;i<first;i++)h+='<div class="cal-c blank"></div>';
+  for(var d=1;d<=dim;d++){
+    var iso=isoOf(viewY,viewM,d);
+    var cls='cal-c';
+    if(iso===selDate)cls+=' sel';
+    if(iso===tis)cls+=' td';
+    h+='<div class="'+cls+'" data-date="'+iso+'"><span>'+d+'</span>'+(has[iso]?'<i class="dot"></i>':'')+'</div>';
+  }
+  calG.innerHTML=h;
+}
 function render(){
+  renderCal();
   var query=q.value.trim();
-  var data=cases.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
-  count.textContent=query?(data.length+' result for "'+query+'"'):(cases.length+' case'+(cases.length===1?'':'s')+' registered');
-  if(!data.length){list.innerHTML='<tr><td colspan="7" class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</td></tr>';return}
+  var day=cases.filter(function(c){return (c.nextDate||'')===selDate});
+  var data=day.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
+  count.textContent=fmtLong(selDate)+' • '+(query?(data.length+' result for "'+query+'"'):(data.length+' case'+(data.length===1?'':'s')+' is date'));
+  if(!data.length){list.innerHTML='<tr><td colspan="7" class="empty">'+(query?'Is date pe "'+query+'" se koi case nahi mila.':'Is date pe koi case nahi. Neeche ➕ Naya case se darj karo.')+'</td></tr>';return}
   list.innerHTML=data.map(function(c){
     var sr=cases.indexOf(c)+1;
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
@@ -238,11 +299,17 @@ function render(){
       +'</tr>';
   }).join('');
 }
-/* pehli baar hi intro dikhao, phir kabhi nahi */
-(function(){
-  if(!localStorage.getItem(IKEY)){ intro.removeAttribute('hidden'); localStorage.setItem(IKEY,'1'); }
-  if(ix) ix.addEventListener('click',function(){ intro.setAttribute('hidden',''); });
-})();
+calWd.innerHTML=WD.map(function(w){return '<div>'+w+'</div>'}).join('');
+document.getElementById('cal').addEventListener('click',function(e){
+  var nav=e.target.closest('[data-nav]');
+  if(nav){var n=+nav.getAttribute('data-nav');
+    if(n===0){selDate=todayISO();var t=parseISO(selDate);viewY=t.y;viewM=t.m0;}
+    else{viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}}
+    render();return;}
+  var dc=e.target.closest('[data-date]');
+  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;render();}
+});
+jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;render();}});
 secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
 libAddBtn.addEventListener('click',function(){
   var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
@@ -255,12 +322,15 @@ saveBtn.addEventListener('click',function(){
   var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert('Case Number zaroori hai');return}
   var o={};
   FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
+  if(!o.nextDate)o.nextDate=selDate;
   o.docs=F('docsText').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
-  if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case darj karo';}
+  if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case';}
   else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
-  saveCases();clearForm();render();
+  saveCases();clearForm();
+  selDate=o.nextDate; var p=parseISO(selDate); viewY=p.y; viewM=p.m0;
+  render();
 });
-cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case darj karo';clearForm();});
+cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case';clearForm();});
 list.addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]'); if(!tr)return; var id=tr.dataset.id;
   if(e.target.closest('[data-act="info"]')){openModal(id);}
@@ -274,6 +344,10 @@ mbg.addEventListener('click',function(e){
 });
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
+(function(){
+  if(!localStorage.getItem(IKEY)){ intro.removeAttribute('hidden'); localStorage.setItem(IKEY,'1'); }
+  if(ix) ix.addEventListener('click',function(){ intro.setAttribute('hidden',''); });
+})();
 buildPicker();renderLib();render();
 </script>
 </body>
