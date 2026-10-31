@@ -175,4 +175,19 @@ saveBtn.addEventListener('click',function(){
 });
 list.addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]'); if(!tr||tr.classList.contains('detrow'))return; var id=tr.dataset.id;
- 
+  if(e.target.closest('.ibtn')){
+    var d=tr.nextElementSibling;
+    if(d && d.classList.contains('detrow')){
+      var open=d.hasAttribute('hidden');
+      if(open){d.removeAttribute('hidden');e.target.textContent=''}else{d.setAttribute('hidden','');e.target.textContent='ⓘ'}
+    }
+    return;
+  }
+  if(e.target.closest('.del')){ if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==id});save();render()} }
+});
+q.addEventListener('input',render);
+clr.addEventListener('click',function(){q.value='';render();q.focus()});
+render();
+</script>
+</body>
+</html>
