@@ -34,45 +34,55 @@ textarea{resize:vertical;min-height:40px}
 .btnrow{display:flex;gap:8px;padding:0 12px 12px}
 .go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
 .cancelbtn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:11px 14px;font-size:13px;cursor:pointer}
-table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
-table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:8px}
+table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:8.5px}
 table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:7.5px}
 table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
-td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:10px}
+td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:11px}
 td.act{text-align:center}
 .u,.d{display:block;line-height:1.3}
 .d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
 .val.b{font-weight:700;color:var(--acc2)}
 .pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
-.ibtn{background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:7px;padding:2px 5px;font-size:10px;cursor:pointer}
-tr.detrow td{background:#0b1220;padding:8px 9px}
-.blk{margin-bottom:7px}
-.blk h4{margin:0 0 3px;font-size:9px;color:var(--acc);text-transform:uppercase;letter-spacing:.4px}
-.dl{font-size:11px;line-height:1.5}
+.ibtn{background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:7px;padding:3px 7px;font-size:12px;cursor:pointer}
+.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:12px}
+mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
+.modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.72);display:none;align-items:center;justify-content:center;padding:14px;z-index:60}
+.modal-bg.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.modal .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+.modal .mh h2{margin:0;font-size:16px;color:var(--acc2)}
+.modal .mh .mc{font-size:11px;color:var(--mut);margin-top:2px}
+.modal .x{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:9px;padding:5px 10px;font-size:14px;cursor:pointer;flex:0 0 auto}
+.blk{margin-bottom:12px}
+.blk h4{margin:0 0 4px;font-size:10px;color:var(--acc);text-transform:uppercase;letter-spacing:.4px}
+.dl{font-size:13px;line-height:1.6}
 .dl span{color:var(--mut)}
-.chips{display:flex;flex-wrap:wrap;gap:4px}
-.chip{background:#0f172a;border:1px solid var(--line);color:var(--txt);font-size:10px;padding:2px 6px;border-radius:6px}
-.row2{display:flex;gap:8px;margin-top:6px}
-.editbtn{flex:1;background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
-.del{flex:1;background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
-.hint{font-size:9px;color:var(--mut);margin-top:3px}
+.dl a{color:var(--acc2);text-decoration:none}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{background:#0f172a;border:1px solid var(--line);color:var(--txt);font-size:12px;padding:3px 8px;border-radius:7px}
+.soon{background:#0f172a88;border:1px dashed var(--line);border-radius:10px;padding:9px 11px;font-size:11px;color:var(--mut);line-height:1.5}
+.soon b{color:var(--acc2)}
+.mrow{display:flex;gap:8px;margin-top:6px}
+.mbtn{flex:1;border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--line)}
+.mbtn.e{background:transparent;color:var(--acc2)}
+.mbtn.d{background:transparent;color:var(--danger);border-color:#7f1d1d}
 .libitem{display:flex;justify-content:space-between;align-items:center;gap:6px;background:#0f172a;border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:11px;margin-bottom:4px;word-break:break-word}
 .rm{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:6px;padding:2px 7px;font-size:11px;cursor:pointer;flex:0 0 auto}
 .libnote{font-size:10px;color:var(--mut);margin:4px 0 8px;line-height:1.4}
 .mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-top:6px}
 .mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
-.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:12px}
-mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
-@media(orientation:landscape){table.reg{font-size:11.5px}td.sr{font-size:13px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}}
+.hint{font-size:9px;color:var(--mut);margin-top:3px}
+@media(orientation:landscape){table.reg{font-size:12px}td.sr{font-size:14px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}}
 @media(max-width:380px){.inner{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Register style • BNS/IPC section picker • 100% offline</p>
+<p class="sub">Saaf register • detail alag window (ⓘ) • 100% offline</p>
 <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-<p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Dhara field ke upar dropdown se section chuno, ya khud likho.</p>
+<p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Case ki poori detail dekhni ho to us line ke ⓘ dabao — nayi window khulegi.</p>
 <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number & title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
 
 <div class="bar">
@@ -84,7 +94,7 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <details class="main">
   <summary><span id="fs">➕ Naya case darj karo</span> <span class="ar">▾</span></summary>
 
-  <details class="grp" open><summary><b>Face</b> • 6 column (sketch ka order)</summary>
+  <details class="grp" open><summary><b>Face</b> • 5 column (sketch ka order)</summary>
     <div class="inner">
       <div><label>Col1 ↑ Last date</label><input name="lastDate" type="date"></div>
       <div><label>Col1 ↓ Pervious proceeding</label><input name="lastProc" placeholder="New case / Notice…"></div>
@@ -102,16 +112,16 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       </div>
       <div><label>Col5 ↑ Next date</label><input name="nextDate" type="date"></div>
       <div><label>Col5 ↓ Next proceeding</label><input name="nextProc" placeholder="Evidence…"></div>
-      <div><label>Col6 ↑ Client number</label><input name="clientPhone" placeholder="+91…"></div>
-      <div><label>Col6 ↓ Opp. Adv. number</label><input name="oppPhone" placeholder="+91…"></div>
     </div>
   </details>
 
-  <details class="grp"><summary><b>ⓘ Details</b> • naam / pata / papers (click pe)</summary>
+  <details class="grp"><summary><b>ⓘ Window</b> • client / opposition / numbers / papers (ⓘ pe khulega)</summary>
     <div class="inner">
       <div><label>Client ka Naam</label><input name="clientName" placeholder="Ram Swaroop"></div>
+      <div><label>Client Number</label><input name="clientPhone" placeholder="+91…"></div>
       <div class="full"><label>Client ka Pata</label><input name="clientAddress" placeholder="Chamber / ghar"></div>
       <div><label>Opposition Vakil</label><input name="oppName" placeholder="Adv. X"></div>
+      <div><label>Opp. Adv. Number</label><input name="oppPhone" placeholder="+91…"></div>
       <div class="full"><label>Opposition Pata / Firm</label><input name="oppAddress" placeholder="Firm ka pata"></div>
       <div class="full"><label>Har paper ek nayi line me</label><textarea name="docsText" placeholder="Vakalatnama 12-10-2026&#10;FIR copy&#10;Cheque return memo"></textarea>
       <p class="hint">📎 Asli PDF/photo attach agle step me. Abhi slow net ke liye yahan likh lo — list ban jayegi.</p></div>
@@ -137,13 +147,17 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </details>
 
 <table class="reg" id="tbl">
-  <colgroup><col style="width:5%"><col style="width:13%"><col style="width:14%"><col style="width:21%"><col style="width:11%"><col style="width:14%"><col style="width:13%"><col style="width:5%"></colgroup>
+  <colgroup><col style="width:5%"><col style="width:14%"><col style="width:15%"><col style="width:25%"><col style="width:13%"><col style="width:22%"><col style="width:6%"></colgroup>
   <thead>
-    <tr><td class="sr">Sr</td><td>Last date</td><td>Court</td><td>पार्टी v/s पार्टी</td><td>Police station</td><td>Next date</td><td>Clients numbers</td><td class="act"></td></tr>
-    <tr><td class="sr"></td><td>Pervious proceeding</td><td>Case number</td><td>Today proceedings</td><td>Dhara</td><td>Next proceeding</td><td>Opp. Adv. Numbers</td><td class="act"></td></tr>
+    <tr><td class="sr">Sr</td><td>Last date</td><td>Court</td><td>पार्टी v/s पार्टी</td><td>Police station</td><td>Next date</td><td class="act"></td></tr>
+    <tr><td class="sr"></td><td>Pervious proceeding</td><td>Case number</td><td>Today proceedings</td><td>Dhara</td><td>Next proceeding</td><td class="act">ⓘ</td></tr>
   </thead>
   <tbody id="list"></tbody>
 </table>
+
+<div class="modal-bg" id="mbg">
+  <div class="modal" id="modal"></div>
+</div>
 
 <script>
 var KEY='adam_diary_v1', SKEY='adam_sections_v1';
@@ -164,8 +178,9 @@ function saveLib(){localStorage.setItem(SKEY,JSON.stringify(LIB))}
 var q=document.getElementById('q'),clr=document.getElementById('clr'),list=document.getElementById('list'),count=document.getElementById('count');
 var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),fs=document.getElementById('fs');
 var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
+var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
 var form=document.querySelector('details.main');
-var editId=null;
+var editId=null, openId=null;
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'];
 function F(n){return form.querySelector('[name="'+n+'"]')}
 function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
@@ -173,40 +188,47 @@ function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(q
 function fmt(d){if(!d)return '—';var p=d.split('-');return p.length===3?(p[2]+'/'+p[1]+'/'+p[0]):d}
 function docsArr(c){return (c.docs||[]).filter(Boolean)}
 function hay(c){return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,(c.docs||[]).join(' ')].join(' ').toLowerCase()}
+function tel(v){return v?('tel:'+String(v).replace(/\s+/g,'')):'#';}
 function buildPicker(){secPick.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent='— list se chuno (ya neeche khud likho) —';secPick.appendChild(o0);LIB.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;secPick.appendChild(o);});}
 function renderLib(){libList.innerHTML='';if(!LIB.length){var n=document.createElement('div');n.className='libnote';n.textContent='List khaali hai. Upar paste karke Add karo.';libList.appendChild(n);return;}LIB.forEach(function(s){var d=document.createElement('div');d.className='libitem';var t=document.createElement('span');t.textContent=s;var b=document.createElement('button');b.className='rm';b.type='button';b.textContent='✕';b.setAttribute('data-val',s);d.appendChild(t);d.appendChild(b);libList.appendChild(d);});}
 function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docsText').value=(c.docs||[]).join('\n');try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}}
 function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){el.value=''});secPick.value='';}
 function cell(u,d,query,bold,pill){var t=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);return '<span class="u'+(bold?' val b':'')+'">'+t+'</span><span class="d">'+hl(d,query)+'</span>';}
-function blk(title,rows){var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?esc(x[1]):'—')+'</div>'}).join('');return '<div class="blk"><h4>'+title+'</h4><div class="dl">'+r+'</div></div>';}
-function closeDet(dr){dr.setAttribute('hidden','');var m=dr.previousElementSibling;if(m){var b=m.querySelector('.ibtn');if(b)b.textContent='ⓘ';}}
+function blk(title,rows){var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?(x[2]?('<a href="'+x[2]+'">'+esc(x[1])+'</a>'):esc(x[1])):'—')+'</div>'}).join('');return '<div class="blk"><h4>'+title+'</h4><div class="dl">'+r+'</div></div>';}
+function closeModal(){mbg.classList.remove('on');openId=null;modal.innerHTML='';}
+function openModal(id){
+  var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===id){c=cases[i];break;}}
+  if(!c)return; openId=id;
+  var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
+  var ds=docsArr(c);
+  var docHtml=ds.length?('<div class="chips">'+ds.map(function(d){return '<span class="chip">'+esc(d)+'</span>'}).join('')+'</div>'):'<div class="dl"><span>Koi paper add nahi kiya.</span></div>';
+  modal.innerHTML=''
+    +'<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+' • '+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
+    +blk('Client',[['Naam',c.clientName],['Number',c.clientPhone,tel(c.clientPhone)],['Pata',c.clientAddress]])
+    +blk('Opposition',[['Vakil',c.oppName],['Number',c.oppPhone,tel(c.oppPhone)],['Pata',c.oppAddress]])
+    +'<div class="blk"><h4>Client ke Papers</h4>'+docHtml+'</div>'
+    +'<div class="soon">🔜 <b>Aage isi window me naye option aayenge:</b> Fees &amp; pending dues • Documents (PDF/photo) • Voice notes • WhatsApp update. Abhi yahan khaali jagah hai — tu bol to next step me yahin jod denge.</div>'
+    +'<div class="mrow"><button class="mbtn e" type="button" data-act="edit">✏️ Edit karo</button><button class="mbtn d" type="button" data-act="del">🗑 Delete</button></div>';
+  mbg.classList.add('on');
+}
 function render(){
   var query=q.value.trim();
   var data=cases.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
   count.textContent=query?(data.length+' result for "'+query+'"'):(cases.length+' case'+(cases.length===1?'':'s')+' registered');
-  if(!data.length){list.innerHTML='<tr><td colspan="8" class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</td></tr>';return}
+  if(!data.length){list.innerHTML='<tr><td colspan="7" class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</td></tr>';return}
   list.innerHTML=data.map(function(c){
     var sr=cases.indexOf(c)+1;
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
     var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
-    var row='<tr data-id="'+c.id+'">'
+    return '<tr data-id="'+c.id+'">'
       +'<td class="sr">'+sr+'</td>'
       +'<td>'+cell(fmt(c.lastDate),c.lastProc||'—',query)+'</td>'
       +'<td>'+cell(cd,c.caseNumber||'—',query,true)+'</td>'
       +'<td>'+cell(pt,c.todayProc||'—',query)+'</td>'
       +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
       +'<td>'+cell(fmt(c.nextDate),c.nextProc||'—',query,false,true)+'</td>'
-      +'<td>'+cell(c.clientPhone||'—',c.oppPhone||'—',query)+'</td>'
-      +'<td class="act"><button class="ibtn" type="button">ⓘ</button></td>'
+      +'<td class="act"><button class="ibtn" type="button" data-act="info">ⓘ</button></td>'
       +'</tr>';
-    var ds=docsArr(c);
-    var docHtml=ds.length?('<div class="chips">'+ds.map(function(d){return '<span class="chip">'+esc(d)+'</span>'}).join('')+'</div>'):'<div class="dl"><span>Koi paper add nahi kiya.</span></div>';
-    var det=blk('Client',[['Naam',c.clientName],['Number',c.clientPhone],['Pata',c.clientAddress]])
-           +blk('Opposition',[['Vakil',c.oppName],['Number',c.oppPhone],['Pata',c.oppAddress]])
-           +'<div class="blk"><h4>Client ke Papers</h4>'+docHtml+'<p class="hint">📎 PDF/photo attach agle step me.</p></div>'
-           +'<div class="row2"><button class="editbtn" type="button">✏️ Edit karo</button><button class="del" type="button">🗑 Delete karo</button></div>';
-    row+='<tr class="detrow" data-id="'+c.id+'" hidden><td colspan="8">'+det+'</td></tr>';
-    return row;
   }).join('');
 }
 secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
@@ -229,9 +251,14 @@ saveBtn.addEventListener('click',function(){
 cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case darj karo';clearForm();});
 list.addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]'); if(!tr)return; var id=tr.dataset.id;
-  if(e.target.closest('.ibtn')){var d=tr.nextElementSibling;if(d&&d.classList.contains('detrow')){if(d.hasAttribute('hidden')){d.removeAttribute('hidden');e.target.textContent='✕';}else{closeDet(d);}}return;}
-  if(e.target.closest('.editbtn')){var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===id){c=cases[i];break;}}if(!c)return;editId=id;fillForm(c);fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';form.setAttribute('open','');if(tr.classList.contains('detrow'))closeDet(tr);form.scrollIntoView({behavior:'smooth'});return;}
-  if(e.target.closest('.del')){if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==id});saveCases();render();}}
+  if(e.target.closest('[data-act="info"]')){openModal(id);}
+});
+mbg.addEventListener('click',function(e){
+  if(e.target===mbg){closeModal();return;}
+  var b=e.target.closest('[data-act]'); if(!b)return; var a=b.getAttribute('data-act');
+  if(a==='close'){closeModal();return;}
+  if(a==='edit'){var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===openId){c=cases[i];break;}}if(!c)return;editId=openId;fillForm(c);fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});return;}
+  if(a==='del'){if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==openId});saveCases();closeModal();render();}return;}
 });
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
