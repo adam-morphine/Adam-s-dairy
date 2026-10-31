@@ -20,11 +20,14 @@ h1{font-size:18px;margin:0 0 2px}
 .bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:14px}
 .bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:16px;cursor:pointer}
 .count{color:var(--mut);font-size:11px;margin:0 0 8px}
-.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;margin-bottom:10px}
-.cal-hd{display:flex;align-items:center;gap:6px;margin-bottom:7px}
-.cal-hd button{background:#0f172a;border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:5px 9px;font-size:13px;cursor:pointer}
-.cal-hd .cal-today{color:var(--acc);font-weight:700}
-.cal-m{flex:1;text-align:center;font-weight:700;font-size:13px}
+.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 8px;margin-bottom:10px}
+.cal-head{display:flex;align-items:center;gap:6px}
+.cal-head button{background:#0f172a;border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 9px;font-size:13px;cursor:pointer;flex:0 0 auto}
+.cal-head .cal-today{color:var(--acc);font-weight:700}
+.cal-mid{flex:1;background:#0f172a;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 10px;font-size:13px;font-weight:700;text-align:center;cursor:pointer}
+.cal-body{display:none;margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
+.cal.open .cal-body{display:block}
+.cal-title{text-align:center;font-weight:700;font-size:12px;color:var(--acc2);margin-bottom:6px}
 .cal-jump{display:flex;align-items:center;gap:6px;margin-bottom:7px}
 .cal-jump label{font-size:10px;color:var(--mut)}
 .cal-jump input{flex:1;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:6px 8px;border-radius:8px;font-size:12px;font-family:inherit}
@@ -98,11 +101,11 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Date-wise register • calendar upar • naya case neeche • 100% offline</p>
+<p class="sub">Date-wise register • calendar chhota (tap pe khulta hai) • 100% offline</p>
 
 <div id="intro" hidden>
   <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-  <p class="tip">💡 Upar calendar se kisi bhi date pe jao — us din ke cases dikhenge. Naya case banane ke liye sabse neeche ➕ Naya case kholo.</p>
+  <p class="tip">💡 Upar ki 📅 patti pe tap karo to mahina khulega — din chuno, apne aap band. Naya case ke liye sabse neeche ➕.</p>
   <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number &amp; title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
   <button class="ix" type="button" id="ix">✕ Samajh gaya (dobara nahi dikhega)</button>
 </div>
@@ -114,18 +117,21 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <p class="count" id="count"></p>
 
 <div class="cal" id="cal">
-  <div class="cal-hd">
+  <div class="cal-head">
     <button type="button" data-nav="-1">◀</button>
-    <div class="cal-m" id="calM">—</div>
+    <button type="button" class="cal-mid" id="calMid">📅 —</button>
     <button type="button" data-nav="1">▶</button>
     <button type="button" class="cal-today" data-nav="0">Aaj</button>
   </div>
-  <div class="cal-jump">
-    <label>Kisi bhi date pe jao</label>
-    <input type="date" id="jump">
+  <div class="cal-body">
+    <div class="cal-title" id="calTitle">—</div>
+    <div class="cal-jump">
+      <label>Kisi bhi date pe jao</label>
+      <input type="date" id="jump">
+    </div>
+    <div class="cal-wd" id="calWd"></div>
+    <div class="cal-g" id="calG"></div>
   </div>
-  <div class="cal-wd" id="calWd"></div>
-  <div class="cal-g" id="calG"></div>
 </div>
 
 <table class="reg" id="tbl">
@@ -217,9 +223,9 @@ var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById
 var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
 var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
 var intro=document.getElementById('intro'),ix=document.getElementById('ix');
-var calM=document.getElementById('calM'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
+var cal=document.getElementById('cal'),calMid=document.getElementById('calMid'),calTitle=document.getElementById('calTitle'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
 var form=document.querySelector('details.main');
-var editId=null, openId=null;
+var editId=null, openId=null, calOpen=false;
 var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var WD=['र','सो','मं','बु','गु','शु','श'];
 function pad2(n){return (n<10?'0':'')+n}
@@ -260,8 +266,10 @@ function openModal(id){
     +'<div class="mrow"><button class="mbtn e" type="button" data-act="edit">✏️ Edit karo</button><button class="mbtn d" type="button" data-act="del">🗑 Delete</button></div>';
   mbg.classList.add('on');
 }
+function setCalOpen(v){calOpen=v; if(v){cal.classList.add('open');}else{cal.classList.remove('open');}}
 function renderCal(){
-  calM.textContent=MONTHS[viewM]+' '+viewY;
+  calMid.textContent='📅 '+fmtLong(selDate)+(calOpen?' ▴':' ▾');
+  calTitle.textContent=MONTHS[viewM]+' '+viewY;
   jump.value=selDate;
   var has=caseDatesSet(), tis=todayISO();
   var first=new Date(viewY,viewM,1).getDay();
@@ -300,16 +308,17 @@ function render(){
   }).join('');
 }
 calWd.innerHTML=WD.map(function(w){return '<div>'+w+'</div>'}).join('');
+calMid.addEventListener('click',function(){setCalOpen(!calOpen);renderCal();});
 document.getElementById('cal').addEventListener('click',function(e){
   var nav=e.target.closest('[data-nav]');
   if(nav){var n=+nav.getAttribute('data-nav');
-    if(n===0){selDate=todayISO();var t=parseISO(selDate);viewY=t.y;viewM=t.m0;}
-    else{viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}}
+    if(n===0){selDate=todayISO();var t=parseISO(selDate);viewY=t.y;viewM=t.m0;setCalOpen(false);}
+    else{viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}setCalOpen(true);}
     render();return;}
   var dc=e.target.closest('[data-date]');
-  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;render();}
+  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;setCalOpen(false);render();}
 });
-jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;render();}});
+jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;setCalOpen(false);render();}});
 secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
 libAddBtn.addEventListener('click',function(){
   var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
@@ -327,7 +336,7 @@ saveBtn.addEventListener('click',function(){
   if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case';}
   else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
   saveCases();clearForm();
-  selDate=o.nextDate; var p=parseISO(selDate); viewY=p.y; viewM=p.m0;
+  selDate=o.nextDate; var p=parseISO(selDate); viewY=p.y; viewM=p.m0; setCalOpen(false);
   render();
 });
 cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case';clearForm();});
