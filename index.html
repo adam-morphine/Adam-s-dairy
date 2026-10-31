@@ -13,6 +13,7 @@ h1{font-size:18px;margin:0 0 2px}
 .off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:10px;padding:3px 8px;border-radius:999px;margin-bottom:6px}
 .off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
 .tip{color:var(--acc2);font-size:10px;margin:0 0 8px}
+.warn{color:#fca5a5;font-size:10px;margin:0 0 8px;line-height:1.4}
 .bar{display:flex;gap:6px;margin-bottom:6px}
 .bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:14px}
 .bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:16px;cursor:pointer}
@@ -28,7 +29,7 @@ details.main>summary span.ar{float:right;color:var(--acc2)}
 .inner{padding:9px 11px 11px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .inner .full{grid-column:1/-1}
 label{font-size:10px;color:var(--mut);display:block;margin-bottom:2px}
-input,textarea{width:100%;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:13px;font-family:inherit}
+input,textarea,select{width:100%;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:13px;font-family:inherit}
 textarea{resize:vertical;min-height:40px}
 .btnrow{display:flex;gap:8px;padding:0 12px 12px}
 .go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
@@ -56,6 +57,11 @@ tr.detrow td{background:#0b1220;padding:8px 9px}
 .editbtn{flex:1;background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
 .del{flex:1;background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
 .hint{font-size:9px;color:var(--mut);margin-top:3px}
+.libitem{display:flex;justify-content:space-between;align-items:center;gap:6px;background:#0f172a;border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:11px;margin-bottom:4px;word-break:break-word}
+.rm{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:6px;padding:2px 7px;font-size:11px;cursor:pointer;flex:0 0 auto}
+.libnote{font-size:10px;color:var(--mut);margin:4px 0 8px;line-height:1.4}
+.mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-top:6px}
+.mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
 .empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:12px}
 mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 @media(orientation:landscape){table.reg{font-size:11.5px}td.sr{font-size:13px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}}
@@ -64,9 +70,10 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Register style • header ek baar • ab EDIT bhi • 100% offline</p>
+<p class="sub">Register style • BNS/IPC section picker • 100% offline</p>
 <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-<p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Case badalna ho to ⓘ khol → ✏️ Edit.</p>
+<p class="tip">💡 Phone tedha (landscape) karo to poori diary jaisi table. Dhara field ke upar dropdown se section chuno, ya khud likho.</p>
+<p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number & title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
 
 <div class="bar">
   <input id="q" type="search" placeholder="Search: case no, party, court, dhara, thana, number…">
@@ -88,7 +95,11 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       <div><label>Col3 ↑ Prativadi / Respondent</label><input name="respondent" placeholder="Lal and others"></div>
       <div class="full"><label>Col3 ↓ Today proceedings</label><textarea name="todayProc" placeholder="Charge framed…"></textarea></div>
       <div><label>Col4 ↑ Police station</label><input name="policeStation" placeholder="Basai jagner"></div>
-      <div><label>Col4 ↓ Dhara</label><input name="section" placeholder="302, 323"></div>
+      <div class="full"><label>Col4 ↓ Dhara / Section — dropdown se chuno YA khud likho</label>
+        <select id="secPick" style="margin-bottom:6px"></select>
+        <input name="section" placeholder="e.g. BNS 103 / IPC 302 / Order 39 R.1 CPC / 138 NI Act">
+        <p class="hint">Dropdown sirf typing ka shortcut hai; neeche wale box me jo likha hai wahi save & search hoga.</p>
+      </div>
       <div><label>Col5 ↑ Next date</label><input name="nextDate" type="date"></div>
       <div><label>Col5 ↓ Next proceeding</label><input name="nextProc" placeholder="Evidence…"></div>
       <div><label>Col6 ↑ Client number</label><input name="clientPhone" placeholder="+91…"></div>
@@ -104,6 +115,18 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       <div class="full"><label>Opposition Pata / Firm</label><input name="oppAddress" placeholder="Firm ka pata"></div>
       <div class="full"><label>Har paper ek nayi line me</label><textarea name="docsText" placeholder="Vakalatnama 12-10-2026&#10;FIR copy&#10;Cheque return memo"></textarea>
       <p class="hint">📎 Asli PDF/photo attach agle step me. Abhi slow net ke liye yahan likh lo — list ban jayegi.</p></div>
+    </div>
+  </details>
+
+  <details class="grp"><summary><b>📚 Section Library</b> • apni BNS/IPC list yahan manage karo</summary>
+    <div class="inner">
+      <div class="full"><label>Naye section add karo (ek line me ek)</label>
+        <textarea id="libAdd" placeholder="BNS 115 – Voluntarily causing hurt&#10;BNS 311 – Theft&#10;BNSS 173 – Police report&#10;(apni trusted list yahan paste karo)"></textarea>
+        <button class="mini" type="button" id="libAddBtn">➕ List me Add karo</button>
+        <button class="mini g" type="button" id="libReset">↺ Default wapas</button>
+        <p class="libnote">Jo bhi add karoge wo <b>isi phone me save</b> ho jayega aur upar Dhara dropdown me hamesha milega. ✕ dabakar hata sakte ho.</p>
+      </div>
+      <div class="full"><div id="libList"></div></div>
     </div>
   </details>
 
@@ -123,31 +146,40 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </table>
 
 <script>
-var KEY='adam_diary_v1';
+var KEY='adam_diary_v1', SKEY='adam_sections_v1';
+var SEED=[
+ "IPC 302 – Murder","IPC 304 – Culpable homicide not amounting to murder","IPC 307 – Attempt to murder",
+ "IPC 323 – Voluntarily causing hurt","IPC 354 – Outraging modesty of woman","IPC 376 – Rape",
+ "IPC 379 – Theft","IPC 392 – Robbery","IPC 406 – Criminal breach of trust",
+ "IPC 420 – Cheating & dishonestly inducing delivery of property","IPC 467 – Forgery of valuable security",
+ "IPC 468 – Forgery for cheating","IPC 471 – Using forged document as genuine","IPC 498A – Cruelty by husband/relatives",
+ "IPC 504 – Intentional insult","IPC 506 – Criminal intimidation","IPC 34 – Common intention","IPC 149 – Unlawful assembly offence",
+ "BNS 103 – Murder","BNS 318 – Cheating & dishonestly inducing delivery of property","BNS 351 – Criminal intimidation",
+ "NI Act 138 – Dishonour of cheque","CrPC 173 – Police report (old)","CPC Order 39 R.1 & 2 – Temporary injunction","CPC Order 37 – Summary suit"
+];
 var cases=[]; try{cases=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){cases=[]}
+var LIB; (function(){var a=null;try{a=JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){}if(!a||!a.length){a=SEED.slice();localStorage.setItem(SKEY,JSON.stringify(a));}LIB=a;})();
+function saveCases(){localStorage.setItem(KEY,JSON.stringify(cases))}
+function saveLib(){localStorage.setItem(SKEY,JSON.stringify(LIB))}
 var q=document.getElementById('q'),clr=document.getElementById('clr'),list=document.getElementById('list'),count=document.getElementById('count');
 var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),fs=document.getElementById('fs');
+var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
 var form=document.querySelector('details.main');
 var editId=null;
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'];
 function F(n){return form.querySelector('[name="'+n+'"]')}
-function save(){localStorage.setItem(KEY,JSON.stringify(cases))}
 function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
 function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(query.toLowerCase());if(i<0)return s;return s.slice(0,i)+'<mark>'+s.slice(i,i+query.length)+'</mark>'+s.slice(i+query.length)}
 function fmt(d){if(!d)return '—';var p=d.split('-');return p.length===3?(p[2]+'/'+p[1]+'/'+p[0]):d}
 function docsArr(c){return (c.docs||[]).filter(Boolean)}
 function hay(c){return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,(c.docs||[]).join(' ')].join(' ').toLowerCase()}
-function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docsText').value=(c.docs||[]).join('\n');}
-function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){el.value=''});}
-function cell(u,d,query,bold,pill){
-  var t=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);
-  return '<span class="u'+(bold?' val b':'')+'">'+t+'</span><span class="d">'+hl(d,query)+'</span>';
-}
-function blk(title,rows){
-  var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?esc(x[1]):'—')+'</div>'}).join('');
-  return '<div class="blk"><h4>'+title+'</h4><div class="dl">'+r+'</div></div>';
-}
-function closeDet(detrowTr){detrowTr.setAttribute('hidden','');var m=detrowTr.previousElementSibling;if(m){var b=m.querySelector('.ibtn');if(b)b.textContent='ⓘ';}}
+function buildPicker(){secPick.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent='— list se chuno (ya neeche khud likho) —';secPick.appendChild(o0);LIB.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;secPick.appendChild(o);});}
+function renderLib(){libList.innerHTML='';if(!LIB.length){var n=document.createElement('div');n.className='libnote';n.textContent='List khaali hai. Upar paste karke Add karo.';libList.appendChild(n);return;}LIB.forEach(function(s){var d=document.createElement('div');d.className='libitem';var t=document.createElement('span');t.textContent=s;var b=document.createElement('button');b.className='rm';b.type='button';b.textContent='✕';b.setAttribute('data-val',s);d.appendChild(t);d.appendChild(b);libList.appendChild(d);});}
+function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docsText').value=(c.docs||[]).join('\n');try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}}
+function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){el.value=''});secPick.value='';}
+function cell(u,d,query,bold,pill){var t=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);return '<span class="u'+(bold?' val b':'')+'">'+t+'</span><span class="d">'+hl(d,query)+'</span>';}
+function blk(title,rows){var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?esc(x[1]):'—')+'</div>'}).join('');return '<div class="blk"><h4>'+title+'</h4><div class="dl">'+r+'</div></div>';}
+function closeDet(dr){dr.setAttribute('hidden','');var m=dr.previousElementSibling;if(m){var b=m.querySelector('.ibtn');if(b)b.textContent='ⓘ';}}
 function render(){
   var query=q.value.trim();
   var data=cases.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
@@ -177,45 +209,33 @@ function render(){
     return row;
   }).join('');
 }
+secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
+libAddBtn.addEventListener('click',function(){
+  var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+  lines.forEach(function(s){if(LIB.indexOf(s)<0)LIB.push(s);});
+  saveLib();buildPicker();renderLib();libAdd.value='';
+});
+libReset.addEventListener('click',function(){if(confirm('Default list wapas laayein? (tumhari added list hat jayegi)')){LIB=SEED.slice();saveLib();buildPicker();renderLib();}});
+libList.addEventListener('click',function(e){var b=e.target.closest('.rm');if(!b)return;var v=b.getAttribute('data-val');LIB=LIB.filter(function(s){return s!==v});saveLib();buildPicker();renderLib();});
 saveBtn.addEventListener('click',function(){
   var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert('Case Number zaroori hai');return}
   var o={};
   FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
   o.docs=F('docsText').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
-  if(editId){
-    for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}
-    editId=null; fs.textContent='➕ Naya case darj karo';
-  }else{
-    o.id=Date.now()+''+Math.floor(Math.random()*9999);
-    cases.unshift(o);
-  }
-  save(); clearForm(); render();
+  if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case darj karo';}
+  else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
+  saveCases();clearForm();render();
 });
 cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case darj karo';clearForm();});
 list.addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]'); if(!tr)return; var id=tr.dataset.id;
-  if(e.target.closest('.ibtn')){
-    var d=tr.nextElementSibling;
-    if(d&&d.classList.contains('detrow')){
-      if(d.hasAttribute('hidden')){d.removeAttribute('hidden');e.target.textContent='✕';}
-      else{closeDet(d);}
-    }
-    return;
-  }
-  if(e.target.closest('.editbtn')){
-    var c=null; for(var i=0;i<cases.length;i++){if(cases[i].id===id){c=cases[i];break;}}
-    if(!c)return;
-    editId=id; fillForm(c); fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';
-    form.setAttribute('open','');
-    if(tr.classList.contains('detrow'))closeDet(tr);
-    form.scrollIntoView({behavior:'smooth'});
-    return;
-  }
-  if(e.target.closest('.del')){ if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==id});save();render()} }
+  if(e.target.closest('.ibtn')){var d=tr.nextElementSibling;if(d&&d.classList.contains('detrow')){if(d.hasAttribute('hidden')){d.removeAttribute('hidden');e.target.textContent='✕';}else{closeDet(d);}}return;}
+  if(e.target.closest('.editbtn')){var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===id){c=cases[i];break;}}if(!c)return;editId=id;fillForm(c);fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';form.setAttribute('open','');if(tr.classList.contains('detrow'))closeDet(tr);form.scrollIntoView({behavior:'smooth'});return;}
+  if(e.target.closest('.del')){if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==id});saveCases();render();}}
 });
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
-render();
+buildPicker();renderLib();render();
 </script>
 </body>
 </html>
