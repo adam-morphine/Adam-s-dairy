@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adam's Court Diary</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;--acc:#22c55e;--acc2:#38bdf8;--danger:#f87171;--pill:#78350f;--pillt:#fbbf24}
+:root{--bg:#0f172a;--card:#1e293b;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;--acc:#22c55e;--acc2:#38bdf8;--danger:#f87171;--pill:#78350f;--pillt:#fbbf24;--wa:#25d366}
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:8px}
 h1{font-size:18px;margin:0 0 2px}
@@ -51,6 +51,7 @@ details.main>summary span.ar{float:right;color:var(--acc2)}
 .inner .full{grid-column:1/-1}
 label{font-size:10px;color:var(--mut);display:block;margin-bottom:2px}
 input,textarea,select{width:100%;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:13px;font-family:inherit}
+input[type=file]{padding:6px;font-size:11px}
 textarea{resize:vertical;min-height:40px}
 .btnrow{display:flex;gap:8px;padding:0 12px 12px}
 .go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer}
@@ -59,36 +60,50 @@ table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;b
 table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
 table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:8.5px}
 table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:7.5px}
+table.reg tbody tr{cursor:pointer}
+table.reg tbody tr:active{background:#0f172a}
 table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
 td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:11px}
-td.act{text-align:center}
+td.act{text-align:center;color:var(--acc2)}
 .u,.d{display:block;line-height:1.3}
 .d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
 .val.b{font-weight:700;color:var(--acc2)}
 .pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
-.ibtn{background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:7px;padding:3px 7px;font-size:12px;cursor:pointer}
 .empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:12px}
 mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
-.modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.72);display:none;align-items:center;justify-content:center;padding:14px;z-index:60}
+.modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.78);display:none;align-items:flex-start;justify-content:center;padding:12px;z-index:60;overflow-y:auto}
 .modal-bg.on{display:flex}
-.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:480px;width:100%;margin:auto;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
 .modal .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
 .modal .mh h2{margin:0;font-size:16px;color:var(--acc2)}
-.modal .mh .mc{font-size:11px;color:var(--mut);margin-top:2px}
+.modal .mh .mc{font-size:11px;color:var(--mut);margin-top:2px;line-height:1.4}
 .modal .x{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:9px;padding:5px 10px;font-size:14px;cursor:pointer;flex:0 0 auto}
-.blk{margin-bottom:12px}
-.blk h4{margin:0 0 4px;font-size:10px;color:var(--acc);text-transform:uppercase;letter-spacing:.4px}
-.dl{font-size:13px;line-height:1.6}
+.sec{border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin-bottom:10px;background:#0f172a55}
+.sec h3{margin:0 0 7px;font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:.4px}
+.dl{font-size:13px;line-height:1.7}
 .dl span{color:var(--mut)}
 .dl a{color:var(--acc2);text-decoration:none}
-.chips{display:flex;flex-wrap:wrap;gap:5px}
-.chip{background:#0f172a;border:1px solid var(--line);color:var(--txt);font-size:12px;padding:3px 8px;border-radius:7px}
-.soon{background:#0f172a88;border:1px dashed var(--line);border-radius:10px;padding:9px 11px;font-size:11px;color:var(--mut);line-height:1.5}
-.soon b{color:var(--acc2)}
-.mrow{display:flex;gap:8px;margin-top:6px}
-.mbtn{flex:1;border-radius:10px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--line)}
-.mbtn.e{background:transparent;color:var(--acc2)}
-.mbtn.d{background:transparent;color:var(--danger);border-color:#7f1d1d}
+.actrow{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.abtn{flex:1;min-width:84px;border-radius:9px;padding:8px 6px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:#0f172a;color:var(--acc2);text-decoration:none;text-align:center;display:inline-block}
+.abtn.wa{background:var(--wa);color:#04331a;border-color:var(--wa)}
+.abtn.call{color:var(--acc)}
+.abtn.none{opacity:.4;cursor:default}
+.docgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px}
+.docwrap{position:relative}
+.thumb{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:9px;display:block;background:#0f172a;cursor:pointer}
+.pdfcard{width:100%;aspect-ratio:1/1;border:1px solid var(--line);border-radius:9px;background:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:5px;text-align:center}
+.pdfcard .ic{font-size:22px}
+.pdfcard .nm{font-size:9px;color:var(--mut);word-break:break-all;line-height:1.2}
+.rmx{position:absolute;top:-5px;right:-5px;background:#7f1d1d;color:#fff;border:0;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{background:#0f172a;border:1px solid var(--line);color:var(--txt);font-size:11px;padding:3px 8px;border-radius:7px}
+.addfile{display:inline-flex;align-items:center;gap:6px;background:#0f172a;border:1px dashed var(--acc2);color:var(--acc2);border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;cursor:pointer;margin-top:7px}
+.addfile input{display:none}
+.note{font-size:10px;color:var(--mut);margin-top:5px;line-height:1.4}
+.mrow{display:flex;gap:8px;margin-top:4px}
+.mbtn{flex:1;border-radius:10px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:#0f172a}
+.mbtn.e{color:var(--acc2)}
+.mbtn.d{color:var(--danger);border-color:#7f1d1d}
 .libitem{display:flex;justify-content:space-between;align-items:center;gap:6px;background:#0f172a;border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:11px;margin-bottom:4px;word-break:break-word}
 .rm{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:6px;padding:2px 7px;font-size:11px;cursor:pointer;flex:0 0 auto}
 .libnote{font-size:10px;color:var(--mut);margin:4px 0 8px;line-height:1.4}
@@ -96,17 +111,17 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 .mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
 .hint{font-size:9px;color:var(--mut);margin-top:3px}
 @media(orientation:landscape){table.reg{font-size:12px}td.sr{font-size:14px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}.cal-c{font-size:13px}}
-@media(max-width:380px){.inner{grid-template-columns:1fr}}
+@media(max-width:380px){.inner{grid-template-columns:1fr}.docgrid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Date-wise register • calendar chhota (tap pe khulta hai) • 100% offline</p>
+<p class="sub">Date-wise register • card tap pe detail + call/WhatsApp + photo/PDF • 100% offline</p>
 
 <div id="intro" hidden>
   <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-  <p class="tip">💡 Upar ki 📅 patti pe tap karo to mahina khulega — din chuno, apne aap band. Naya case ke liye sabse neeche ➕.</p>
-  <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number &amp; title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi.</p>
+  <p class="tip">💡 Kisi bhi case ki line pe tap karo → khidki khulegi: edit, client/opp detail, call/WhatsApp/SMS, aur photo/PDF jodo. Naya case ke liye sabse neeche ➕.</p>
+  <p class="warn">⚠️ Section list sirf <b>shortcut</b> hai (phone me save). BNS/IPC ka exact number &amp; title <b>apne code/journal se confirm karo</b> — app jo text save karega wahi chalega, ye koi legal advice nahi. Photo/PDF phone ki storage me save hote hain (bahut badi PDF skip ho sakti hai).</p>
   <button class="ix" type="button" id="ix">✕ Samajh gaya (dobara nahi dikhega)</button>
 </div>
 
@@ -167,16 +182,24 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
     </div>
   </details>
 
-  <details class="grp"><summary><b>ⓘ Window</b> • client / opposition / numbers / papers (ⓘ pe khulega)</summary>
+  <details class="grp"><summary><b>Client &amp; Opposition</b> • number = direct call/WhatsApp/SMS</summary>
     <div class="inner">
       <div><label>Client ka Naam</label><input name="clientName" placeholder="Ram Swaroop"></div>
       <div><label>Client Number</label><input name="clientPhone" placeholder="+91…"></div>
       <div class="full"><label>Client ka Pata</label><input name="clientAddress" placeholder="Chamber / ghar"></div>
-      <div><label>Opposition Vakil</label><input name="oppName" placeholder="Adv. X"></div>
+      <div><label>Opposition Vakil ka Naam</label><input name="oppName" placeholder="Adv. X"></div>
       <div><label>Opp. Adv. Number</label><input name="oppPhone" placeholder="+91…"></div>
       <div class="full"><label>Opposition Pata / Firm</label><input name="oppAddress" placeholder="Firm ka pata"></div>
-      <div class="full"><label>Har paper ek nayi line me</label><textarea name="docsText" placeholder="Vakalatnama 12-10-2026&#10;FIR copy&#10;Cheque return memo"></textarea>
-      <p class="hint">📎 Asli PDF/photo attach agle step me. Abhi slow net ke liye yahan likh lo — list ban jayegi.</p></div>
+    </div>
+  </details>
+
+  <details class="grp"><summary><b>📎 Papers</b> • photo / PDF jodo + likhi hui list</summary>
+    <div class="inner">
+      <div class="full"><label>Asli photo / PDF chuno (ek saath kai bhi)</label>
+        <input type="file" id="formFile" multiple accept="image/*,application/pdf">
+        <p class="hint">📷 Photo apne aap compress ho jayegi. 📄 2.5MB se badi PDF skip ho sakti hai (phone ki seema).</p>
+      </div>
+      <div class="full"><label>Ya sirf likh do (ek line me ek paper)</label><textarea name="docNotes" placeholder="Vakalatnama 12-10-2026&#10;FIR copy&#10;Cheque return memo"></textarea></div>
     </div>
   </details>
 
@@ -215,12 +238,15 @@ var SEED=[
  "NI Act 138 – Dishonour of cheque","CrPC 173 – Police report (old)","CPC Order 39 R.1 & 2 – Temporary injunction","CPC Order 37 – Summary suit"
 ];
 var cases=[]; try{cases=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){cases=[]}
+/* migrate purani text-list (c.docs strings) -> c.notes ; files -> c.files */
+(function(){for(var i=0;i<cases.length;i++){var c=cases[i];if(c.docs&&!c.files){c.files=[];c.notes=[];for(var j=0;j<c.docs.length;j++){var x=c.docs[j];if(typeof x==='string')c.notes.push(x);else c.files.push(x);}delete c.docs;}if(!c.files)c.files=[];if(!c.notes)c.notes=[];}})();
 var LIB; (function(){var a=null;try{a=JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){}if(!a||!a.length){a=SEED.slice();localStorage.setItem(SKEY,JSON.stringify(a));}LIB=a;})();
-function saveCases(){localStorage.setItem(KEY,JSON.stringify(cases))}
+function saveCases(){try{localStorage.setItem(KEY,JSON.stringify(cases));return true;}catch(e){alert('Phone ki memory bhar gayi — kuch photo/PDF hata kar do, phir Save karo.');return false;}}
 function saveLib(){localStorage.setItem(SKEY,JSON.stringify(LIB))}
 var q=document.getElementById('q'),clr=document.getElementById('clr'),list=document.getElementById('list'),count=document.getElementById('count');
 var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),fs=document.getElementById('fs');
 var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
+var formFile=document.getElementById('formFile');
 var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
 var intro=document.getElementById('intro'),ix=document.getElementById('ix');
 var cal=document.getElementById('cal'),calMid=document.getElementById('calMid'),calTitle=document.getElementById('calTitle'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
@@ -238,37 +264,63 @@ function caseDatesSet(){var s={};for(var i=0;i<cases.length;i++){var nd=cases[i]
 function fmtLong(iso){var p=parseISO(iso);if(!p.y)return '—';return pad2(p.d)+' '+MONTHS[p.m0]+' '+p.y}
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'];
 function F(n){return form.querySelector('[name="'+n+'"]')}
-function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(query.toLowerCase());if(i<0)return s;return s.slice(0,i)+'<mark>'+s.slice(i,i+query.length)+'</mark>'+s.slice(i+query.length)}
 function fmt(d){if(!d)return '—';var p=d.split('-');return p.length===3?(p[2]+'/'+p[1]+'/'+p[0]):d}
-function docsArr(c){return (c.docs||[]).filter(Boolean)}
-function hay(c){return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,(c.docs||[]).join(' ')].join(' ').toLowerCase()}
-function tel(v){return v?('tel:'+String(v).replace(/\s+/g,'')):'#';}
+function digits(v){return String(v||'').replace(/[^\d+]/g,'')}
+function waDigits(v){var d=String(v||'').replace(/\D/g,'');if(d.length===10)d='91'+d;return d;}
+function hay(c){var f=(c.files||[]).map(function(x){return x.n||''}).join(' ');var nt=(c.notes||[]).join(' ');return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,f,nt].join(' ').toLowerCase()}
+function telLink(v){return v?('tel:'+digits(v)):'#';}
+function smsLink(v){return v?('sms:'+digits(v)):('#');}
+function waLink(v,msg){return v?('https://wa.me/'+waDigits(v)+(msg?('?text='+encodeURIComponent(msg)):'')):('#');}
 function buildPicker(){secPick.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent='— list se chuno (ya neeche khud likho) —';secPick.appendChild(o0);LIB.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;secPick.appendChild(o);});}
 function renderLib(){libList.innerHTML='';if(!LIB.length){var n=document.createElement('div');n.className='libnote';n.textContent='List khaali hai. Upar paste karke Add karo.';libList.appendChild(n);return;}LIB.forEach(function(s){var d=document.createElement('div');d.className='libitem';var t=document.createElement('span');t.textContent=s;var b=document.createElement('button');b.className='rm';b.type='button';b.textContent='✕';b.setAttribute('data-val',s);d.appendChild(t);d.appendChild(b);libList.appendChild(d);});}
-function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docsText').value=(c.docs||[]).join('\n');try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}}
-function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){el.value=''});secPick.value='';}
+function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docNotes').value=(c.notes||[]).join('\n');formFile.value='';try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}}
+function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='file')el.value=''});formFile.value='';secPick.value='';}
 function cell(u,d,query,bold,pill){var t=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);return '<span class="u'+(bold?' val b':'')+'">'+t+'</span><span class="d">'+hl(d,query)+'</span>';}
-function blk(title,rows){var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?(x[2]?('<a href="'+x[2]+'">'+esc(x[1])+'</a>'):esc(x[1])):'—')+'</div>'}).join('');return '<div class="blk"><h4>'+title+'</h4><div class="dl">'+r+'</div></div>';}
-function closeModal(){mbg.classList.remove('on');openId=null;modal.innerHTML='';}
+function actBtns(label,phone,msg){
+  if(!phone)return '<div class="actrow"><span class="abtn none">'+label+': number nahi</span></div>';
+  return '<div class="actrow">'
+    +'<a class="abtn call" href="'+telLink(phone)+'">📞 Call</a>'
+    +'<a class="abtn wa" href="'+waLink(phone,msg)+'" target="_blank" rel="noopener">💬 WhatsApp</a>'
+    +'<a class="abtn" href="'+smsLink(phone)+'">✉️ SMS</a>'
+    +'</div>';
+}
+function waMsg(c){return 'Case '+c.caseNumber+' ('+([c.court,c.courtNo].filter(Boolean).join(' ')||'—')+')\n'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'\nAaj: '+(c.todayProc||'—')+'\nAgli taarikh: '+(c.nextDate?fmt(c.nextDate):'—')+' ('+(c.nextProc||'—')+')\n— Adam\'s Court Diary';}
+function docItemHtml(it,idx){
+  if(it&&it.d&&it.t&&it.t.indexOf('image')===0){
+    return '<div class="docwrap"><img class="thumb" src="'+it.d+'" data-act="opendoc" alt="'+esc(it.n||'photo')+'"><button class="rmx" type="button" data-act="rmdoc" data-i="'+idx+'" title="hatao">✕</button></div>';
+  }
+  if(it&&it.d){
+    return '<div class="docwrap"><div class="pdfcard" data-act="opendoc" data-i="'+idx+'"><span class="ic">📄</span><span class="nm">'+esc(it.n||'PDF')+'</span></div><button class="rmx" type="button" data-act="rmdoc" data-i="'+idx+'" title="hatao">✕</button></div>';
+  }
+  return '';
+}
 function openModal(id){
   var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===id){c=cases[i];break;}}
   if(!c)return; openId=id;
   var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
-  var ds=docsArr(c);
-  var docHtml=ds.length?('<div class="chips">'+ds.map(function(d){return '<span class="chip">'+esc(d)+'</span>'}).join('')+'</div>'):'<div class="dl"><span>Koi paper add nahi kiya.</span></div>';
+  var files=c.files||[], notes=c.notes||[];
+  var gal=files.length?('<div class="docgrid">'+files.map(docItemHtml).join('')+'</div>'):'<div class="note">Abhi koi photo/PDF nahi. Neeche se jodo.</div>';
+  var noteChips=notes.length?('<div class="chips">'+notes.map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>'):'';
   modal.innerHTML=''
-    +'<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+' • '+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
-    +blk('Client',[['Naam',c.clientName],['Number',c.clientPhone,tel(c.clientPhone)],['Pata',c.clientAddress]])
-    +blk('Opposition',[['Vakil',c.oppName],['Number',c.oppPhone,tel(c.oppPhone)],['Pata',c.oppAddress]])
-    +'<div class="blk"><h4>Client ke Papers</h4>'+docHtml+'</div>'
-    +'<div class="soon">🔜 <b>Aage isi window me naye option aayenge:</b> Fees &amp; pending dues • Documents (PDF/photo) • Voice notes • WhatsApp update. Abhi yahan khaali jagah hai — tu bol to next step me yahin jod denge.</div>'
+    +'<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+'<br>'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'<br>Agli: '+(c.nextDate?fmt(c.nextDate):'—')+' • '+(c.nextProc||'—')+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
+    +'<div class="sec"><h3>Client</h3><div class="dl"><div><span>Naam :</span> '+(c.clientName?esc(c.clientName):'—')+'</div><div><span>Number :</span> '+(c.clientPhone?('<a href="'+telLink(c.clientPhone)+'">'+esc(c.clientPhone)+'</a>'):'—')+'</div><div><span>Pata :</span> '+(c.clientAddress?esc(c.clientAddress):'—')+'</div></div>'+actBtns('Client',c.clientPhone,waMsg(c))+'</div>'
+    +'<div class="sec"><h3>Opposition Council</h3><div class="dl"><div><span>Naam :</span> '+(c.oppName?esc(c.oppName):'—')+'</div><div><span>Number :</span> '+(c.oppPhone?('<a href="'+telLink(c.oppPhone)+'">'+esc(c.oppPhone)+'</a>'):'—')+'</div><div><span>Pata :</span> '+(c.oppAddress?esc(c.oppAddress):'—')+'</div></div>'+actBtns('Opposition',c.oppPhone,null)+'</div>'
+    +'<div class="sec"><h3>📎 Papers (photo / PDF)</h3>'+gal+noteChips
+      +'<label class="addfile">➕ File jodo<input type="file" multiple accept="image/*,application/pdf" data-role="addfile"></label>'
+      +'<p class="note">Tap = poori file khulegi • ✕ = hatao. Photo compress hoti hai; 2.5MB+ PDF skip ho sakti hai.</p></div>'
     +'<div class="mrow"><button class="mbtn e" type="button" data-act="edit">✏️ Edit karo</button><button class="mbtn d" type="button" data-act="del">🗑 Delete</button></div>';
   mbg.classList.add('on');
 }
-function setCalOpen(v){calOpen=v; if(v){cal.classList.add('open');}else{cal.classList.remove('open');}}
+function closeModal(){mbg.classList.remove('on');openId=null;modal.innerHTML='';}
+function getCase(id){for(var i=0;i<cases.length;i++){if(cases[i].id===id)return cases[i];}return null;}
+function compressImage(file,maxDim,quality){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(e){var img=new Image();img.onload=function(){var w=img.width,h=img.height,sc=Math.min(1,maxDim/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res({n:file.name,t:'image/jpeg',d:c.toDataURL('image/jpeg',quality)});};img.onerror=rej;img.src=e.target.result;};r.onerror=rej;r.readAsDataURL(file);});}
+function readPdf(file){return new Promise(function(res,rej){if(file.size>2.5*1024*1024){rej('badi');return;}var r=new FileReader();r.onload=function(e){res({n:file.name,t:file.type||'application/pdf',d:e.target.result});};r.onerror=rej;r.readAsDataURL(file);});}
+function readOne(file){if(file.type&&file.type.indexOf('image')===0)return compressImage(file,1000,0.6);if(file.type&&file.type.indexOf('pdf')>=0)return readPdf(file);return Promise.reject('type');}
+function addFilesToCase(list,c,done){var ps=[];for(var i=0;i<list.length;i++){(function(f){ps.push(readOne(f).catch(function(){alert('Ye file nahi ja sakti (bahut badi ya unsupported): '+f.name);return null;}));})(list[i]);}Promise.all(ps).then(function(arr){var added=0;for(var k=0;k<arr.length;k++){if(arr[k]){c.files.push(arr[k]);added++;}}if(added)saveCases();done&&done();});}
 function renderCal(){
-  calMid.textContent='📅 '+fmtLong(selDate)+(calOpen?' ▴':' ▾');
+  calMid.textContent='📅 '+fmtLong(selDate)+(calOpen?' ▴':' ');
   calTitle.textContent=MONTHS[viewM]+' '+viewY;
   jump.value=selDate;
   var has=caseDatesSet(), tis=todayISO();
@@ -296,6 +348,7 @@ function render(){
     var sr=cases.indexOf(c)+1;
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
     var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
+    var nf=(c.files||[]).length;
     return '<tr data-id="'+c.id+'">'
       +'<td class="sr">'+sr+'</td>'
       +'<td>'+cell(fmt(c.lastDate),c.lastProc||'—',query)+'</td>'
@@ -303,22 +356,22 @@ function render(){
       +'<td>'+cell(pt,c.todayProc||'—',query)+'</td>'
       +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
       +'<td>'+cell(fmt(c.nextDate),c.nextProc||'—',query,false,true)+'</td>'
-      +'<td class="act"><button class="ibtn" type="button" data-act="info">ⓘ</button></td>'
+      +'<td class="act">'+(nf?('📎'+nf):'ⓘ')+'</td>'
       +'</tr>';
   }).join('');
 }
 calWd.innerHTML=WD.map(function(w){return '<div>'+w+'</div>'}).join('');
-calMid.addEventListener('click',function(){setCalOpen(!calOpen);renderCal();});
+calMid.addEventListener('click',function(){calOpen=!calOpen;if(calOpen)cal.classList.add('open');else cal.classList.remove('open');renderCal();});
 document.getElementById('cal').addEventListener('click',function(e){
   var nav=e.target.closest('[data-nav]');
   if(nav){var n=+nav.getAttribute('data-nav');
-    if(n===0){selDate=todayISO();var t=parseISO(selDate);viewY=t.y;viewM=t.m0;setCalOpen(false);}
-    else{viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}setCalOpen(true);}
+    if(n===0){selDate=todayISO();var t=parseISO(selDate);viewY=t.y;viewM=t.m0;calOpen=false;cal.classList.remove('open');}
+    else{viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}calOpen=true;cal.classList.add('open');}
     render();return;}
   var dc=e.target.closest('[data-date]');
-  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;setCalOpen(false);render();}
+  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
 });
-jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;setCalOpen(false);render();}});
+jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}});
 secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
 libAddBtn.addEventListener('click',function(){
   var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
@@ -332,24 +385,34 @@ saveBtn.addEventListener('click',function(){
   var o={};
   FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
   if(!o.nextDate)o.nextDate=selDate;
-  o.docs=F('docsText').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
-  if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case';}
-  else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
-  saveCases();clearForm();
-  selDate=o.nextDate; var p=parseISO(selDate); viewY=p.y; viewM=p.m0; setCalOpen(false);
-  render();
+  o.notes=F('docNotes').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+  var existing=editId?getCase(editId):null;
+  o.files=existing?(existing.files||[]).slice():[];
+  var picked=formFile.files;
+  var finish=function(){
+    if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fs.textContent='➕ Naya case';}
+    else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
+    if(saveCases()){clearForm();selDate=o.nextDate;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
+    else{ /* save fail: text wapas form me rakho, files input clear mat karo taaki dobara try ho sake */ }
+  };
+  if(picked&&picked.length){addFilesToCase(picked,{files:o.files},finish);}else{finish();}
 });
 cancelBtn.addEventListener('click',function(){editId=null;fs.textContent='➕ Naya case';clearForm();});
-list.addEventListener('click',function(e){
-  var tr=e.target.closest('tr[data-id]'); if(!tr)return; var id=tr.dataset.id;
-  if(e.target.closest('[data-act="info"]')){openModal(id);}
-});
+list.addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);});
 mbg.addEventListener('click',function(e){
   if(e.target===mbg){closeModal();return;}
+  var od=e.target.closest('[data-act="opendoc"]');
+  if(od){var c=getCase(openId);var idx=+od.getAttribute('data-i');var it=c&&c.files&&c.files[idx];if(it&&it.d){var a=document.createElement('a');a.href=it.d;a.target='_blank';a.rel='noopener';if(it.n)a.download=it.n;document.body.appendChild(a);a.click();document.body.removeChild(a);}return;}
+  var rm=e.target.closest('[data-act="rmdoc"]');
+  if(rm){var c2=getCase(openId);var i2=+rm.getAttribute('data-i');if(c2&&c2.files){c2.files.splice(i2,1);if(saveCases()){openModal(openId);render();}}return;}
   var b=e.target.closest('[data-act]'); if(!b)return; var a=b.getAttribute('data-act');
   if(a==='close'){closeModal();return;}
-  if(a==='edit'){var c=null;for(var i=0;i<cases.length;i++){if(cases[i].id===openId){c=cases[i];break;}}if(!c)return;editId=openId;fillForm(c);fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});return;}
+  if(a==='edit'){var c3=getCase(openId);if(!c3)return;editId=openId;fillForm(c3);fs.textContent='✏️ Case edit kar rahe ho — badal ke Save dabao';form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});return;}
   if(a==='del'){if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==openId});saveCases();closeModal();render();}return;}
+});
+mbg.addEventListener('change',function(e){
+  var fi=e.target.closest('[data-role="addfile"]');
+  if(fi&&fi.files&&fi.files.length){var c=getCase(openId);if(c){addFilesToCase(fi.files,c,function(){openModal(openId);render();});}}
 });
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
