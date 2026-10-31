@@ -1,24 +1,120 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adam's Court Diary</title>
-  <style>
-    body{font-family:system-ui,sans-serif;margin:0;background:#0f172a;color:#e2e8f0;
-         display:flex;min-height:100vh;align-items:center;justify-content:center}
-    .card{background:#1e293b;padding:28px;border-radius:18px;max-width:380px;
-          text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-    h1{margin:0 0 8px;font-size:22px}
-    p{margin:0;color:#94a3b8;font-size:14px;line-height:1.6}
-    .dot{display:inline-block;width:9px;height:9px;border-radius:50%;
-         background:#22c55e;margin-right:6px;vertical-align:middle}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam's Court Diary</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;--acc:#22c55e;--acc2:#38bdf8;--danger:#f87171}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:14px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:var(--mut);font-size:12px;margin:0 0 12px}
+.off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:11px;padding:3px 9px;border-radius:999px;margin-bottom:12px}
+.off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
+.bar{display:flex;gap:8px;margin-bottom:10px}
+.bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:11px 12px;border-radius:12px;font-size:15px}
+.bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:12px;padding:0 14px;font-size:18px;cursor:pointer}
+.count{color:var(--mut);font-size:12px;margin:0 0 12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+summary{padding:13px 14px;font-weight:600;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary span{float:right;color:var(--acc2)}
+form{padding:0 14px 14px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+form .full{grid-column:1/-1}
+label{font-size:11px;color:var(--mut);display:block;margin-bottom:3px}
+input,textarea{width:100%;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:9px;border-radius:9px;font-size:14px;font-family:inherit}
+textarea{resize:vertical;min-height:46px}
+.go{grid-column:1/-1;background:var(--acc);color:#052e16;border:0;padding:12px;border-radius:11px;font-weight:700;font-size:15px;cursor:pointer}
+.case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:11px}
+.case .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.case .no{font-weight:700;color:var(--acc2)}
+.case .ct{color:var(--mut);font-size:12px}
+.case .parties{margin:7px 0;font-size:14px}
+.case .meta{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0}
+.tag{background:#0f172a;border:1px solid var(--line);color:var(--mut);font-size:11px;padding:2px 7px;border-radius:7px}
+.tag.d{color:#fbbf24;border-color:#78350f}
+.proc{font-size:13px;margin:5px 0;line-height:1.5}
+.proc b{color:var(--mut);font-weight:600;font-size:10px;display:block;text-transform:uppercase;letter-spacing:.4px}
+.del{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:9px;padding:6px 11px;font-size:12px;cursor:pointer}
+.empty{text-align:center;color:var(--mut);padding:30px 10px;font-size:14px}
+mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 2px}
+@media(max-width:430px){form{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>⚖️ Adam's Court Diary</h1>
-    <p><span class="dot"></span>Pehli saans le li. Agla step: cases + search + offline.</p>
-  </div>
+<h1>⚖️ Adam's Court Diary</h1>
+<p class="sub">Case register + global search • 100% offline</p>
+<div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
+
+<div class="bar">
+  <input id="q" type="search" placeholder="Search: case no, party, court, section, thana…">
+  <button id="clr" title="Clear search">✕</button>
+</div>
+<p class="count" id="count"></p>
+
+<details open>
+  <summary>➕ Naya case darj karo <span>▾</span></summary>
+  <form id="f">
+    <div><label>Case Number</label><input name="caseNumber" required placeholder="CS(COMM) 214/2024"></div>
+    <div><label>Court</label><input name="court" placeholder="Commercial Court-12"></div>
+    <div><label>Waadi / Petitioner</label><input name="petitioner" placeholder="ABC Pvt Ltd"></div>
+    <div><label>Prativadi / Respondent</label><input name="respondent" placeholder="XYZ Traders"></div>
+    <div><label>Dhara / Section</label><input name="section" placeholder="Order 39 R.1 CPC"></div>
+    <div><label>Thana / Police Stn</label><input name="policeStation" placeholder="Tilak Marg"></div>
+    <div><label>Pichhli Taarikh</label><input name="lastDate" type="date"></div>
+    <div><label>Aagli Taarikh</label><input name="nextDate" type="date"></div>
+    <div class="full"><label>2-A • Pichhli Kaaryavaahi</label><textarea name="lastProc" placeholder="Notice served…"></textarea></div>
+    <div class="full"><label>2-B • Aaj Kaaryavaahi</label><textarea name="todayProc" placeholder="Aaj kya hua…"></textarea></div>
+    <div class="full"><label>2-C • Aagli Taarikh Ka Kaam</label><textarea name="nextProc" placeholder="Taiyari ka maqsad…"></textarea></div>
+    <button class="go" type="submit">Case Save Karo</button>
+  </form>
+</details>
+
+<div id="list"></div>
+
+<script>
+var KEY='adam_diary_v1';
+var cases=[]; try{cases=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){cases=[]}
+var q=document.getElementById('q'),clr=document.getElementById('clr'),list=document.getElementById('list'),count=document.getElementById('count'),f=document.getElementById('f');
+function save(){localStorage.setItem(KEY,JSON.stringify(cases))}
+function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(query.toLowerCase());if(i<0)return s;return s.slice(0,i)+'<mark>'+s.slice(i,i+query.length)+'</mark>'+s.slice(i+query.length)}
+function hay(c){return [c.caseNumber,c.court,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc].join(' ').toLowerCase()}
+function fmt(d){if(!d)return '—';var p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+function render(){
+  var query=q.value.trim();
+  var data=cases.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
+  count.textContent=query?(data.length+' result for "'+query+'"'):(cases.length+' case'+(cases.length===1?'':'s')+' registered');
+  if(!data.length){list.innerHTML='<div class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</div>';return}
+  list.innerHTML=data.map(function(c){
+    return '<div class="case"><div class="top"><div><span class="no">'+hl(c.caseNumber,query)+'</span><div class="ct">'+hl(c.court,query)+'</div></div><button class="del" data-id="'+c.id+'">Delete</button></div>'
+    +'<div class="parties">'+hl(c.petitioner,query)+' <b>v/s</b> '+hl(c.respondent,query)+'</div>'
+    +'<div class="meta">'
+      +(c.section?'<span class="tag">📜 '+hl(c.section,query)+'</span>':'')
+      +(c.policeStation?'<span class="tag">🚓 '+hl(c.policeStation,query)+'</span>':'')
+      +'<span class="tag">⬅ '+fmt(c.lastDate)+'</span>'
+      +'<span class="tag d">➡ '+fmt(c.nextDate)+'</span>'
+    +'</div>'
+    +(c.lastProc?'<div class="proc"><b>2-A Pichhli</b>'+hl(c.lastProc,query)+'</div>':'')
+    +(c.todayProc?'<div class="proc"><b>2-B Aaj</b>'+hl(c.todayProc,query)+'</div>':'')
+    +(c.nextProc?'<div class="proc"><b>2-C Aage</b>'+hl(c.nextProc,query)+'</div>':'')
+    +'</div>';
+  }).join('');
+}
+f.addEventListener('submit',function(e){
+  e.preventDefault();
+  var d=new FormData(f),o={id:Date.now()+''+Math.floor(Math.random()*9999)};
+  d.forEach(function(v,k){o[k]=v});
+  cases.unshift(o);save();f.reset();render();
+});
+list.addEventListener('click',function(e){
+  var b=e.target.closest('.del');if(!b)return;
+  if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==b.dataset.id});save();render()}
+});
+q.addEventListener('input',render);
+clr.addEventListener('click',function(){q.value='';render();q.focus()});
+render();
+</script>
 </body>
 </html>
