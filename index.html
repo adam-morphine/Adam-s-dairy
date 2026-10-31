@@ -10,7 +10,7 @@
 body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:8px}
 h1{font-size:18px;margin:0 0 2px}
 .sub{color:var(--mut);font-size:11px;margin:0 0 8px}
-.off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:10px;padding:3px 8px;border-radius:999px;margin-bottom:8px}
+.off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:10px;padding:3px 8px;border-radius:999px;margin-bottom:6px}
 .off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
 .tip{color:var(--acc2);font-size:10px;margin:0 0 8px}
 .bar{display:flex;gap:6px;margin-bottom:6px}
@@ -31,17 +31,18 @@ label{font-size:10px;color:var(--mut);display:block;margin-bottom:2px}
 input,textarea{width:100%;background:#0f172a;border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:13px;font-family:inherit}
 textarea{resize:vertical;min-height:40px}
 .go{grid-column:1/-1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;margin-top:3px}
-table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:10.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-table.reg td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
-td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:11px}
+table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
+table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:8px}
+table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:7.5px}
+table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
+td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:10px}
 td.act{text-align:center}
-.u,.d{display:block}
-.d{border-top:1px dashed var(--line);margin-top:3px;padding-top:3px}
-.lbl{font-size:7.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;display:block;line-height:1.1}
-.val{display:block;line-height:1.3;margin-top:1px}
+.u,.d{display:block;line-height:1.3}
+.d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
 .val.b{font-weight:700;color:var(--acc2)}
-.pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 6px;border-radius:7px;font-weight:700}
-.ibtn{background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:7px;padding:3px 6px;font-size:11px;cursor:pointer}
+.pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
+.ibtn{background:transparent;border:1px solid var(--line);color:var(--acc2);border-radius:7px;padding:2px 5px;font-size:10px;cursor:pointer}
 tr.detrow td{background:#0b1220;padding:8px 9px}
 .blk{margin-bottom:7px}
 .blk h4{margin:0 0 3px;font-size:9px;color:var(--acc);text-transform:uppercase;letter-spacing:.4px}
@@ -51,20 +52,20 @@ tr.detrow td{background:#0b1220;padding:8px 9px}
 .chip{background:#0f172a;border:1px solid var(--line);color:var(--txt);font-size:10px;padding:2px 6px;border-radius:6px}
 .del{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer;margin-top:4px}
 .hint{font-size:9px;color:var(--mut);margin-top:3px}
-.empty{text-align:center;color:var(--mut);padding:20px 8px;font-size:12px}
+.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:12px}
 mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
-@media(orientation:landscape){table.reg{font-size:12px}td.sr{font-size:13px}.lbl{font-size:8.5px}}
+@media(orientation:landscape){table.reg{font-size:11.5px}td.sr{font-size:13px}table.reg thead tr:first-child td{font-size:11px}table.reg thead tr:last-child td{font-size:10px}}
 @media(max-width:380px){.inner{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <h1>⚖️ Adam's Court Diary</h1>
-<p class="sub">Physical-ledger table • Sr. no. left • 100% offline</p>
+<p class="sub">Register style • header ek baar • data clean • 100% offline</p>
 <div class="off"><i></i> Data sirf is phone me save hota hai — internet ki zaroorat nahi</div>
-<p class="tip">💡 Phone ko thoda tedha (landscape) karo to bilkul diary jaisi poori table dikhegi — koi swipe nahi.</p>
+<p class="tip">💡 Phone tedha (landscape) karo to bilkul diary jaisi poori table — koi swipe nahi, koi baar-baar label nahi.</p>
 
 <div class="bar">
-  <input id="q" type="search" placeholder="Search: case no, party, court, dhara, thana…">
+  <input id="q" type="search" placeholder="Search: case no, party, court, dhara, thana, number…">
   <button id="clr" title="Clear search">✕</button>
 </div>
 <p class="count" id="count"></p>
@@ -72,29 +73,30 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <details class="main">
   <summary>➕ Naya case darj karo <span>▾</span></summary>
 
-  <details class="grp" open><summary><b>Face</b> • 5 column (sketch ka order)</summary>
+  <details class="grp" open><summary><b>Face</b> • 6 column (sketch ka order)</summary>
     <div class="inner">
       <div><label>Col1 ↑ Last date</label><input name="lastDate" type="date"></div>
-      <div><label>Col1 ↓ Previous proceeding</label><input name="lastProc" placeholder="New case / Notice…"></div>
-      <div><label>Col2 ↑ Court (naam + no.)</label><input name="court" placeholder="ACJM 3"></div>
-      <div><label>Col2 ↓ Case number</label><input name="caseNumber" required placeholder="383/2026"></div>
+      <div><label>Col1 ↓ Pervious proceeding</label><input name="lastProc" placeholder="New case / Notice…"></div>
+      <div><label>Col2 ↑ Court (naam)</label><input name="court" placeholder="ACJM"></div>
+      <div><label>Col2 ↑ Court No. (bench)</label><input name="courtNo" placeholder="3"></div>
+      <div class="full"><label>Col2 ↓ Case number</label><input name="caseNumber" required placeholder="383/2026"></div>
       <div><label>Col3 ↑ Waadi / Petitioner</label><input name="petitioner" placeholder="State"></div>
-      <div><label>Col3 ↑ Prativadi / Respondent</label><input name="respondent" placeholder="Tandoori lal & others"></div>
+      <div><label>Col3 ↑ Prativadi / Respondent</label><input name="respondent" placeholder="Lal and others"></div>
       <div class="full"><label>Col3 ↓ Today proceedings</label><textarea name="todayProc" placeholder="Charge framed…"></textarea></div>
       <div><label>Col4 ↑ Police station</label><input name="policeStation" placeholder="Basai jagner"></div>
       <div><label>Col4 ↓ Dhara</label><input name="section" placeholder="302, 323"></div>
       <div><label>Col5 ↑ Next date</label><input name="nextDate" type="date"></div>
       <div><label>Col5 ↓ Next proceeding</label><input name="nextProc" placeholder="Evidence…"></div>
+      <div><label>Col6 ↑ Client number</label><input name="clientPhone" placeholder="+91…"></div>
+      <div><label>Col6 ↓ Opp. Adv. number</label><input name="oppPhone" placeholder="+91…"></div>
     </div>
   </details>
 
-  <details class="grp"><summary><b>ⓘ Details</b> • client / opposition / papers (click pe)</summary>
+  <details class="grp"><summary><b>ⓘ Details</b> • naam / pata / papers (click pe)</summary>
     <div class="inner">
       <div><label>Client ka Naam</label><input name="clientName" placeholder="Ram Swaroop"></div>
-      <div><label>Client Number</label><input name="clientPhone" placeholder="+91…"></div>
       <div class="full"><label>Client ka Pata</label><input name="clientAddress" placeholder="Chamber / ghar"></div>
       <div><label>Opposition Vakil</label><input name="oppName" placeholder="Adv. X"></div>
-      <div><label>Opp. Adv. Number</label><input name="oppPhone" placeholder="+91…"></div>
       <div class="full"><label>Opposition Pata / Firm</label><input name="oppAddress" placeholder="Firm ka pata"></div>
       <div class="full"><label>Har paper ek nayi line me</label><textarea name="docsText" placeholder="Vakalatnama 12-10-2026&#10;FIR copy&#10;Cheque return memo"></textarea>
       <p class="hint">📎 Asli PDF/photo attach agle step me. Abhi slow net ke liye yahan likh lo — list ban jayegi.</p></div>
@@ -105,10 +107,11 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 </details>
 
 <table class="reg" id="tbl">
-  <colgroup><col style="width:6%"><col style="width:15%"><col style="width:15%"><col style="width:23%"><col style="width:14%"><col style="width:20%"><col style="width:7%"></colgroup>
-  <thead><tr>
-    <td class="sr">Sr</td><td><span class="lbl">Last date</span></td><td><span class="lbl">Court</span></td><td><span class="lbl">पार्टी v/s पार्टी</span></td><td><span class="lbl">Police stn</span></td><td><span class="lbl">Next date</span></td><td class="act"></td>
-  </tr></thead>
+  <colgroup><col style="width:5%"><col style="width:13%"><col style="width:14%"><col style="width:21%"><col style="width:11%"><col style="width:14%"><col style="width:13%"><col style="width:5%"></colgroup>
+  <thead>
+    <tr><td class="sr">Sr</td><td>Last date</td><td>Court</td><td>पार्टी v/s पार्टी</td><td>Police station</td><td>Next date</td><td>Clients numbers</td><td class="act"></td></tr>
+    <tr><td class="sr"></td><td>Pervious proceeding</td><td>Case number</td><td>Today proceedings</td><td>Dhara</td><td>Next proceeding</td><td>Opp. Adv. Numbers</td><td class="act"></td></tr>
+  </thead>
   <tbody id="list"></tbody>
 </table>
 
@@ -123,11 +126,10 @@ function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,function(c){retur
 function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(query.toLowerCase());if(i<0)return s;return s.slice(0,i)+'<mark>'+s.slice(i,i+query.length)+'</mark>'+s.slice(i+query.length)}
 function fmt(d){if(!d)return '—';var p=d.split('-');return p.length===3?(p[2]+'/'+p[1]+'/'+p[0]):d}
 function docsArr(c){return (c.docs||[]).filter(Boolean)}
-function hay(c){return [c.caseNumber,c.court,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,(c.docs||[]).join(' ')].join(' ').toLowerCase()}
-function cell(tl,tv,bl,bv,query,bold,pill){
-  var t=pill?('<span class="pill">'+hl(tv,query)+'</span>'):hl(tv,query);
-  return '<span class="u"><span class="lbl">'+tl+'</span><span class="val'+(bold?' b':'')+'">'+t+'</span></span>'
-       + '<span class="d"><span class="lbl">'+bl+'</span><span class="val">'+hl(bv,query)+'</span></span>';
+function hay(c){return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.lastProc,c.todayProc,c.nextProc,c.clientName,c.clientPhone,c.oppName,c.oppPhone,(c.docs||[]).join(' ')].join(' ').toLowerCase()}
+function cell(u,d,query,bold,pill){
+  var t=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);
+  return '<span class="u'+(bold?' val b':'')+'">'+t+'</span><span class="d">'+hl(d,query)+'</span>';
 }
 function blk(title,rows){
   var r=rows.map(function(x){return '<div><span>'+x[0]+' :</span> '+(x[1]?esc(x[1]):'—')+'</div>'}).join('');
@@ -137,16 +139,19 @@ function render(){
   var query=q.value.trim();
   var data=cases.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
   count.textContent=query?(data.length+' result for "'+query+'"'):(cases.length+' case'+(cases.length===1?'':'s')+' registered');
-  if(!data.length){list.innerHTML='<tr><td colspan="7" class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</td></tr>';return}
+  if(!data.length){list.innerHTML='<tr><td colspan="8" class="empty">'+(query?'Koi case nahi mila. ✕ dabakar poori diary dekho.':'Abhi koi case nahi. Upar ➕ se pehla case darj karo.')+'</td></tr>';return}
   list.innerHTML=data.map(function(c){
     var sr=cases.indexOf(c)+1;
+    var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
+    var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
     var row='<tr data-id="'+c.id+'">'
       +'<td class="sr">'+sr+'</td>'
-      +'<td>'+cell('Last date',fmt(c.lastDate),'Prev proc',c.lastProc||'—',query)+'</td>'
-      +'<td>'+cell('Court',c.court||'—','Case no',c.caseNumber||'—',query,true)+'</td>'
-      +'<td>'+cell('पार्टी v/s पार्टी',(c.petitioner||'—')+' v/s '+(c.respondent||'—'),'Today proc',c.todayProc||'—',query)+'</td>'
-      +'<td>'+cell('Police stn',c.policeStation||'—','Dhara',c.section||'—',query)+'</td>'
-      +'<td>'+cell('Next date',fmt(c.nextDate),'Next proc',c.nextProc||'—',query,false,true)+'</td>'
+      +'<td>'+cell(fmt(c.lastDate),c.lastProc||'—',query)+'</td>'
+      +'<td>'+cell(cd,c.caseNumber||'—',query,true)+'</td>'
+      +'<td>'+cell(pt,c.todayProc||'—',query)+'</td>'
+      +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
+      +'<td>'+cell(fmt(c.nextDate),c.nextProc||'—',query,false,true)+'</td>'
+      +'<td>'+cell(c.clientPhone||'—',c.oppPhone||'—',query)+'</td>'
       +'<td class="act"><button class="ibtn" type="button">ⓘ</button></td>'
       +'</tr>';
     var ds=docsArr(c);
@@ -155,14 +160,14 @@ function render(){
            +blk('Opposition',[['Vakil',c.oppName],['Number',c.oppPhone],['Pata',c.oppAddress]])
            +'<div class="blk"><h4>Client ke Papers</h4>'+docHtml+'<p class="hint">📎 PDF/photo attach agle step me.</p></div>'
            +'<button class="del" type="button">🗑 Ye case delete karo</button>';
-    row+='<tr class="detrow" data-id="'+c.id+'" hidden><td colspan="7">'+det+'</td></tr>';
+    row+='<tr class="detrow" data-id="'+c.id+'" hidden><td colspan="8">'+det+'</td></tr>';
     return row;
   }).join('');
 }
 saveBtn.addEventListener('click',function(){
   var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert('Case Number zaroori hai');return}
   var o={id:Date.now()+''+Math.floor(Math.random()*9999)};
-  ['court','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientName','clientPhone','clientAddress','oppName','oppPhone','oppAddress'].forEach(function(k){o[k]=F(k).value.trim()});
+  ['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientPhone','oppPhone','clientName','clientAddress','oppName','oppAddress'].forEach(function(k){o[k]=F(k).value.trim()});
   o.docs=F('docsText').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
   cases.unshift(o);save();
   form.querySelectorAll('input,textarea').forEach(function(el){el.value=''});
@@ -170,19 +175,4 @@ saveBtn.addEventListener('click',function(){
 });
 list.addEventListener('click',function(e){
   var tr=e.target.closest('tr[data-id]'); if(!tr||tr.classList.contains('detrow'))return; var id=tr.dataset.id;
-  if(e.target.closest('.ibtn')){
-    var d=tr.nextElementSibling;
-    if(d && d.classList.contains('detrow')){
-      var open=d.hasAttribute('hidden');
-      if(open){d.removeAttribute('hidden');e.target.textContent='ⓘ '}else{d.setAttribute('hidden','');e.target.textContent='ⓘ'}
-    }
-    return;
-  }
-  if(e.target.closest('.del')){ if(confirm('Ye case delete karein?')){cases=cases.filter(function(c){return c.id!==id});save();render()} }
-});
-q.addEventListener('input',render);
-clr.addEventListener('click',function(){q.value='';render();q.focus()});
-render();
-</script>
-</body>
-</html>
+ 
