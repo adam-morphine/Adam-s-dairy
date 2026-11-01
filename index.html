@@ -101,8 +101,6 @@ table.reg tbody tr:active{background:var(--inp)}
 table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
 td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:calc(var(--fs-base) - 2px)}
 td.act{text-align:center;color:var(--acc2)}
-.numcell{position:relative}
-.numgo{position:absolute;right:1px;bottom:1px;background:transparent;border:1px solid var(--acc2);color:var(--acc2);border-radius:6px;font-size:calc(var(--fs-base) - 5px);padding:0 3px;cursor:pointer;line-height:1.3}
 .u,.d{display:block;line-height:1.3}
 .d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
 .val.b{font-weight:700;color:var(--acc2)}
@@ -168,19 +166,6 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 .gbtn{width:100%;border-radius:10px;padding:10px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px}
 .gbtn.g{border-color:#1d4ed8;color:#93c5fd}
 .gnote{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:6px;line-height:1.4}
-.asheet{position:fixed;inset:0;background:var(--ov2);display:none;align-items:flex-end;justify-content:center;z-index:70}
-.asheet.on{display:flex}
-.asheet-card{background:var(--card);border:1px solid var(--acc2);border-radius:16px 16px 0 0;max-width:480px;width:100%;padding:14px;max-height:82vh;overflow-y:auto}
-.asheet-card h3{margin:0 0 10px;font-size:calc(var(--fs-base)+2px);color:var(--acc2)}
-.asheet-sec{margin-bottom:10px}
-.asheet-sec h4{margin:0 0 6px;font-size:calc(var(--fs-base)-1px);color:var(--acc);text-transform:uppercase;letter-spacing:.3px}
-.as-row{display:flex;align-items:center;gap:6px;padding:6px 0;border-top:1px dashed var(--line)}
-.as-row .as-n{flex:1;font-size:calc(var(--fs-base)-1px);word-break:break-all}
-.as-btn{border-radius:8px;padding:6px 8px;font-size:calc(var(--fs-base)-2px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);text-decoration:none}
-.as-btn.wa{background:var(--wa);color:#04331a;border-color:var(--wa)}
-.as-btn.call{color:var(--acc)}
-.asheet-x{width:100%;margin-top:6px;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--mut)}
-.swipehint{font-size:calc(var(--fs-base)-4px);color:var(--mut);margin:2px 0 8px;text-align:center}
 @media(orientation:landscape){
   table.reg{font-size:calc(var(--fs-base) - 1px)}
   td.sr{font-size:var(--fs-base)}
@@ -239,13 +224,12 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <table class="reg" id="tbl">
   <colgroup>
     <col style="width:5%">
-    <col style="width:12%">
-    <col style="width:13%">
-    <col style="width:21%">
-    <col style="width:12%">
-    <col style="width:12%">
-    <col style="width:13%">
-    <col style="width:6%">
+    <col style="width:14%">
+    <col style="width:15%">
+    <col style="width:27%">
+    <col style="width:14%">
+    <col style="width:14%">
+    <col style="width:7%">
   </colgroup>
   <thead>
     <tr>
@@ -255,7 +239,6 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       <td data-k="c_party"></td>
       <td data-k="c_ps"></td>
       <td data-k="c_next"></td>
-      <td data-k="c_cli"></td>
       <td class="act"></td>
     </tr>
     <tr>
@@ -265,13 +248,11 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
       <td data-k="c_party_s"></td>
       <td data-k="c_ps_s"></td>
       <td data-k="c_next_s"></td>
-      <td data-k="c_cli_s"></td>
       <td class="act">ⓘ</td>
     </tr>
   </thead>
   <tbody id="list"></tbody>
 </table>
-<p class="swipehint" data-k="swipe_hint"></p>
 
 <details class="main">
   <summary><span id="fs" data-k="fs_new"></span> <span class="ar">▾</span></summary>
@@ -345,8 +326,6 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 
 <div class="modal-bg" id="mbg"><div class="modal" id="modal"></div></div>
 
-<div class="asheet" id="asheet"><div class="asheet-card" id="asheetCard"></div></div>
-
 <div class="backup-pop" id="bp">
   <div class="backup-card">
     <h3 data-k="bp_title"></h3>
@@ -379,9 +358,9 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
     </div>
     <div class="set-grp">
       <h4 data-k="s_langh"></h4>
-      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दी</label>
+      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दী</label>
       <label class="set-opt"><input type="radio" name="lang" value="en"> B. English</label>
-      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. द्विभाषी / Diglot</label>
+      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. দ্বিভাষী / Diglot</label>
     </div>
     <div class="set-grp">
       <h4 data-k="s_googleh"></h4>
@@ -401,16 +380,16 @@ var GOOGLE_CLIENT_ID='';
 
 var I18N={
 hi:{
-sub:"दिनांक-आधारित रजिस्टर • 2+ नंबर • swipe/► से कॉल-व्हाट्सऐप • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लइन",
-intro_off:"डेटा सिरफ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
-intro_tip:"💡 कैलेंडर सिर्फ 📅 दबाने पर खुलेगा; खुला हो तभी ◀ ▶ महीना बदलेंगे। नंबर वाले خانे पर बायीं ओर स्वाइप करो या ► दबाओ → कॉल/व्हाट्सऐप/एसएमएस। 🖨️ से इस तारीख का रजिस्टर प्रिंट। ⚙️ से थीम/फॉन्ट/भाषा।",
+sub:"दिनान्क-आधारित रजिस्टर • टैप पर पूरी डिटेल (बाहर से कुछ नहीं) • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लाइन",
+intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
+intro_tip:"💡 कैलेंडर बंद हो तो ◀ ▶ से दिन आगे-पीछे; 📅 दबाकर खोलने पर ◀ ▶ से महीना बदले। केस की लाइन टैप करो → अंदर वादी/विपक्षी/कागजात की पूरी डिटेल (बाहर से कोई नंबर/विवरण नहीं दिखता)। 🖨️ से इस तारीख का साफ़ रजिस्टर प्रिंट। ⚙️ से थीम/फ़ॉन्ट/भाषा।",
 intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC का नंबर व शीर्षक अपने कोड से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/पीडीएफ फोन की स्टोरेज में (बहुत बड़ी पीडीएफ छूट सकती है)।",
 intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
 search:"खोजें (इसी तारीख के केस में): केस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
 today:"आज",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨️ Print",jump_lbl:"किसी भी तारीख पर जाओ",
-swipe_hint:"ℹ️ नंबर वाले خانे पर बायीं ओर स्वाइप करो या ► दबाओ — सीधा कॉल / व्हाट्सऐप / एसएमएस",
-c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",c_cli:"वकील नंबर",
-c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",c_cli_s:"विपक्षी नंबर",
+c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",
+c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",
+pr_last:"पिछली तारीख",pr_court:"न्यायालय",pr_party:"वादी बनाम विपक्षी",pr_ps:"थाना",pr_next:"अगली तारीख",
 fs_new:"➕ नया केस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी और विपक्षी • 2+ नंबर",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
 l_lastdate:"↑ अंतिम तिथि",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली = चुनी तारीख)",l_nextproc:"↓ अगली कार्यवाही",
 l_clientname:"वादी का नाम",l_clientphones:"वादी के नंबर",l_clientaddr:"वादी का पता",l_oppname:"विपक्षी वकील का नाम",l_oppphones:"विपक्षी के नंबर",l_oppaddr:"विपक्षी का पता / फर्म",l_addphone:"＋ और नंबर जोड़ो",
@@ -421,19 +400,19 @@ ph_pervious:"नया केस / नोटिस…",ph_court:"ACJM",ph_courtn
 m_client:"वादी",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / पीडीएफ)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/पीडीएफ नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
 s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_small:"छोटा",s_medium:"मध्यम",s_large:"बड़ा",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
 bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में Save नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
-msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/पीडीएफ हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_deleted:"यह केस हटाएँ?",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"Save फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ Restore से वापस आ जाएगी।",msg_badfile:"यह सही Save फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की Save फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वत सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूंगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहाँ से सेव कर लो।",msg_dl:"✅ फाइल डाउनलोड हो गई। अब Google Drive ऐप में अपलोड कर दो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी पीडीएफ छूट सकती है।"
+msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/पीडीएफ हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_deleted:"यह केस हटाएँ?",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"Save फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ Restore से वापस आ जाएगी।",msg_badfile:"यह सही Save फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की Save फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूँगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहाँ से सेव कर लो।",msg_dl:"✅ फाइल डाउनलोड हो गई। अब Google Drive ऐप में अपलोड कर दो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी पीडीएफ छूट सकती है।"
 },
 en:{
-sub:"Date-wise register • 2+ numbers • swipe/► for call-WhatsApp • 🖨️ Print • ☁️ Save • 100% offline",
+sub:"Date-wise register • tap for full detail (nothing shown outside) • 🖨️ Print • ☁️ Save • 100% offline",
 intro_off:"Data saves only on this phone — no internet needed",
-intro_tip:"💡 Calendar opens only on 📅 tap; ◀ ▶ change month only when open. Swipe left on the number cell or tap ► → call/WhatsApp/SMS. 🖨️ prints this date's register. ⚙️ for theme/font/language.",
+intro_tip:"💡 When calendar is closed, ◀ ▶ move the DAY; open it with 📅 and ◀ ▶ change the MONTH. Tap a case row → full client/opposition/papers detail inside (no numbers/details visible outside). 🖨️ prints a clean register of this date. ⚙️ for theme/font/language.",
 intro_warn:"⚠️ Section list is only a shortcut. Confirm BNS/IPC number & title from your own code — not legal advice. Photos/PDFs save in phone storage (very large PDF may be skipped).",
 intro_ok:"✕ Got it (won't show again)",
 search:"Search (this date's cases): case no, party, court, section, PS, number…",
 today:"Today",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨️ Print",jump_lbl:"Jump to any date",
-swipe_hint:"ℹ️ Swipe left on the number cell or tap ► — direct call / WhatsApp / SMS",
-c_sr:"Sr",c_last:"Last date",c_court:"Court",c_party:"Party (Plaintiff & Petitioner) vs party (Defendant & Respondent)",c_ps:"Police station",c_next:"Next date",c_cli:"Clients numbers",
-c_last_s:"Previous proceeding",c_court_s:"Case number",c_party_s:"Today proceedings",c_ps_s:"Under Section",c_next_s:"Next proceeding",c_cli_s:"Opp. Adv. Numbers",
+c_sr:"Sr",c_last:"Last date",c_court:"Court",c_party:"Party (Plaintiff & Petitioner) vs party (Defendant & Respondent)",c_ps:"Police station",c_next:"Next date",
+c_last_s:"Previous proceeding",c_court_s:"Case number",c_party_s:"Today proceedings",c_ps_s:"Under Section",c_next_s:"Next proceeding",
+pr_last:"Last date",pr_court:"Court",pr_party:"Parties",pr_ps:"Police station",pr_next:"Next date",
 fs_new:"➕ Register new case",g_face:"Face • 6 columns",g_client:"Client & Opposition • 2+ numbers",g_papers:"📎 Papers",g_lib:"📚 Section Library",
 l_lastdate:"↑ Last date",l_pervious:"↓ Previous proceeding",l_courtname:"↑ Court (name)",l_courtno:"↑ Court No. (bench)",l_caseno:"↓ Case number",l_petitioner:"↑ Petitioner",l_respondent:"↑ Respondent",l_todayproc:"↓ Today proceedings",l_ps:"↑ Police station",l_uses:"↓ Under Section — pick or type",l_nextdate:"↑ Next date (blank = selected date)",l_nextproc:"↓ Next proceeding",
 l_clientname:"Client name",l_clientphones:"Client numbers",l_clientaddr:"Client address",l_oppname:"Opposition counsel name",l_oppphones:"Opposition numbers",l_oppaddr:"Opposition address / firm",l_addphone:"＋ add another number",
@@ -497,7 +476,6 @@ var bkNow=document.getElementById('bkNow'),rsBtn=document.getElementById('rsBtn'
 var bp=document.getElementById('bp'),bpYes=document.getElementById('bpYes'),bpNo=document.getElementById('bpNo');
 var sp=document.getElementById('sp'),stBtn=document.getElementById('stBtn'),setSave=document.getElementById('setSave');
 var gisBtn=document.getElementById('gisBtn'),drvBtn=document.getElementById('drvBtn');
-var asheet=document.getElementById('asheet'),asheetCard=document.getElementById('asheetCard');
 var fontSizeRadios=document.querySelectorAll('[name="fontSize"]'),boldToggle=document.getElementById('boldToggle'),themeRadios=document.querySelectorAll('[name="theme"]'),langRadios=document.querySelectorAll('[name="lang"]');
 var form=document.querySelector('details.main');
 var editId=null, openId=null, calOpen=false;
@@ -516,6 +494,7 @@ function caseDatesSet(){var s={};for(var i=0;i<cases.length;i++){var nd=cases[i]
 function fmtDate(iso){var p=parseISO(iso);if(!p.y)return '—';return pad2(p.d)+'/'+pad2(p.m0+1)+'/'+p.y;}
 function fmtLong(iso){var d=fmtDate(iso);if(d==='—')return d;var p=parseISO(iso);var wd=new Date(p.y,p.m0,p.d).getDay();return d+' ('+WD_HI[wd]+' '+WD_EN[wd]+')';}
 function monthName(m0){if(LANG==='en')return MONTHS_EN[m0];if(LANG==='hi')return MONTHS_HI[m0];return MONTHS_HI[m0]+' '+MONTHS_EN[m0];}
+function shiftDate(iso,n){var p=parseISO(iso);var dt=new Date(p.y,p.m0,p.d+n);return isoOf(dt.getFullYear(),dt.getMonth(),dt.getDate());}
 
 var FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','lastDate','lastProc','nextDate','nextProc','todayProc','clientName','clientAddress','oppName','oppAddress'];
 function F(n){return form.querySelector('[name="'+n+'"]')}
@@ -580,14 +559,12 @@ function render(){
   var day=cases.filter(function(c){return (c.nextDate||'')===selDate});
   var data=day.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
   count.textContent=fmtLong(selDate)+' • '+(query?(data.length+' '+txt('msg_cases')+' "'+query+'"'):(data.length+' '+txt('msg_cases')));
-  if(!data.length){list.innerHTML='<tr><td colspan="8" class="empty">'+(query?txt('msg_nosearch'):txt('msg_nocase'))+'</td></tr>';return}
+  if(!data.length){list.innerHTML='<tr><td colspan="7" class="empty">'+(query?txt('msg_nosearch'):txt('msg_nocase'))+'</td></tr>';return}
   list.innerHTML=data.map(function(c){
     var sr=cases.indexOf(c)+1;
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
     var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
     var nf=(c.files||[]).length;
-    var cn=(c.clientPhones||[])[0]||'—';
-    var on=(c.oppPhones||[])[0]||'—';
     return '<tr data-id="'+c.id+'">'
       +'<td class="sr">'+sr+'</td>'
       +'<td>'+cell(fmtDate(c.lastDate),c.lastProc||'—',query)+'</td>'
@@ -595,7 +572,6 @@ function render(){
       +'<td>'+cell(pt,c.todayProc||'—',query)+'</td>'
       +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
       +'<td>'+cell(fmtDate(c.nextDate),c.nextProc||'—',query,false,true)+'</td>'
-      +'<td class="numcell">'+cell(cn,on,query)+'<button class="numgo" type="button" data-act="numsheet">►</button></td>'
       +'<td class="act">'+(nf?('📎'+nf):'ⓘ')+'</td>'
       +'</tr>';
   }).join('');
@@ -608,8 +584,8 @@ cal.addEventListener('click',function(e){
   if(nav){
     var n=+nav.getAttribute('data-nav');
     if(n===0){selDate=todayISO();var t2=parseISO(selDate);viewY=t2.y;viewM=t2.m0;calOpen=false;cal.classList.remove('open');render();return;}
-    if(!calOpen) return;                 // arrow jab calendar band: no-op (tera rule)
-    viewM+=n;if(viewM<0){viewM=11;viewY--;}if(viewM>11){viewM=0;viewY++;}render();return;
+    if(calOpen){ viewM+=n; if(viewM<0){viewM=11;viewY--;} if(viewM>11){viewM=0;viewY++;} renderCal(); return; }   // open: MONTH
+    selDate=shiftDate(selDate,n); var v=parseISO(selDate); viewY=v.y; viewM=v.m0; render(); return;                // closed: DAY
   }
   var dc=e.target.closest('[data-date]');
   if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
@@ -642,12 +618,7 @@ saveBtn.addEventListener('click',function(){
   if(picked&&picked.length){addFilesToCase(picked,{files:o.files},finish);}else{finish();}
 });
 cancelBtn.addEventListener('click',function(){editId=null;fsEl.textContent=txt('fs_new');clearForm();resetGroups();form.removeAttribute('open');});
-list.addEventListener('click',function(e){
-  if(suppressClick){suppressClick=false;return;}
-  var ng=e.target.closest('[data-act="numsheet"]');
-  if(ng){e.stopPropagation();var tr0=ng.closest('tr[data-id]');if(tr0)openNumSheet(tr0.dataset.id);return;}
-  var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);
-});
+list.addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);});
 mbg.addEventListener('click',function(e){
   if(e.target===mbg){closeModal();return;}
   var od=e.target.closest('[data-act="opendoc"]');
@@ -663,29 +634,23 @@ mbg.addEventListener('change',function(e){var fi=e.target.closest('[data-role="a
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
 
-/* ---- SWIPE on number cell -> quick action sheet ---- */
-var touchX=0,touchY=0,touchCell=null,suppressClick=false;
-list.addEventListener('touchstart',function(e){var t=e.target.closest('.numcell');if(!t){touchCell=null;return;}touchCell=t;var p=e.touches[0];touchX=p.clientX;touchY=p.clientY;},{passive:true});
-list.addEventListener('touchend',function(e){if(!touchCell){return;}var p=e.changedTouches[0];var dx=p.clientX-touchX,dy=p.clientY-touchY;if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){var tr=touchCell.closest('tr[data-id]');if(tr){suppressClick=true;openNumSheet(tr.dataset.id);setTimeout(function(){suppressClick=false;},450);}}touchCell=null;},{passive:true});
-function numRows(arr,msg){var h='';var got=false;for(var i=0;i<arr.length;i++){var v=arr[i];if(!v)continue;got=true;h+='<div class="as-row"><span class="as-n">'+esc(v)+'</span><a class="as-btn call" href="'+telLink(v)+'">📞</a><a class="as-btn wa" href="'+waLink(v,msg)+'" target="_blank" rel="noopener">💬</a><a class="as-btn" href="'+smsLink(v)+'">✉️</a></div>';}if(!got)h='<div class="note">'+txt('m_nonum')+'</div>';return h;}
-function openNumSheet(id){var c=getCase(id);if(!c)return;
-  asheetCard.innerHTML='<h3>📞 '+esc(c.caseNumber||'—')+'</h3>'
-    +'<div class="asheet-sec"><h4>'+txt('m_client')+'</h4>'+numRows(c.clientPhones||[],waMsg(c))+'</div>'
-    +'<div class="asheet-sec"><h4>'+txt('m_opp')+'</h4>'+numRows(c.oppPhones||[],null)+'</div>'
-    +'<button class="asheet-x" type="button" data-act="asclose">'+txt('s_close')+'</button>';
-  asheet.classList.add('on');
-}
-asheet.addEventListener('click',function(e){if(e.target===asheet){asheet.classList.remove('on');return;}var b=e.target.closest('[data-act="asclose"]');if(b){asheet.classList.remove('on');}});
-
-/* ---- PRINT selected date's register ---- */
+/* ---- PRINT: Sr + 5 columns only (no numbers) ---- */
 function printRegister(){
   var day=cases.filter(function(c){return (c.nextDate||'')===selDate;});
   var w=window.open('','_blank');if(!w){alert(txt('msg_popup'));return;}
-  var rows=day.map(function(c,i){var cd=[c.court,c.courtNo].filter(Boolean).join(' ');return '<tr><td>'+(i+1)+'</td><td>'+esc(fmtDate(c.lastDate))+'<br>'+esc(c.lastProc||'')+'</td><td>'+esc(cd)+'<br>'+esc(c.caseNumber||'')+'</td><td>'+esc(c.petitioner||'')+' v/s '+esc(c.respondent||'')+'<br>'+esc(c.todayProc||'')+'</td><td>'+esc(c.policeStation||'')+'<br>'+esc(c.section||'')+'</td><td>'+esc(fmtDate(c.nextDate))+'<br>'+esc(c.nextProc||'')+'</td><td>'+esc((c.clientPhones||[]).join(', '))+'<br>'+esc((c.oppPhones||[]).join(', '))+'</td></tr>';}).join('');
+  var rows=day.map(function(c,i){
+    var cd=[c.court,c.courtNo].filter(Boolean).join(' ');
+    return '<tr><td>'+(i+1)+'</td>'
+      +'<td>'+esc(fmtDate(c.lastDate))+'<br>'+esc(c.lastProc||'')+'</td>'
+      +'<td>'+esc(cd)+'<br>'+esc(c.caseNumber||'')+'</td>'
+      +'<td>'+esc(c.petitioner||'')+' v/s '+esc(c.respondent||'')+'<br>'+esc(c.todayProc||'')+'</td>'
+      +'<td>'+esc(c.policeStation||'')+'<br>'+esc(c.section||'')+'</td>'
+      +'<td>'+esc(fmtDate(c.nextDate))+'<br>'+esc(c.nextProc||'')+'</td></tr>';
+  }).join('');
   var html='<!doctype html><html lang="'+(LANG==='en'?'en':'hi')+'"><head><meta charset="utf-8"><title>Print '+fmtDate(selDate)+'</title><style>body{font-family:Georgia,serif;color:#000;padding:18px}h1{font-size:16px;margin:0 0 2px}.d{font-size:12px;color:#444;margin:0 0 10px}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #333;padding:5px 6px;vertical-align:top;text-align:left}th{background:#eee;font-size:10px;text-transform:uppercase}.f{font-size:9px;color:#666;margin-top:14px}@media print{body{padding:0}}</style></head><body>';
   html+='<h1>⚖️ Adam\'s Court Diary</h1><div class="d">'+fmtLong(selDate)+'</div>';
-  html+='<table><thead><tr><th>'+txt('c_sr')+'</th><th>'+txt('c_last')+' / '+txt('c_last_s')+'</th><th>'+txt('c_court')+' / '+txt('c_court_s')+'</th><th>'+txt('c_party')+' / '+txt('c_party_s')+'</th><th>'+txt('c_ps')+' / '+txt('c_ps_s')+'</th><th>'+txt('c_next')+' / '+txt('c_next_s')+'</th><th>'+txt('c_cli')+' / '+txt('c_cli_s')+'</th></tr></thead><tbody>';
-  html+= rows || ('<tr><td colspan="7" style="text-align:center;color:#888">'+txt('msg_nocase')+'</td></tr>');
+  html+='<table><thead><tr><th>'+txt('c_sr')+'</th><th>'+txt('pr_last')+' / '+txt('c_last_s')+'</th><th>'+txt('pr_court')+' / '+txt('c_court_s')+'</th><th>'+txt('pr_party')+' / '+txt('c_party_s')+'</th><th>'+txt('pr_ps')+' / '+txt('c_ps_s')+'</th><th>'+txt('pr_next')+' / '+txt('c_next_s')+'</th></tr></thead><tbody>';
+  html+= rows || ('<tr><td colspan="6" style="text-align:center;color:#888">'+txt('msg_nocase')+'</td></tr>');
   html+='</tbody></table><div class="f">Printed '+new Date().toLocaleString()+' — Adam\'s Court Diary</div></body></html>';
   w.document.write(html);w.document.close();setTimeout(function(){w.print();},400);
 }
