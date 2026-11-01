@@ -106,6 +106,7 @@ td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:calc(var(--f
 .d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
 .val.b{font-weight:700;color:var(--acc2)}
 .pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
+.setnext{background:var(--inp);border:1px dashed var(--acc2);color:var(--acc2);border-radius:7px;padding:2px 6px;font-size:calc(var(--fs-base) - 3px);font-weight:700;cursor:pointer;line-height:1.3}
 .empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:calc(var(--fs-base) - 1px)}
 mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 .modal-bg{position:fixed;inset:0;background:var(--ov);display:none;align-items:flex-start;justify-content:center;padding:12px;z-index:60;overflow-y:auto}
@@ -382,9 +383,9 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 
     <div class="set-grp">
       <h4 data-k="s_langh"></h4>
-      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दी</label>
+      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दী</label>
       <label class="set-opt"><input type="radio" name="lang" value="en"> B. English</label>
-      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. द्विभाषी / Diglot</label>
+      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. দ্বিভাষী / Diglot</label>
     </div>
 
     <div class="set-grp">
@@ -412,18 +413,19 @@ var GOOGLE_CLIENT_ID='';
 
 var I18N={
 hi:{
-sub:"दिनांक-आधारित रजिस्टर • टैप पर पूरी डिटेल • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लाइन",
+sub:"दिनान्क-आधारित रजिस्टर • टैप पर पूरী डिटेल • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लइन",
 intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
-intro_tip:"💡 कैलेंडर बंद हो तो सिर्फ तारीख दिखेगी; खोलने पर दिन/महीने चुनी भाषा में दिखेंगे। ◀ ▶ बंद कैलेंडर में दिन बदलेंगे, खुले कैलेंडर में महीना बदलेंगे। केस की लाइन टैप करो → अंदर वादी/विपक्षी पक्ष/विपक्षी वकील/कागजात की पूरी डिटेल। 🖨️ से इस तारीख का साफ रजिस्टर प्रिंट। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत्। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा।",
+intro_tip:"💡 कैलेंडर बंद हो तो सिर्फ तारीख दिखेगी; खोलने पर दिन/महीने चुनी भाषा में। ◀ ▶ बंद कैलेंडर में दिन बदलेंगे, खुले में महीना। नया केस बनाते वक्त 'अगली तिथि' खाली छोड़ो → केस आज की तारीख पर रहेगा और '＋ अगली तारीख तय करो' बटन दिखेगा; उसे दबाते ही कैलेंडर खुल जाएगा। जैसे ही अगली तारीख सेव होगी, केस उस तारीख पर चला जाएगा (रिकॉर्ड डिलीट नहीं होता, बस शिफ्ट होता है)। केस की लाइन टैप करो → अंदर वादी/विपक्षी पक्ष/विपक्षी वकील/कागजात की पूरी डिटेल। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा।",
 intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC का नंबर व शीर्षक अपने कोड से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/PDF फोन की स्टोरेज में (बहुत बड़ी PDF छूट सकती है)।",
 intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
 search:"खोजें (इसी तारीख के केस में): केस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
 today:"आज",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨️ Print",jump_lbl:"किसी भी तारीख पर जाओ",
 c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",
-c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धार",c_next_s:"अगली कार्यवाही",
+c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",
 pr_last:"पिछली तारीख",pr_court:"न्यायालय",pr_party:"वादी बनाम विपक्षी",pr_ps:"थाना",pr_next:"अगली तारीख",
+set_next:"अगली तारीख तय करो",moved:"केस अगली तारीख पर चला गया:",
 fs_new:"➕ नया केस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी / Client",g_opp:"विपक्षी पक्ष और वकील",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
-l_lastdate:"↑ अंतिम तिथि",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली = चुनी तारीख)",l_nextproc:"↓ अगली कार्यवाही",
+l_lastdate:"↑ अंतिम तिथि",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली छोड़ो = आज पर रहेगी, बाद में तय करो)",l_nextproc:"↓ अगली कार्यवाही",
 l_clientname:"वादी का नाम",l_clientphones:"वादी के नंबर",l_clientaddr:"वादी का पता",
 l_opppartyname:"विपक्षी पक्ष का नाम",l_opppartyphones:"विपक्षी पक्ष के नंबर",l_opppartyaddr:"विपक्षी पक्ष का पता",
 l_oppname:"विपक्षी वकील का नाम",l_oppphones:"विपक्षी वकील के नंबर",l_oppaddr:"विपक्षी वकील का पता / फर्म",
@@ -433,17 +435,17 @@ l_libadd:"नई धाराएँ जोड़ो (एक लाइन मे�
 b_savecase:"केस सेव करो",b_cancel:"रद्द करो",
 ph_pervious:"नया केस / नोटिस…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"राज्य",ph_respondent:"लाल व अन्य",ph_todayproc:"आरोप पत्र पढ़ा गया…",ph_ps:"बसई जगनेर",ph_uses:"उदा. धारा 302 IPC / BNS 103 / 138 एनआई एक्ट",h_uses:"जो लिखोगे वही सेव और खोज होगा।",ph_nextproc:"साक्ष्य…",ph_clientname:"राम स्वरूप",ph_clientaddr:"चैंबर / घर",ph_opppartyname:"राम लाल",ph_opppartyaddr:"पता / फर्म",ph_oppname:"वकील X",ph_oppaddr:"फर्म का पता",ph_docnotes:"वकालतनामा 12-10-2026\nएफआईआर कॉपी\nचेक रिटर्न मेमो",ph_libadd:"BNS 115 – चोट\nBNS 311 – चोरी\n(अपनी विश्वसनीय सूची पेस्ट करो)",
 m_client:"वादी",m_oppparty:"विपक्षी पक्ष",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / PDF)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/PDF नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
-s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत् (Large)",s_xl:"अति बृहत् (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिंदू कैलेंडर",s_vsOn:"विक्रम संवत् + तिथि दिखाएँ (हिंदी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन तिथि के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत् दिखेगा और तिथि के लिए Google लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
+s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत (Large)",s_xl:"अति बृहत (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिंदू कैलेंडर",s_vsOn:"विक्रम संवत + तिथि दिखाएँ (हिंदी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन तिथि के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत दिखेगा और तिथि के लिए Google लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
 bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में Save नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
 unsaved_title:"⚠️ बिना सेव किए बंद कर रहे हो?",unsaved_body:"यह डेटा अभी सेव नहीं हुआ। पहले सेव करें?",save_now:"हाँ, सेव करो",stay_cancel:"रहने दो",
 cancel_title:"बदलाव रद्द करें?",cancel_body:"अभी किया गया बदलाव रद्द हो जाएगा। पक्का?",cancel_ok:"हाँ, रद्द करो",cancel_no:"रहने दो",
 delete_title:"🗑 केस हटाएँ?",delete_body:"यह केस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
-msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"Save फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ Restore से वापस आ जाएगी।",msg_badfile:"यह सही Save फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की Save फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वत सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूँगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहाँ से सेव कर लो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
+msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"Save फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ Restore से वापस आ जाएगी।",msg_badfile:"यह सही Save फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की Save फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूँगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहाँ से सेव कर लो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
 },
 en:{
 sub:"Date-wise register • tap for full detail • 🖨️ Print • ☁️ Save • 100% offline",
 intro_off:"Data saves only on this phone — no internet needed",
-intro_tip:"💡 When calendar is closed, only date is shown; open it and day/month names appear in selected language. ◀ ▶ change DAY when closed, MONTH when open. Tap a case row → full client/opposition party/opposition counsel/papers detail inside. 🖨️ prints clean register of this date. ⚙️ for theme/font/language/Vikram Samvat. Closing form without save asks to save first.",
+intro_tip:"💡 Calendar closed shows only the date; open it and day/month names appear in chosen language. ◀ ▶ change DAY when closed, MONTH when open. When registering a new case, leave 'Next date' blank → the case stays on today and shows a '＋ Set next date' button; tapping it opens the calendar. As soon as you save a next date, the case moves to that date (the record is never deleted, only shifted). Tap a case row → full client / opposition party / opposition counsel / papers detail inside. ⚙️ for theme/font/language/Vikram Samvat. Closing the form without saving asks to save first.",
 intro_warn:"⚠️ Section list is only a shortcut. Confirm BNS/IPC number & title from your own code — not legal advice. Photos/PDFs save in phone storage (very large PDF may be skipped).",
 intro_ok:"✕ Got it (won't show again)",
 search:"Search (this date's cases): case no, party, court, section, PS, number…",
@@ -451,8 +453,9 @@ today:"Today",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨�
 c_sr:"Sr",c_last:"Last date",c_court:"Court",c_party:"Party (Plaintiff & Petitioner) vs party (Defendant & Respondent)",c_ps:"Police station",c_next:"Next date",
 c_last_s:"Previous proceeding",c_court_s:"Case number",c_party_s:"Today proceedings",c_ps_s:"Under Section",c_next_s:"Next proceeding",
 pr_last:"Last date",pr_court:"Court",pr_party:"Parties",pr_ps:"Police station",pr_next:"Next date",
+set_next:"Set next date",moved:"Case moved to next date:",
 fs_new:"➕ Register new case",g_face:"Face • 6 columns",g_client:"Client",g_opp:"Opposition Party & Counsel",g_papers:"📎 Papers",g_lib:"📚 Section Library",
-l_lastdate:"↑ Last date",l_pervious:"↓ Previous proceeding",l_courtname:"↑ Court (name)",l_courtno:"↑ Court No. (bench)",l_caseno:"↓ Case number",l_petitioner:"↑ Petitioner",l_respondent:"↑ Respondent",l_todayproc:"↓ Today proceedings",l_ps:"↑ Police station",l_uses:"↓ Under Section — pick or type",l_nextdate:"↑ Next date (blank = selected date)",l_nextproc:"↓ Next proceeding",
+l_lastdate:"↑ Last date",l_pervious:"↓ Previous proceeding",l_courtname:"↑ Court (name)",l_courtno:"↑ Court No. (bench)",l_caseno:"↓ Case number",l_petitioner:"↑ Petitioner",l_respondent:"↑ Respondent",l_todayproc:"↓ Today proceedings",l_ps:"↑ Police station",l_uses:"↓ Under Section — pick or type",l_nextdate:"↑ Next date (leave blank = stays today, set later)",l_nextproc:"↓ Next proceeding",
 l_clientname:"Client name",l_clientphones:"Client numbers",l_clientaddr:"Client address",
 l_opppartyname:"Opposition party name",l_opppartyphones:"Opposition party numbers",l_opppartyaddr:"Opposition party address",
 l_oppname:"Opposition counsel name",l_oppphones:"Opposition counsel numbers",l_oppaddr:"Opposition counsel address / firm",
@@ -504,6 +507,7 @@ var cases=[]; try{cases=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){cas
   if(!c.clientPhones){c.clientPhones=c.clientPhone?[c.clientPhone]:[];delete c.clientPhone;}
   if(!c.oppPhones){c.oppPhones=c.oppPhone?[c.oppPhone]:[];delete c.oppPhone;}
   if(!c.oppPartyPhones)c.oppPartyPhones=[];
+  if(!c.holdingDate)c.holdingDate=c.nextDate||todayISO();
 }})();
 var LIB; (function(){var a=null;try{a=JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){}if(!a||!a.length){a=SEED.slice();localStorage.setItem(SKEY,JSON.stringify(a));}LIB=a;})();
 
@@ -550,7 +554,8 @@ function isoOf(y,m0,d){return y+'-'+pad2(m0+1)+'-'+pad2(d)}
 function todayISO(){var d=new Date();return isoOf(d.getFullYear(),d.getMonth(),d.getDate())}
 function parseISO(s){var p=(s||'').split('-');return {y:+p[0],m0:(+p[1])-1,d:+p[2]}}
 var selDate=todayISO(); var vv=parseISO(selDate); var viewY=vv.y, viewM=vv.m0;
-function caseDatesSet(){var s={};for(var i=0;i<cases.length;i++){var nd=cases[i].nextDate;if(nd)s[nd]=1;}return s}
+function caseDatesSet(){var s={};for(var i=0;i<cases.length;i++){var dd=dueOf(cases[i]);if(dd)s[dd]=1;}return s}
+function dueOf(c){return (c.nextDate&&c.nextDate!=='')?c.nextDate:(c.holdingDate||'');}
 function fmtDate(iso){var p=parseISO(iso);if(!p.y)return '—';return pad2(p.d)+'/'+pad2(p.m0+1)+'/'+p.y;}
 function monthName(m0){if(LANG==='en')return MONTHS_EN[m0];if(LANG==='hi')return MONTHS_HI[m0];return MONTHS_HI[m0]+' '+MONTHS_EN[m0];}
 function wdNames(){if(LANG==='en')return WD_EN;if(LANG==='hi')return WD_HI;return WD_HI.map(function(h,i){return h+' '+WD_EN[i];});}
@@ -627,7 +632,7 @@ function openModal(id){var c=getCase(id);if(!c)return; openId=id;
   var files=c.files||[], notes=c.notes||[];
   var gal=files.length?('<div class="docgrid">'+files.map(docItemHtml).join('')+'</div>'):'<div class="note">'+txt('m_nopdf')+'</div>';
   var noteChips=notes.length?('<div class="chips">'+notes.map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>'):'';
-  modal.innerHTML='<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+'<br>'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'<br>'+txt('c_next')+': '+(c.nextDate?fmtDate(c.nextDate):'—')+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
+  modal.innerHTML='<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+'<br>'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'<br>'+txt('c_next')+': '+(c.nextDate?fmtDate(c.nextDate):txt('set_next'))+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
     +'<div class="sec"><h3>'+txt('m_client')+'</h3><div class="dl"><div><span>'+txt('l_clientname')+' :</span> '+(c.clientName?esc(c.clientName):'—')+'</div><div><span>'+txt('l_clientaddr')+' :</span> '+(c.clientAddress?esc(c.clientAddress):'—')+'</div></div>'+phoneActs(c.clientPhones||[],waMsg(c))+'</div>'
     +'<div class="sec"><h3>'+txt('m_oppparty')+'</h3><div class="dl"><div><span>'+txt('l_opppartyname')+' :</span> '+(c.oppPartyName?esc(c.oppPartyName):'—')+'</div><div><span>'+txt('l_opppartyaddr')+' :</span> '+(c.oppPartyAddress?esc(c.oppPartyAddress):'—')+'</div></div>'+phoneActs(c.oppPartyPhones||[],null)+'</div>'
     +'<div class="sec"><h3>'+txt('m_opp')+'</h3><div class="dl"><div><span>'+txt('l_oppname')+' :</span> '+(c.oppName?esc(c.oppName):'—')+'</div><div><span>'+txt('l_oppaddr')+' :</span> '+(c.oppAddress?esc(c.oppAddress):'—')+'</div></div>'+phoneActs(c.oppPhones||[],null)+'</div>'
@@ -637,6 +642,7 @@ function openModal(id){var c=getCase(id);if(!c)return; openId=id;
 }
 function closeModal(){mbg.classList.remove('on');openId=null;modal.innerHTML='';}
 function getCase(id){for(var i=0;i<cases.length;i++){if(cases[i].id===id)return cases[i];}return null;}
+function openEditForNext(id){var c=getCase(id);if(!c)return;editId=id;fillForm(c);openAllGroups();fsEl.textContent='✏️ '+txt('fs_new');form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});var el=F('nextDate');if(el){el.focus();if(el.showPicker){try{el.showPicker();}catch(_){}}}}
 function compressImage(file,maxDim,quality){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(e){var img=new Image();img.onload=function(){var w=img.width,h=img.height,sc=Math.min(1,maxDim/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);var cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);res({n:file.name,t:'image/jpeg',d:cv.toDataURL('image/jpeg',quality)});};img.onerror=rej;img.src=e.target.result;};r.onerror=rej;r.readAsDataURL(file);});}
 function readPdf(file){return new Promise(function(res,rej){if(file.size>2.5*1024*1024){rej('badi');return;}var r=new FileReader();r.onload=function(e){res({n:file.name,t:file.type||'application/pdf',d:e.target.result});};r.onerror=rej;r.readAsDataURL(file);});}
 function readOne(file){if(file.type&&file.type.indexOf('image')===0)return compressImage(file,1000,0.6);if(file.type&&file.type.indexOf('pdf')>=0)return readPdf(file);return Promise.reject('type');}
@@ -646,7 +652,7 @@ function saveCurrentCase(){
   var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert(txt('msg_casereq'));return false;}
   var o={};
   FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
-  if(!o.nextDate)o.nextDate=selDate;
+  o.holdingDate=selDate;
   o.notes=F('docNotes').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
   o.clientPhones=readPhoneBoxes(cliPhones).filter(Boolean);
   o.oppPartyPhones=readPhoneBoxes(oppPartyPhones).filter(Boolean);
@@ -657,14 +663,21 @@ function saveCurrentCase(){
   var finish=function(){
     if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fsEl.textContent=txt('fs_new');}
     else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
-    if(saveCases()){clearForm();resetGroups();closeFormUI();selDate=o.nextDate;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();return true;}
+    if(saveCases()){
+      var movedTo=dueOf(o);
+      clearForm();resetGroups();closeFormUI();
+      var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');
+      render();
+      if(movedTo && movedTo!==selDate){alert('✅ '+txt('moved')+' '+fmtDate(movedTo));}
+      return true;
+    }
     return false;
   };
   if(picked&&picked.length){addFilesToCase(picked,{files:o.files},finish);return true;}
   return finish();
 }
 
-function approxVS(iso){var p=parseISO(iso); var y=p.y + (p.m0>=2?57:56); return 'विक्रम संवत् '+y;}
+function approxVS(iso){var p=parseISO(iso); var y=p.y + (p.m0>=2?57:56); return 'विक्रम संवत '+y;}
 function loadHc(){
   try{return new Function('return import("https://cdn.jsdelivr.net/npm/hindu-calendar@latest/+esm")')();}
   catch(e){return Promise.reject(e);}
@@ -672,7 +685,7 @@ function loadHc(){
 function getHinduInfo(iso){
   return new Promise(function(resolve){
     var vs=approxVS(iso);
-    var url='https://www.google.com/search?q='+encodeURIComponent('विक्रम संवत् तिथि '+fmtDate(iso));
+    var url='https://www.google.com/search?q='+encodeURIComponent('विक्रम संवत तिथि '+fmtDate(iso));
     var cachedKey='adam_hindu_'+iso+'_'+(new Date().getTimezoneOffset());
     try{var c=JSON.parse(localStorage.getItem(cachedKey)); if(c && c.text){resolve(c);return;}}catch(e){}
     loadHc().then(function(mod){
@@ -683,7 +696,7 @@ function getHinduInfo(iso){
       var res=fn(d,{lat:28.6139,lng:77.2090,timezone:tz});
       var samvat=res.samvat||res.vikramSamvat||res.vikram||{};
       var vsYear=(samvat.vikram&&samvat.vikram.year)||samvat.year||(res.vikramSamvat&&res.vikramSamvat.year)||(res.vikram&&res.vikram.year);
-      if(vsYear) vs='विक्रम संवत् '+vsYear;
+      if(vsYear) vs='विक्रम संवत '+vsYear;
       var t=res.tithi||{}; var tName=t.english||t.name||t.transliteration||'';
       var pk=res.paksha||{}; var pkName=pk.english||pk.name||'';
       var mo=res.month||{}; var moName=mo.english||mo.name||'';
@@ -722,7 +735,7 @@ function renderWd(){var names=wdNames();calWd.innerHTML='';for(var i=0;i<7;i++){
 function render(){
   renderCal();renderWd();
   var query=q.value.trim();
-  var day=cases.filter(function(c){return (c.nextDate||'')===selDate});
+  var day=cases.filter(function(c){return dueOf(c)===selDate});
   var data=day.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
   count.textContent=fmtDate(selDate)+' • '+(query?(data.length+' '+txt('msg_cases')+' "'+query+'"'):(data.length+' '+txt('msg_cases')));
   if(!data.length){list.innerHTML='<tr><td colspan="6" class="empty">'+(query?txt('msg_nosearch'):txt('msg_nocase'))+'</td></tr>';return}
@@ -730,15 +743,17 @@ function render(){
     var sr=cases.indexOf(c)+1;
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
     var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
-    var nf=(c.files||[]).length;
-    var nextLower=(c.nextProc||'—')+(nf?(' 📎'+nf):'');
+    var nd=c.nextDate;
+    var nextHtml = nd
+      ? cell(fmtDate(nd), c.nextProc||'—', query, false, true)
+      : '<span class="u"><button class="setnext" type="button" data-act="setnext">＋ '+txt('set_next')+'</button></span><span class="d">—</span>';
     return '<tr data-id="'+c.id+'">'
       +'<td class="sr">'+sr+'</td>'
       +'<td>'+cell(fmtDate(c.lastDate),c.lastProc||'—',query)+'</td>'
       +'<td>'+cell(cd,c.caseNumber||'—',query,true)+'</td>'
       +'<td>'+cell(pt,c.todayProc||'—',query)+'</td>'
       +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
-      +'<td>'+cell(fmtDate(c.nextDate),nextLower,query,false,true)+'</td>'
+      +'<td>'+nextHtml+'</td>'
       +'</tr>';
   }).join('');
 }
@@ -791,7 +806,11 @@ window.addEventListener('beforeunload',function(e){
   if(formDirty){ e.preventDefault(); e.returnValue=''; }
 });
 
-list.addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);});
+list.addEventListener('click',function(e){
+  var sn=e.target.closest('[data-act="setnext"]');
+  if(sn){e.stopPropagation();var tr0=sn.closest('tr[data-id]');if(tr0)openEditForNext(tr0.dataset.id);return;}
+  var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);
+});
 mbg.addEventListener('click',function(e){
   if(e.target===mbg){closeModal();return;}
   var od=e.target.closest('[data-act="opendoc"]');
@@ -808,7 +827,7 @@ q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
 
 function printRegister(){
-  var day=cases.filter(function(c){return (c.nextDate||'')===selDate;});
+  var day=cases.filter(function(c){return dueOf(c)===selDate;});
   var w=window.open('','_blank');if(!w){alert(txt('msg_popup'));return;}
   var rows=day.map(function(c,i){
     var cd=[c.court,c.courtNo].filter(Boolean).join(' ');
@@ -817,7 +836,7 @@ function printRegister(){
       +'<td>'+esc(cd)+'<br>'+esc(c.caseNumber||'')+'</td>'
       +'<td>'+esc(c.petitioner||'')+' v/s '+esc(c.respondent||'')+'<br>'+esc(c.todayProc||'')+'</td>'
       +'<td>'+esc(c.policeStation||'')+'<br>'+esc(c.section||'')+'</td>'
-      +'<td>'+esc(fmtDate(c.nextDate))+'<br>'+esc(c.nextProc||'')+'</td></tr>';
+      +'<td>'+esc(c.nextDate?fmtDate(c.nextDate):'—')+'<br>'+esc(c.nextProc||'')+'</td></tr>';
   }).join('');
   var html='<!doctype html><html lang="'+(LANG==='en'?'en':'hi')+'"><head><meta charset="utf-8"><title>Print '+fmtDate(selDate)+'</title><style>body{font-family:Georgia,serif;color:#000;padding:18px}h1{font-size:16px;margin:0 0 2px}.d{font-size:12px;color:#444;margin:0 0 10px}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #333;padding:5px 6px;vertical-align:top;text-align:left}th{background:#eee;font-size:10px;text-transform:uppercase}.f{font-size:9px;color:#666;margin-top:14px}@media print{body{padding:0}}</style></head><body>';
   html+='<h1>⚖️ Adam\'s Court Diary</h1><div class="d">'+fmtDate(selDate)+'</div>';
@@ -836,7 +855,7 @@ function saveToDrive(){var text=makeBackupJson();var fn=backupName();try{var fil
 bkNow.addEventListener('click',function(){doSave(true);});
 drvBtn.addEventListener('click',function(){saveToDrive();});
 rsBtn.addEventListener('click',function(){rsFile.click();});
-rsFile.addEventListener('change',function(){var f=rsFile.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(ev){try{var obj=JSON.parse(ev.target.result);if(!obj||!Array.isArray(obj.cases)){alert(txt('msg_badfile'));rsFile.value='';return;}var mode=confirm(txt('msg_merge'));if(mode){var map={};for(var i=0;i<cases.length;i++)map[cases[i].id]=cases[i];for(var j=0;j<obj.cases.length;j++){var nc=obj.cases[j];if(nc&&nc.id)map[nc.id]=nc;}cases=[];for(var k in map)cases.push(map[k]);cases.sort(function(a,b){return (a.nextDate||'')<(b.nextDate||'')?-1:1;});}else{cases=obj.cases.slice();}if(Array.isArray(obj.sections)&&obj.sections.length){LIB=obj.sections.slice();saveLib();}if(obj.settings){SETTINGS=obj.settings;if(SETTINGS.size==='small')SETTINGS.size='sm';if(SETTINGS.size==='medium')SETTINGS.size='md';if(SETTINGS.size==='large')SETTINGS.size='lg';if(typeof SETTINGS.vs!=='boolean')SETTINGS.vs=false;}if(obj.lang){LANG=obj.lang;}if(obj.theme){THEME.mode=obj.theme;}saveSettings();refreshAll();alert('✅ '+txt('msg_restored')+' '+cases.length+'.');}catch(err){alert(txt('msg_readerr'));}rsFile.value='';};rd.onerror=function(){alert(txt('msg_readerr'));rsFile.value='';};rd.readAsText(f);});
+rsFile.addEventListener('change',function(){var f=rsFile.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(ev){try{var obj=JSON.parse(ev.target.result);if(!obj||!Array.isArray(obj.cases)){alert(txt('msg_badfile'));rsFile.value='';return;}var mode=confirm(txt('msg_merge'));if(mode){var map={};for(var i=0;i<cases.length;i++)map[cases[i].id]=cases[i];for(var j=0;j<obj.cases.length;j++){var nc=obj.cases[j];if(nc&&nc.id)map[nc.id]=nc;}cases=[];for(var k in map)cases.push(map[k]);cases.sort(function(a,b){return (a.nextDate||'')<(b.nextDate||'')?-1:1;});}else{cases=obj.cases.slice();}for(var z=0;z<cases.length;z++){var cz=cases[z];if(!cz.holdingDate)cz.holdingDate=cz.nextDate||todayISO();if(!cz.files)cz.files=[];if(!cz.notes)cz.notes=[];if(!cz.clientPhones)cz.clientPhones=[];if(!cz.oppPhones)cz.oppPhones=[];if(!cz.oppPartyPhones)cz.oppPartyPhones=[];}if(Array.isArray(obj.sections)&&obj.sections.length){LIB=obj.sections.slice();saveLib();}if(obj.settings){SETTINGS=obj.settings;if(SETTINGS.size==='small')SETTINGS.size='sm';if(SETTINGS.size==='medium')SETTINGS.size='md';if(SETTINGS.size==='large')SETTINGS.size='lg';if(typeof SETTINGS.vs!=='boolean')SETTINGS.vs=false;}if(obj.lang){LANG=obj.lang;}if(obj.theme){THEME.mode=obj.theme;}saveSettings();refreshAll();alert('✅ '+txt('msg_restored')+' '+cases.length+'.');}catch(err){alert(txt('msg_readerr'));}rsFile.value='';};rd.onerror=function(){alert(txt('msg_readerr'));rsFile.value='';};rd.readAsText(f);});
 function maybeEveningPrompt(){var now=new Date();var hr=now.getHours();if(hr<20||hr>23)return;var last=parseInt(localStorage.getItem(BTKEY)||'0',10);var DAY=24*60*60*1000;if(last&&(Date.now()-last)<DAY)return;if(sessionStorage.getItem('adam_bp_shown'))return;sessionStorage.setItem('adam_bp_shown','1');bp.classList.add('on');}
 bpYes.addEventListener('click',function(){bp.classList.remove('on');doSave(true);});
 bpNo.addEventListener('click',function(){bp.classList.remove('on');});
