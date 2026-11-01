@@ -48,12 +48,12 @@ h1{font-size:calc(var(--fs-base) + 6px);margin:0 0 2px;font-weight:700}
 .bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:calc(var(--fs-base) + 3px);cursor:pointer}
 .count{color:var(--mut);font-size:calc(var(--fs-base) - 1px);margin:0 0 8px}
 .cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 8px;margin-bottom:10px}
-.cal-head{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.cal-head button{background:var(--inp);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 8px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;flex:0 0 auto}
+.cal-head{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.cal-head button{background:var(--inp);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;flex:0 0 auto}
 .cal-head .cal-today{color:var(--acc);font-weight:700}
-.cal-mid{flex:1;min-width:110px;background:var(--inp);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 8px;font-size:calc(var(--fs-base) - 1px);font-weight:700;text-align:center;cursor:pointer}
-.cloud-mini{display:flex;gap:5px;flex:0 0 auto;flex-wrap:wrap}
-.cbtn{border-radius:8px;padding:6px 8px;font-size:calc(var(--fs-base) - 2px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);display:inline-flex;align-items:center;gap:4px}
+.cal-mid{flex:1;min-width:92px;background:var(--inp);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 6px;font-size:calc(var(--fs-base) - 1px);font-weight:700;text-align:center;cursor:pointer}
+.cloud-mini{display:flex;gap:4px;flex:0 0 auto;flex-wrap:wrap}
+.cbtn{border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 2px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);display:inline-flex;align-items:center;gap:4px}
 .cbtn.dl{color:#86efac;border-color:#166534}
 .cbtn.up{color:#fde68a;border-color:#b45309}
 .cbtn.pr{color:#c4b5fd;border-color:#6d28d9}
@@ -148,12 +148,12 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 .mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;margin-top:6px}
 .mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
 .hint{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:3px}
-.backup-pop,.settings-pop{position:fixed;inset:0;background:var(--ov2);display:none;align-items:center;justify-content:center;padding:16px;z-index:80}
-.backup-pop.on,.settings-pop.on{display:flex}
-.backup-card,.settings-card{background:var(--card);border:1px solid var(--acc2);border-radius:16px;max-width:420px;width:100%;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.6);max-height:90vh;overflow-y:auto}
-.backup-card{text-align:center}
-.backup-card h3,.settings-card h3{margin:0 0 14px;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700;text-align:center}
-.backup-card p{margin:0 0 14px;font-size:calc(var(--fs-base) - 1px);color:var(--mut);line-height:1.5}
+.backup-pop,.settings-pop,.prompt-pop{position:fixed;inset:0;background:var(--ov2);display:none;align-items:center;justify-content:center;padding:16px;z-index:80}
+.backup-pop.on,.settings-pop.on,.prompt-pop.on{display:flex}
+.backup-card,.settings-card,.prompt-card{background:var(--card);border:1px solid var(--acc2);border-radius:16px;max-width:420px;width:100%;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.6);max-height:90vh;overflow-y:auto}
+.backup-card,.prompt-card{text-align:center}
+.backup-card h3,.settings-card h3,.prompt-card h3{margin:0 0 14px;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700;text-align:center}
+.backup-card p,.prompt-card p{margin:0 0 14px;font-size:calc(var(--fs-base) - 1px);color:var(--mut);line-height:1.5}
 .bk-row{display:flex;gap:8px}
 .bk-btn{flex:1;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:0}
 .bk-now{background:var(--acc);color:#052e16}
@@ -176,6 +176,7 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 @media(max-width:380px){
   .inner{grid-template-columns:1fr}
   .docgrid{grid-template-columns:repeat(2,1fr)}
+  .cal-mid{min-width:82px}
 }
 </style>
 </head>
@@ -199,16 +200,14 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <div class="cal" id="cal">
   <div class="cal-head">
     <button type="button" data-nav="-1">◀</button>
-    <button type="button" class="cal-mid" id="calMid">📅 —</button>
-    <button type="button" data-nav="1">▶</button>
     <button type="button" class="cal-today" data-nav="0" data-k="today"></button>
-    <div class="cloud-mini">
-      <button class="cbtn dl" type="button" id="bkNow" data-k="save_btn"></button>
-      <button class="cbtn up" type="button" id="rsBtn" data-k="restore_btn"></button>
-      <button class="cbtn pr" type="button" id="prtBtn" data-k="print_btn"></button>
-      <button class="cbtn st" type="button" id="stBtn" title="Settings">⚙️</button>
-      <input type="file" id="rsFile" accept=".json,application/json" style="display:none">
-    </div>
+    <button class="cbtn dl" type="button" id="bkNow" data-k="save_btn"></button>
+    <button type="button" class="cal-mid" id="calMid">📅 —</button>
+    <button class="cbtn up" type="button" id="rsBtn" data-k="restore_btn"></button>
+    <button class="cbtn pr" type="button" id="prtBtn" data-k="print_btn"></button>
+    <button class="cbtn st" type="button" id="stBtn" title="Settings">⚙️</button>
+    <button type="button" data-nav="1">▶</button>
+    <input type="file" id="rsFile" accept=".json,application/json" style="display:none">
   </div>
   <div class="cal-body">
     <div class="cal-title" id="calTitle">—</div>
@@ -337,6 +336,17 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
   </div>
 </div>
 
+<div class="prompt-pop" id="pp">
+  <div class="prompt-card">
+    <h3 id="ppTitle"></h3>
+    <p id="ppMsg"></p>
+    <div class="bk-row">
+      <button class="bk-btn bk-now" type="button" id="ppOk"></button>
+      <button class="bk-btn bk-later" type="button" id="ppNo"></button>
+    </div>
+  </div>
+</div>
+
 <div class="settings-pop" id="sp">
   <div class="settings-card">
     <h3 data-k="s_title"></h3>
@@ -358,9 +368,9 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
     </div>
     <div class="set-grp">
       <h4 data-k="s_langh"></h4>
-      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दী</label>
+      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दी</label>
       <label class="set-opt"><input type="radio" name="lang" value="en"> B. English</label>
-      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. দ্বিভাষী / Diglot</label>
+      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. द्विभाषी / Diglot</label>
     </div>
     <div class="set-grp">
       <h4 data-k="s_googleh"></h4>
@@ -380,9 +390,9 @@ var GOOGLE_CLIENT_ID='';
 
 var I18N={
 hi:{
-sub:"दिनान्क-आधारित रजिस्टर • टैप पर पूरी डिटेल (बाहर से कुछ नहीं) • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लाइन",
+sub:"दिनांक-आधारित रजिस्टर • टैप पर पूरी डिटेल (बाहर से कुछ नहीं) • 🖨️ प्रिंट • ☁️ Save • 100% ऑफ़लाइन",
 intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
-intro_tip:"💡 कैलेंडर बंद हो तो ◀ ▶ से दिन आगे-पीछे; 📅 दबाकर खोलने पर ◀ ▶ से महीना बदले। केस की लाइन टैप करो → अंदर वादी/विपक्षी/कागजात की पूरी डिटेल (बाहर से कोई नंबर/विवरण नहीं दिखता)। 🖨️ से इस तारीख का साफ़ रजिस्टर प्रिंट। ⚙️ से थीम/फ़ॉन्ट/भाषा।",
+intro_tip:"💡 कैलेंडर बंद हो तो ◀ ▶ से दिन आगे-पीछे; 📅 दबाकर खोलने पर ◀ ▶ से महीना बदले। केस की लाइन टैप करो → अंदर वादी/विपक्षी/कागजात की पूरी डिटेल (बाहर से कोई नंबर/विवरण नहीं दिखता)। 🖨️ से इस तारीख का साफ़ रजिस्टर प्रिंट। ⚙️ से थीम/फ़ॉन्ट/भाषा। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा।",
 intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC का नंबर व शीर्षक अपने कोड से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/पीडीएफ फोन की स्टोरेज में (बहुत बड़ी पीडीएफ छूट सकती है)।",
 intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
 search:"खोजें (इसी तारीख के केस में): केस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
@@ -400,12 +410,15 @@ ph_pervious:"नया केस / नोटिस…",ph_court:"ACJM",ph_courtn
 m_client:"वादी",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / पीडीएफ)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/पीडीएफ नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
 s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_small:"छोटा",s_medium:"मध्यम",s_large:"बड़ा",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
 bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में Save नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
+unsaved_title:"⚠️ बिना सेव किए बंद कर रहे हो?",unsaved_body:"यह डेटा अभी सेव नहीं हुआ। पहले सेव करें?",save_now:"हाँ, सेव करो",stay_cancel:"रहने दो",
+cancel_title:"बदलाव रद्द करें?",cancel_body:"अभी किया गया बदलाव रद्द हो जाएगा। पक्का?",cancel_ok:"हाँ, रद्द करो",cancel_no:"रहने दो",
+delete_title:"🗑 केस हटाएँ?",delete_body:"यह केस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
 msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/पीडीएफ हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_deleted:"यह केस हटाएँ?",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"Save फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ Restore से वापस आ जाएगी।",msg_badfile:"यह सही Save फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की Save फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूँगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहाँ से सेव कर लो।",msg_dl:"✅ फाइल डाउनलोड हो गई। अब Google Drive ऐप में अपलोड कर दो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी पीडीएफ छूट सकती है।"
 },
 en:{
 sub:"Date-wise register • tap for full detail (nothing shown outside) • 🖨️ Print • ☁️ Save • 100% offline",
 intro_off:"Data saves only on this phone — no internet needed",
-intro_tip:"💡 When calendar is closed, ◀ ▶ move the DAY; open it with 📅 and ◀ ▶ change the MONTH. Tap a case row → full client/opposition/papers detail inside (no numbers/details visible outside). 🖨️ prints a clean register of this date. ⚙️ for theme/font/language.",
+intro_tip:"💡 When calendar is closed, ◀ ▶ move the DAY; open it with 📅 and ◀ ▶ change the MONTH. Tap a case row → full client/opposition/papers detail inside (no numbers/details visible outside). 🖨️ prints a clean register of this date. ⚙️ for theme/font/language. If you close the form without saving, it asks to save first.",
 intro_warn:"⚠️ Section list is only a shortcut. Confirm BNS/IPC number & title from your own code — not legal advice. Photos/PDFs save in phone storage (very large PDF may be skipped).",
 intro_ok:"✕ Got it (won't show again)",
 search:"Search (this date's cases): case no, party, court, section, PS, number…",
@@ -423,6 +436,9 @@ ph_pervious:"New case / Notice…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383
 m_client:"Client",m_opp:"Opposition Counsel",m_papers:"📎 Papers (photo / PDF)",m_edit:"✏️ Edit",m_del:"🗑 Delete",m_addfile:"➕ Add file",m_nonum:"No number. Edit to add.",m_nopdf:"No photo/PDF yet. Add below.",m_note:"Tap = open file • ✕ = remove.",
 s_title:"⚙️ Settings",s_theme:"Theme",s_day:"Day (Light)",s_night:"Night (Dark)",s_system:"According to device",s_font:"Font size",s_small:"Small",s_medium:"Medium",s_large:"Large",s_boldh:"Bold text",s_boldon:"Bold ON (thicker letters)",s_langh:"Language",s_googleh:"Google / Cloud",s_signin:"🔑 Sign in with Google",s_savedrive:"☁️ Save to Drive",s_drivenote:"'Save to Drive' works without login — it sends the file straight to your Google Drive / Files app. 'Sign in with Google' (auto-sync) needs a one-time Google Cloud OAuth Client ID from a computer; then this button goes live.",s_apply:"✓ Apply & Save",s_close:"✕ Close",
 bp_title:"☁️ Secure your data?",bp_msg:"You haven't saved in the last 24 hours. A file will be made — keep it in Google Drive / Gmail / WhatsApp so your register travels with you to a new phone.",bp_yes:"Yes, save now",bp_no:"Later",
+unsaved_title:"⚠️ Closing without saving?",unsaved_body:"This data is not saved yet. Save it first?",save_now:"Yes, save",stay_cancel:"Stay",
+cancel_title:"Discard changes?",cancel_body:"Your current changes will be discarded. Sure?",cancel_ok:"Yes, discard",cancel_no:"Stay",
+delete_title:"🗑 Delete case?",delete_body:"This case will be permanently removed. Sure?",delete_ok:"Yes, delete",delete_no:"Cancel",
 msg_casereq:"Case number required",msg_memfull:"Phone memory full — remove some photo/PDF then save.",msg_nocase:"No case on this date. Register one with ➕ below.",msg_nosearch:"No case matched your search on this date.",msg_deleted:"Delete this case?",msg_restored:"Restored. Total",msg_merge:"How to restore?\n\nOK = MERGE (keep old, add new)\nCancel = REPLACE (wipe and load backup)",msg_copy:"Save file created:",msg_copy2:"Now keep it in Google Drive / Gmail / WhatsApp — on a new phone ⬇ Restore brings it back.",msg_badfile:"This doesn't look like a valid Save file.",msg_readerr:"Could not read file. Is this an Adam's Court Diary Save file?",msg_pick:"— pick from list (or type below) —",msg_gisoff:"🔑 Auto-sync not enabled yet. For now use '☁️ Save to Drive' — it works without login. Full Google sync needs a one-time Google Cloud OAuth Client ID from a computer (I'll guide you).",msg_share:"✅ Sent to Drive / Files app — save it there.",msg_dl:"✅ File downloaded. Now upload it in your Google Drive app.",msg_cases:"cases",msg_popup:"Popup blocked. Allow popups for this site in your browser.",h_papers:"📷 Photo auto-compresses. 📄 PDF larger than 2.5MB may be skipped."
 }
 };
@@ -474,11 +490,14 @@ var intro=document.getElementById('intro'),ix=document.getElementById('ix'),subE
 var cal=document.getElementById('cal'),calMid=document.getElementById('calMid'),calTitle=document.getElementById('calTitle'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
 var bkNow=document.getElementById('bkNow'),rsBtn=document.getElementById('rsBtn'),rsFile=document.getElementById('rsFile'),prtBtn=document.getElementById('prtBtn');
 var bp=document.getElementById('bp'),bpYes=document.getElementById('bpYes'),bpNo=document.getElementById('bpNo');
+var pp=document.getElementById('pp'),ppTitle=document.getElementById('ppTitle'),ppMsg=document.getElementById('ppMsg'),ppOk=document.getElementById('ppOk'),ppNo=document.getElementById('ppNo');
 var sp=document.getElementById('sp'),stBtn=document.getElementById('stBtn'),setSave=document.getElementById('setSave');
 var gisBtn=document.getElementById('gisBtn'),drvBtn=document.getElementById('drvBtn');
 var fontSizeRadios=document.querySelectorAll('[name="fontSize"]'),boldToggle=document.getElementById('boldToggle'),themeRadios=document.querySelectorAll('[name="theme"]'),langRadios=document.querySelectorAll('[name="lang"]');
 var form=document.querySelector('details.main');
+var formSummary=form.querySelector('summary');
 var editId=null, openId=null, calOpen=false;
+var formDirty=false, ppCallback=null;
 
 var MONTHS_HI=['जनवर','फ़रवर','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
 var MONTHS_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -508,16 +527,39 @@ function telLink(v){return v?('tel:'+digits(v)):'#';}
 function smsLink(v){return v?('sms:'+digits(v)):('#');}
 function waLink(v,msg){return v?('https://wa.me/'+waDigits(v)+(msg?('?text='+encodeURIComponent(msg)):'')):('#');}
 
+function setDirty(v){formDirty=!!v;}
+function isCaseField(el){
+  if(!el) return false;
+  if(el.id==='libAdd') return false;
+  if(el.closest && (el.closest('#libAdd')||el.closest('#libList'))) return false;
+  if(el.name || el.classList.contains('ph-input') || el.id==='formFile' || el.id==='secPick') return true;
+  return false;
+}
+form.addEventListener('input',function(e){ if(isCaseField(e.target)) setDirty(true); });
+form.addEventListener('change',function(e){ if(isCaseField(e.target)) setDirty(true); });
+
+function showPrompt(tk,bk,okk,nok,onOk){
+  ppTitle.textContent=txt(tk);
+  ppMsg.textContent=txt(bk);
+  ppOk.textContent=txt(okk);
+  ppNo.textContent=txt(nok);
+  ppCallback=onOk;
+  pp.classList.add('on');
+}
+ppOk.addEventListener('click',function(){pp.classList.remove('on');var cb=ppCallback;ppCallback=null;if(cb)cb();});
+ppNo.addEventListener('click',function(){pp.classList.remove('on');ppCallback=null;});
+
 function buildPicker(){secPick.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent=txt('msg_pick');secPick.appendChild(o0);LIB.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;secPick.appendChild(o);});}
 function renderLib(){libList.innerHTML='';if(!LIB.length){var n=document.createElement('div');n.className='libnote';n.textContent=txt('h_libnote');libList.appendChild(n);return;}LIB.forEach(function(s){var d=document.createElement('div');d.className='libitem';var t=document.createElement('span');t.textContent=s;var b=document.createElement('button');b.className='rm';b.type='button';b.textContent='✕';b.setAttribute('data-val',s);d.appendChild(t);d.appendChild(b);libList.appendChild(d);});}
 function phoneBoxHtml(val){return '<div class="phrow"><input class="ph-input" type="tel" placeholder="+91…" value="'+esc(val)+'"><button type="button" class="ph-del" title="remove">−</button></div>';}
 function renderPhoneBoxes(el,arr){el.innerHTML='';for(var i=0;i<arr.length;i++){el.insertAdjacentHTML('beforeend',phoneBoxHtml(arr[i]||''));}}
 function ensureTwo(arr){arr=arr||[];while(arr.length<2)arr.push('');return arr;}
 function readPhoneBoxes(el){var out=[];var ins=el.querySelectorAll('.ph-input');for(var i=0;i<ins.length;i++){out.push(ins[i].value.trim());}return out;}
-function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docNotes').value=(c.notes||[]).join('\n');renderPhoneBoxes(cliPhones,ensureTwo((c.clientPhones||[]).slice()));renderPhoneBoxes(oppPhones,ensureTwo((c.oppPhones||[]).slice()));formFile.value='';try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}}
-function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='file'&&!el.classList.contains('ph-input'))el.value=''});renderPhoneBoxes(cliPhones,['','']);renderPhoneBoxes(oppPhones,['','']);formFile.value='';secPick.value='';}
+function fillForm(c){FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||''});F('docNotes').value=(c.notes||[]).join('\n');renderPhoneBoxes(cliPhones,ensureTwo((c.clientPhones||[]).slice()));renderPhoneBoxes(oppPhones,ensureTwo((c.oppPhones||[]).slice()));formFile.value='';try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(e){}setDirty(false);}
+function clearForm(){form.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='file'&&!el.classList.contains('ph-input'))el.value=''});renderPhoneBoxes(cliPhones,['','']);renderPhoneBoxes(oppPhones,['','']);formFile.value='';secPick.value='';setDirty(false);}
 function openAllGroups(){form.querySelectorAll('.grp').forEach(function(g){g.setAttribute('open','');});}
 function resetGroups(){var gs=form.querySelectorAll('.grp');gs.forEach(function(g,i){if(i===0)g.setAttribute('open','');else g.removeAttribute('open');});}
+function closeFormUI(){form.removeAttribute('open');}
 function cell(u,d,query,bold,pill){var tx=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);return '<span class="u'+(bold?' val b':'')+'">'+tx+'</span><span class="d">'+hl(d,query)+'</span>';}
 function phoneActs(arr,msg){var html='';var got=false;for(var i=0;i<arr.length;i++){var v=arr[i];if(!v)continue;got=true;html+='<div class="numline"><div class="nl">'+esc(v)+'</div><div class="actrow"><a class="abtn call" href="'+telLink(v)+'">📞</a><a class="abtn wa" href="'+waLink(v,msg)+'" target="_blank" rel="noopener">💬</a><a class="abtn" href="'+smsLink(v)+'">✉️</a></div></div>';}if(!got)html='<div class="note">'+txt('m_nonum')+'</div>';return html;}
 function waMsg(c){return 'Case '+c.caseNumber+' ('+([c.court,c.courtNo].filter(Boolean).join(' ')||'—')+')\n'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'\nToday: '+(c.todayProc||'—')+'\nNext: '+(c.nextDate?fmtDate(c.nextDate):'—')+' ('+(c.nextProc||'—')+')\n— Adam\'s Court Diary';}
@@ -540,6 +582,28 @@ function compressImage(file,maxDim,quality){return new Promise(function(res,rej)
 function readPdf(file){return new Promise(function(res,rej){if(file.size>2.5*1024*1024){rej('badi');return;}var r=new FileReader();r.onload=function(e){res({n:file.name,t:file.type||'application/pdf',d:e.target.result});};r.onerror=rej;r.readAsDataURL(file);});}
 function readOne(file){if(file.type&&file.type.indexOf('image')===0)return compressImage(file,1000,0.6);if(file.type&&file.type.indexOf('pdf')>=0)return readPdf(file);return Promise.reject('type');}
 function addFilesToCase(l,c,done){var ps=[];for(var i=0;i<l.length;i++){(function(f){ps.push(readOne(f).catch(function(){return null;}));})(l[i]);}Promise.all(ps).then(function(arr){var added=0;for(var k=0;k<arr.length;k++){if(arr[k]){c.files.push(arr[k]);added++;}}if(added)saveCases();done&&done();});}
+
+function saveCurrentCase(){
+  var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert(txt('msg_casereq'));return false;}
+  var o={};
+  FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
+  if(!o.nextDate)o.nextDate=selDate;
+  o.notes=F('docNotes').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+  o.clientPhones=readPhoneBoxes(cliPhones).filter(Boolean);
+  o.oppPhones=readPhoneBoxes(oppPhones).filter(Boolean);
+  var existing=editId?getCase(editId):null;
+  o.files=existing?(existing.files||[]).slice():[];
+  var picked=formFile.files;
+  var finish=function(){
+    if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fsEl.textContent=txt('fs_new');}
+    else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
+    if(saveCases()){clearForm();resetGroups();closeFormUI();selDate=o.nextDate;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();return true;}
+    return false;
+  };
+  if(picked&&picked.length){addFilesToCase(picked,{files:o.files},finish);return true;}
+  return finish();
+}
+
 function renderCal(){
   calMid.textContent='📅 '+fmtLong(selDate)+(calOpen?' ▴':' ▾');
   calTitle.textContent=monthName(viewM)+' '+viewY;
@@ -584,40 +648,46 @@ cal.addEventListener('click',function(e){
   if(nav){
     var n=+nav.getAttribute('data-nav');
     if(n===0){selDate=todayISO();var t2=parseISO(selDate);viewY=t2.y;viewM=t2.m0;calOpen=false;cal.classList.remove('open');render();return;}
-    if(calOpen){ viewM+=n; if(viewM<0){viewM=11;viewY--;} if(viewM>11){viewM=0;viewY++;} renderCal(); return; }   // open: MONTH
-    selDate=shiftDate(selDate,n); var v=parseISO(selDate); viewY=v.y; viewM=v.m0; render(); return;                // closed: DAY
+    if(calOpen){ viewM+=n; if(viewM<0){viewM=11;viewY--;} if(viewM>11){viewM=0;viewY++;} renderCal(); return; }
+    selDate=shiftDate(selDate,n); var v=parseISO(selDate); viewY=v.y; viewM=v.m0; render(); return;
   }
   var dc=e.target.closest('[data-date]');
   if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
 });
 jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}});
-cliAdd.addEventListener('click',function(){cliPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));});
-oppAdd.addEventListener('click',function(){oppPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));});
-function delPhoneHandler(el){el.addEventListener('click',function(e){var b=e.target.closest('.ph-del');if(!b)return;if(el.querySelectorAll('.ph-input').length<=2){return;}b.parentElement.remove();});}
+cliAdd.addEventListener('click',function(){cliPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));setDirty(true);});
+oppAdd.addEventListener('click',function(){oppPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));setDirty(true);});
+function delPhoneHandler(el){el.addEventListener('click',function(e){var b=e.target.closest('.ph-del');if(!b)return;if(el.querySelectorAll('.ph-input').length<=2){return;}b.parentElement.remove();setDirty(true);});}
 delPhoneHandler(cliPhones);delPhoneHandler(oppPhones);
-secPick.addEventListener('change',function(){if(secPick.value)F('section').value=secPick.value;});
+secPick.addEventListener('change',function(){if(secPick.value){F('section').value=secPick.value;setDirty(true);}});
 libAddBtn.addEventListener('click',function(){var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);lines.forEach(function(s){if(LIB.indexOf(s)<0)LIB.push(s);});saveLib();buildPicker();renderLib();libAdd.value='';});
 libReset.addEventListener('click',function(){if(confirm(txt('b_libreset')+'?')){LIB=SEED.slice();saveLib();buildPicker();renderLib();}});
 libList.addEventListener('click',function(e){var b=e.target.closest('.rm');if(!b)return;var v=b.getAttribute('data-val');LIB=LIB.filter(function(s){return s!==v});saveLib();buildPicker();renderLib();});
-saveBtn.addEventListener('click',function(){
-  var need=F('caseNumber'); if(!need.value.trim()){need.focus();alert(txt('msg_casereq'));return}
-  var o={};
-  FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value.trim():''});
-  if(!o.nextDate)o.nextDate=selDate;
-  o.notes=F('docNotes').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
-  o.clientPhones=readPhoneBoxes(cliPhones).filter(Boolean);
-  o.oppPhones=readPhoneBoxes(oppPhones).filter(Boolean);
-  var existing=editId?getCase(editId):null;
-  o.files=existing?(existing.files||[]).slice():[];
-  var picked=formFile.files;
-  var finish=function(){
-    if(editId){for(var i=0;i<cases.length;i++){if(cases[i].id===editId){o.id=editId;cases[i]=o;break;}}editId=null;fsEl.textContent=txt('fs_new');}
-    else{o.id=Date.now()+''+Math.floor(Math.random()*9999);cases.unshift(o);}
-    if(saveCases()){clearForm();resetGroups();selDate=o.nextDate;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
-  };
-  if(picked&&picked.length){addFilesToCase(picked,{files:o.files},finish);}else{finish();}
+
+saveBtn.addEventListener('click',function(){saveCurrentCase();});
+cancelBtn.addEventListener('click',function(){
+  if(formDirty){
+    showPrompt('cancel_title','cancel_body','cancel_ok','cancel_no',function(){
+      editId=null;fsEl.textContent=txt('fs_new');clearForm();resetGroups();closeFormUI();
+    });
+  }else{
+    editId=null;fsEl.textContent=txt('fs_new');clearForm();resetGroups();closeFormUI();
+  }
 });
-cancelBtn.addEventListener('click',function(){editId=null;fsEl.textContent=txt('fs_new');clearForm();resetGroups();form.removeAttribute('open');});
+
+formSummary.addEventListener('click',function(e){
+  if(form.hasAttribute('open') && formDirty){
+    e.preventDefault();
+    showPrompt('unsaved_title','unsaved_body','save_now','stay_cancel',function(){
+      saveCurrentCase();
+    });
+  }
+});
+
+window.addEventListener('beforeunload',function(e){
+  if(formDirty){ e.preventDefault(); e.returnValue=''; }
+});
+
 list.addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)openModal(tr.dataset.id);});
 mbg.addEventListener('click',function(e){
   if(e.target===mbg){closeModal();return;}
@@ -628,13 +698,12 @@ mbg.addEventListener('click',function(e){
   var b=e.target.closest('[data-act]'); if(!b)return; var a=b.getAttribute('data-act');
   if(a==='close'){closeModal();return;}
   if(a==='edit'){var c3=getCase(openId);if(!c3)return;editId=openId;fillForm(c3);openAllGroups();fsEl.textContent='✏️ '+txt('fs_new');form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});return;}
-  if(a==='del'){if(confirm(txt('msg_deleted'))){cases=cases.filter(function(c){return c.id!==openId});saveCases();closeModal();render();}return;}
+  if(a==='del'){showPrompt('delete_title','delete_body','delete_ok','delete_no',function(){cases=cases.filter(function(c){return c.id!==openId});saveCases();closeModal();render();});return;}
 });
 mbg.addEventListener('change',function(e){var fi=e.target.closest('[data-role="addfile"]');if(fi&&fi.files&&fi.files.length){var c=getCase(openId);if(c){addFilesToCase(fi.files,c,function(){openModal(openId);render();});}}});
 q.addEventListener('input',render);
 clr.addEventListener('click',function(){q.value='';render();q.focus()});
 
-/* ---- PRINT: Sr + 5 columns only (no numbers) ---- */
 function printRegister(){
   var day=cases.filter(function(c){return (c.nextDate||'')===selDate;});
   var w=window.open('','_blank');if(!w){alert(txt('msg_popup'));return;}
@@ -656,7 +725,6 @@ function printRegister(){
 }
 prtBtn.addEventListener('click',printRegister);
 
-/* ---- SAVE / RESTORE / DRIVE ---- */
 function makeBackupJson(){return JSON.stringify({schemaVersion:1,appName:"Adam's Court Diary",exportedAt:new Date().toISOString(),lang:LANG,theme:THEME.mode,sections:LIB,cases:cases,settings:SETTINGS},null,2);}
 function backupName(){var ts=new Date();return 'Adams_Court_Diary_Save_'+ts.getFullYear()+pad2(ts.getMonth()+1)+pad2(ts.getDate())+'_'+pad2(ts.getHours())+pad2(ts.getMinutes())+'.json';}
 function triggerDownload(filename,text){var blob=new Blob([text],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},1500);}
