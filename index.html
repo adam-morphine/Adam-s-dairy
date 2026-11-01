@@ -4,443 +4,1461 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f172a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
 <title>Adam's Court Diary</title>
 <style>
 :root{
   --bg:#0f172a;--card:#1e293b;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;
   --acc:#22c55e;--acc2:#38bdf8;--danger:#f87171;--pill:#78350f;--pillt:#fbbf24;
-  --wa:#25d366;--inp:#0f172a;--soft:#0f172a66;--ov:rgba(2,6,23,.78);--fs-base:14px;
+  --wa:#25d366;--inp:#0f172a;--soft:#0f172a66;--soft2:#0f172a88;--soft3:#0f172a55;
+  --ov:rgba(2,6,23,.78);--ov2:rgba(2,6,23,.85);--fs-base:13px;
 }
 body[data-theme="day"]{
   --bg:#eef2f7;--card:#ffffff;--line:#cbd5e1;--txt:#0f172a;--mut:#475569;
   --acc:#15803d;--acc2:#0369a1;--danger:#b91c1c;--pill:#fef3c7;--pillt:#92400e;
-  --inp:#f8fafc;--soft:#e2e8f0aa;--ov:rgba(15,23,42,.45);
+  --inp:#f8fafc;--soft:#e2e8f0aa;--soft2:#e2e8f0cc;--soft3:#f1f5f9aa;
+  --ov:rgba(15,23,42,.45);--ov2:rgba(15,23,42,.55);
 }
+@media (prefers-color-scheme: light){
+  body[data-theme="system"]{
+    --bg:#eef2f7;--card:#ffffff;--line:#cbd5e1;--txt:#0f172a;--mut:#475569;
+    --acc:#15803d;--acc2:#0369a1;--danger:#b91c1c;--pill:#fef3c7;--pillt:#92400e;
+    --inp:#f8fafc;--soft:#e2e8f0aa;--soft2:#e2e8f0cc;--soft3:#f1f5f9aa;
+    --ov:rgba(15,23,42,.45);--ov2:rgba(15,23,42,.55);
+  }
+}
+body.bold,body.bold *{font-weight:700!important}
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:8px;font-size:var(--fs-base)}
-h1{font-size:18px;margin:0 0 10px;text-align:center;color:var(--acc2)}
-.bar{display:flex;gap:6px;margin-bottom:10px}
-.bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:10px;border-radius:8px;font-size:14px}
-.bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:0 12px;font-size:16px;cursor:pointer}
-.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
-.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.cal-head button{background:var(--inp);border:1px solid var(--line);color:var(--acc2);border-radius:6px;padding:6px 10px;cursor:pointer;font-weight:bold}
-.cal-mid{font-weight:bold;color:var(--txt)}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
-.cal-wd div{font-size:10px;color:var(--mut);padding:4px 0}
-.cal-c{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--soft);border:1px solid transparent;border-radius:6px;font-size:12px;cursor:pointer;color:var(--txt)}
+h1{font-size:calc(var(--fs-base) + 6px);margin:0 0 2px;font-weight:700}
+.sub{color:var(--mut);font-size:calc(var(--fs-base) - 1px);margin:0 0 8px}
+#intro{margin:0 0 8px}
+.off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:calc(var(--fs-base) - 2px);padding:3px 8px;border-radius:999px;margin-bottom:6px}
+.off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
+.tip{color:var(--acc2);font-size:calc(var(--fs-base) - 2px);margin:0 0 6px}
+.warn{color:#fca5a5;font-size:calc(var(--fs-base) - 2px);margin:0 0 6px;line-height:1.4}
+.ix{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:4px 10px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;margin-top:2px}
+.bar{display:flex;gap:6px;margin-bottom:6px}
+.bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:calc(var(--fs-base) + 1px)}
+.bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:calc(var(--fs-base) + 3px);cursor:pointer}
+.count{color:var(--mut);font-size:calc(var(--fs-base) - 1px);margin:0 0 4px}
+.autostat{color:var(--acc);font-size:calc(var(--fs-base) - 2px);margin:0 0 8px}
+.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 8px;margin-bottom:10px}
+.cal-head{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.cal-head button{background:var(--inp);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;flex:0 0 auto}
+.cal-head .cal-today{color:var(--acc);font-weight:700}
+.cal-mid{flex:1;min-width:92px;background:var(--inp);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 6px;font-size:calc(var(--fs-base) - 1px);font-weight:700;text-align:center;cursor:pointer}
+.cloud-mini{display:flex;gap:4px;flex:0 0 auto;flex-wrap:wrap}
+.cbtn{border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 2px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);display:inline-flex;align-items:center;gap:4px}
+.cbtn.dl{color:#86efac;border-color:#166534}
+.cbtn.up{color:#fde68a;border-color:#b45309}
+.cbtn.pr{color:#c4b5fd;border-color:#6d28d9}
+.cbtn.st{color:var(--acc2);border-color:var(--line)}
+.cal-body{display:none;margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
+.cal.open .cal-body{display:block}
+.cal-title{text-align:center;font-weight:700;font-size:calc(var(--fs-base) - 1px);color:var(--acc2);margin-bottom:4px}
+.cal-hindu{text-align:center;font-size:calc(var(--fs-base) - 2px);color:var(--acc);margin:0 0 7px;min-height:16px;line-height:1.35}
+.cal-hindu a{color:var(--acc2);text-decoration:none;font-weight:700}
+.cal-jump{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.cal-jump label{font-size:calc(var(--fs-base) - 3px);color:var(--mut)}
+.cal-jump input{flex:1;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:6px 8px;border-radius:8px;font-size:calc(var(--fs-base) - 1px);font-family:inherit}
+.cal-wd,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-wd div{text-align:center;font-size:calc(var(--fs-base) - 4px);color:var(--mut);padding:2px 0;line-height:1.2}
+.cal-c{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--soft);border:1px solid transparent;border-radius:8px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;color:var(--txt)}
 .cal-c.blank{background:transparent;cursor:default}
 .cal-c.td{border-color:var(--line)}
-.cal-c.sel{background:var(--acc2);color:#06283d;font-weight:bold}
-/* BADGES */
-.badge-count{position:absolute;bottom:2px;right:2px;background:var(--acc);color:#fff;font-size:9px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1;z-index:2}
-.badge-overdue{position:absolute;top:2px;left:2px;background:var(--danger);color:#fff;font-size:9px;width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1;z-index:3;box-shadow:0 0 3px rgba(248,113,113,0.8)}
-table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px}
-table.reg th, table.reg td{border:1px solid var(--line);padding:6px;vertical-align:top;word-break:break-word}
-table.reg th{background:var(--soft);color:var(--mut);text-transform:uppercase;font-size:10px;text-align:left}
+.cal-c.sel{background:var(--acc2);color:#06283d;font-weight:700}
+.cal-c .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.cal-c.sel .dot{background:#052e16}
+details.main{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+details.main>summary{padding:11px 12px;font-weight:600;cursor:pointer;list-style:none;font-size:calc(var(--fs-base) + 1px);text-align:center}
+details.main>summary::-webkit-details-marker{display:none}
+details.main>summary span.ar{float:right;color:var(--acc2)}
+.grp{border:1px solid var(--line);border-radius:10px;margin:0 12px 8px;overflow:hidden}
+.grp>summary{padding:9px 11px;font-weight:600;cursor:pointer;background:var(--soft2);list-style:none;font-size:calc(var(--fs-base) - 1px);text-align:left}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary b{color:var(--acc2)}
+.inner{padding:9px 11px 11px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.inner .full{grid-column:1/-1}
+label{font-size:calc(var(--fs-base) - 3px);color:var(--mut);display:block;margin-bottom:2px}
+input,textarea,select{width:100%;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:calc(var(--fs-base) - 1px);font-family:inherit}
+input[type=file]{padding:6px;font-size:calc(var(--fs-base) - 2px)}
+textarea{resize:vertical;min-height:40px}
+.phrow{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.phrow input{flex:1}
+.phrow button{flex:0 0 auto;background:var(--inp);border:1px solid var(--line);color:var(--mut);border-radius:8px;width:34px;height:36px;font-size:16px;cursor:pointer}
+.btnrow{display:flex;gap:8px;padding:0 12px 12px}
+.go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:calc(var(--fs-base) + 1px);cursor:pointer}
+.cancelbtn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:11px 14px;font-size:var(--fs-base);cursor:pointer}
+table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(var(--fs-base) - 3px);background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:10px}
+table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
+table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:calc(var(--fs-base) - 4px)}
+table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:calc(var(--fs-base) - 5px)}
 table.reg tbody tr{cursor:pointer}
 table.reg tbody tr:active{background:var(--inp)}
-details.main{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
-details.main>summary{padding:12px;font-weight:bold;cursor:pointer;list-style:none;text-align:center;color:var(--acc2)}
-details.main>summary::-webkit-details-marker{display:none}
-.form-group{padding:10px;border-top:1px solid var(--line)}
-label{font-size:11px;color:var(--mut);display:block;margin-bottom:2px}
-input,textarea,select{width:100%;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:6px}
-.btnrow{display:flex;gap:8px;padding:10px}
-.go{flex:1;background:var(--acc);color:#052e16;border:0;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer}
-.cancelbtn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:12px 14px;cursor:pointer}
-.modal-bg{position:fixed;inset:0;background:var(--ov);display:none;align-items:center;justify-content:center;padding:16px;z-index:60}
+table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
+td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:calc(var(--fs-base) - 2px)}
+td.nextcell{cursor:pointer}
+td.nextcell:active{background:var(--inp)}
+.u,.d{display:block;line-height:1.3}
+.d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
+.val.b{font-weight:700;color:var(--acc2)}
+.pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
+.setnext{background:var(--inp);border:1px dashed var(--acc2);color:var(--acc2);border-radius:7px;padding:2px 6px;font-size:calc(var(--fs-base) - 3px);font-weight:700;cursor:pointer;line-height:1.3}
+.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:calc(var(--fs-base) - 1px)}
+mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
+.modal-bg{position:fixed;inset:0;background:var(--ov);display:none;align-items:flex-start;justify-content:center;padding:12px;z-index:60;overflow-y:auto}
 .modal-bg.on{display:flex}
-.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:400px;width:100%;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.modal h2{margin:0 0 10px;font-size:16px;color:var(--acc2)}
-.modal .close-x{float:right;cursor:pointer;color:var(--mut);font-size:20px;line-height:1}
-.info-row{margin-bottom:8px;font-size:13px}
-.info-label{color:var(--mut);font-size:11px;display:block}
-.actions{display:flex;gap:8px;margin-top:10px}
-.act-btn{flex:1;padding:8px;border-radius:6px;border:1px solid var(--line);background:var(--inp);color:var(--txt);cursor:pointer;text-align:center;text-decoration:none;font-size:12px}
-.act-btn.del{color:var(--danger);border-color:var(--danger)}
-.empty-msg{text-align:center;color:var(--mut);padding:20px;font-size:13px}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:480px;width:100%;margin:auto;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.modal .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+.modal .mh h2{margin:0;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700}
+.modal .mh .mc{font-size:calc(var(--fs-base) - 1px);color:var(--mut);margin-top:2px;line-height:1.4}
+.modal .x{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:9px;padding:5px 10px;font-size:calc(var(--fs-base) + 1px);cursor:pointer;flex:0 0 auto}
+.sec{border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin-bottom:10px;background:var(--soft3)}
+.sec h3{margin:0 0 7px;font-size:calc(var(--fs-base) - 2px);color:var(--acc);text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+.dl{font-size:var(--fs-base);line-height:1.7}
+.dl span{color:var(--mut)}
+.dl a{color:var(--acc2);text-decoration:none}
+.numline{margin:6px 0;padding:6px 0;border-top:1px dashed var(--line)}
+.numline:first-of-type{border-top:0}
+.numline .nl{font-size:calc(var(--fs-base) - 1px);color:var(--acc2);font-weight:700;margin-bottom:3px}
+.actrow{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
+.abtn{flex:1;min-width:80px;border-radius:9px;padding:8px 6px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);text-decoration:none;text-align:center;display:inline-block}
+.abtn.wa{background:var(--wa);color:#04331a;border-color:var(--wa)}
+.abtn.call{color:var(--acc)}
+.docgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px}
+.docwrap{position:relative}
+.thumb{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:9px;display:block;background:var(--inp);cursor:pointer}
+.pdfcard{width:100%;aspect-ratio:1/1;border:1px solid var(--line);border-radius:9px;background:var(--inp);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:5px;text-align:center}
+.pdfcard .ic{font-size:22px}
+.pdfcard .nm{font-size:calc(var(--fs-base) - 3px);color:var(--mut);word-break:break-all;line-height:1.2}
+.rmx{position:absolute;top:-5px;right:-5px;background:#7f1d1d;color:#fff;border:0;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{background:var(--inp);border:1px solid var(--line);color:var(--txt);font-size:calc(var(--fs-base) - 2px);padding:3px 8px;border-radius:7px}
+.addfile{display:inline-flex;align-items:center;gap:6px;background:var(--inp);border:1px dashed var(--acc2);color:var(--acc2);border-radius:9px;padding:7px 11px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;margin-top:7px}
+.addfile input{display:none}
+.note{font-size:calc(var(--fs-base) - 2px);color:var(--mut);margin-top:5px;line-height:1.4}
+.mrow{display:flex;gap:8px;margin-top:4px}
+.mbtn{flex:1;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp)}
+.mbtn.e{color:var(--acc2)}
+.mbtn.d{color:var(--danger);border-color:#7f1d1d}
+.libitem{display:flex;justify-content:space-between;align-items:center;gap:6px;background:var(--inp);border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:calc(var(--fs-base) - 2px);margin-bottom:4px;word-break:break-word}
+.rm{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:6px;padding:2px 7px;font-size:calc(var(--fs-base) - 2px);cursor:pointer;flex:0 0 auto}
+.libnote{font-size:calc(var(--fs-base) - 2px);color:var(--mut);margin:4px 0 8px;line-height:1.4}
+.mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;margin-top:6px}
+.mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
+.hint{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:3px}
+.backup-pop,.settings-pop,.prompt-pop{position:fixed;inset:0;background:var(--ov2);display:none;align-items:center;justify-content:center;padding:16px;z-index:80}
+.backup-pop.on,.settings-pop.on,.prompt-pop.on{display:flex}
+.backup-card,.settings-card,.prompt-card{background:var(--card);border:1px solid var(--acc2);border-radius:16px;max-width:420px;width:100%;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.6);max-height:90vh;overflow-y:auto}
+.backup-card,.prompt-card{text-align:center}
+.backup-card h3,.settings-card h3,.prompt-card h3{margin:0 0 14px;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700;text-align:center}
+.backup-card p,.prompt-card p{margin:0 0 14px;font-size:calc(var(--fs-base) - 1px);color:var(--mut);line-height:1.5}
+.bk-row{display:flex;gap:8px}
+.bk-btn{flex:1;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:0}
+.bk-now{background:var(--acc);color:#052e16}
+.bk-later{background:transparent;border:1px solid var(--line);color:var(--mut)}
+.set-grp{margin-bottom:14px;border-top:1px solid var(--line);padding-top:12px}
+.set-grp h4{margin:0 0 8px;font-size:calc(var(--fs-base) - 1px);color:var(--txt);font-weight:700}
+.set-opt{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;font-size:calc(var(--fs-base) - 1px)}
+.set-opt input[type=radio],.set-opt input[type=checkbox]{accent-color:var(--acc2);width:18px;height:18px;cursor:pointer}
+.set-save{width:100%;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:calc(var(--fs-base) + 1px);cursor:pointer;margin-top:6px}
+.gbtn{width:100%;border-radius:10px;padding:10px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px}
+.gbtn.g{border-color:#1d4ed8;color:#93c5fd}
+.gnote{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:6px;line-height:1.4}
+#nextPicker{position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0.01;border:0;padding:0;margin:0;z-index:-1}
+@media(orientation:landscape){
+  table.reg{font-size:calc(var(--fs-base) - 1px)}
+  td.sr{font-size:var(--fs-base)}
+  table.reg thead tr:first-child td{font-size:calc(var(--fs-base) - 2px)}
+  table.reg thead tr:last-child td{font-size:calc(var(--fs-base) - 3px)}
+  .cal-c{font-size:var(--fs-base)}
+}
+@media(max-width:380px){
+  .inner{grid-template-columns:1fr}
+  .docgrid{grid-template-columns:repeat(2,1fr)}
+  .cal-mid{min-width:82px}
+}
 </style>
 </head>
 <body data-theme="night">
-
 <h1>⚖️ Adam's Court Diary</h1>
+<p class="sub" id="sub" hidden data-k="sub"></p>
+
+<div id="intro" hidden>
+  <div class="off"><i></i> <span data-k="intro_off"></span></div>
+  <p class="tip" data-k="intro_tip"></p>
+  <p class="warn" data-k="intro_warn"></p>
+  <button class="ix" type="button" id="ix" data-k="intro_ok"></button>
+</div>
 
 <div class="bar">
-  <input id="q" type="search" placeholder="Search case no, party...">
-  <button id="clr">✕</button>
+  <input id="q" type="search" data-ph="search">
+  <button id="clr" title="Clear">✕</button>
 </div>
+<p class="count" id="count"></p>
+<p class="autostat" id="autoStat" hidden></p>
 
-<!-- CALENDAR -->
-<div class="cal">
+<div class="cal" id="cal">
   <div class="cal-head">
-    <button id="prevMonth">◀</button>
-    <span class="cal-mid" id="calLabel">—</span>
-    <button id="nextMonth">▶</button>
-    <button id="todayBtn" style="color:var(--acc)">Today</button>
+    <button type="button" class="cal-today" data-nav="0" data-k="today"></button>
+    <button class="cbtn dl" type="button" id="bkNow" data-k="save_btn"></button>
+    <button type="button" data-nav="-1">◀</button>
+    <button type="button" class="cal-mid" id="calMid">📅 —</button>
+    <button type="button" data-nav="1">▶</button>
+    <button class="cbtn up" type="button" id="rsBtn" data-k="restore_btn"></button>
+    <button class="cbtn pr" type="button" id="prtBtn" data-k="print_btn"></button>
+    <button class="cbtn st" type="button" id="stBtn" title="Settings">⚙️</button>
+    <input type="file" id="rsFile" accept=".json,application/json" style="display:none">
   </div>
-  <div class="cal-grid" id="calGrid"></div>
+  <div class="cal-body">
+    <div class="cal-title" id="calTitle">—</div>
+    <div class="cal-hindu" id="calHindu"></div>
+    <div class="cal-jump">
+      <label data-k="jump_lbl"></label>
+      <input type="date" id="jump">
+    </div>
+    <div class="cal-wd" id="calWd"></div>
+    <div class="cal-g" id="calG"></div>
+  </div>
 </div>
 
-<!-- TABLE -->
-<table class="reg">
+<table class="reg" id="tbl">
+  <colgroup>
+    <col style="width:5%">
+    <col style="width:15%">
+    <col style="width:16%">
+    <col style="width:30%">
+    <col style="width:16%">
+    <col style="width:18%">
+  </colgroup>
   <thead>
     <tr>
-      <th style="width:5%">Sr</th>
-      <th style="width:20%">Court/No</th>
-      <th style="width:35%">Party</th>
-      <th style="width:20%">Status</th>
-      <th style="width:20%">Next Date</th>
+      <td class="sr" data-k="c_sr"></td>
+      <td data-k="c_last"></td>
+      <td data-k="c_court"></td>
+      <td data-k="c_party"></td>
+      <td data-k="c_ps"></td>
+      <td data-k="c_next"></td>
+    </tr>
+    <tr>
+      <td class="sr"></td>
+      <td data-k="c_last_s"></td>
+      <td data-k="c_court_s"></td>
+      <td data-k="c_party_s"></td>
+      <td data-k="c_ps_s"></td>
+      <td data-k="c_next_s"></td>
     </tr>
   </thead>
-  <tbody id="listBody"></tbody>
+  <tbody id="list"></tbody>
 </table>
 
-<!-- FORM -->
 <details class="main">
-  <summary>➕ Add New Case</summary>
-  <div class="form-group">
-    <label>Date of Hearing</label>
-    <input type="date" id="fDate">
-    
-    <label>Court Name & No.</label>
-    <input type="text" id="fCourt" placeholder="ACJM - 3">
-    
-    <label>Case Number</label>
-    <input type="text" id="fCaseNo" required placeholder="123/2026">
-    
-    <label>Petitioner vs Respondent</label>
-    <input type="text" id="fParty" placeholder="Rahul vs Suresh">
-    
-    <label>Today's Proceeding</label>
-    <textarea id="fProc" rows="2" placeholder="Charge framed..."></textarea>
-    
-    <label>Next Date (If any)</label>
-    <input type="date" id="fNext">
-    
-    <label>Section / Act</label>
-    <input type="text" id="fSec" placeholder="IPC 302 / BNS 103">
-  </div>
+  <summary><span id="fs" data-k="fs_new"></span> <span class="ar">▾</span></summary>
+
+  <details class="grp" open>
+    <summary><b data-k="g_face"></b></summary>
+    <div class="inner">
+      <div><label data-k="l_lastdate"></label><input name="lastDate" type="date"></div>
+      <div><label data-k="l_pervious"></label><input name="lastProc" data-ph="ph_pervious"></div>
+      <div><label data-k="l_courtname"></label><input name="court" data-ph="ph_court"></div>
+      <div><label data-k="l_courtno"></label><input name="courtNo" data-ph="ph_courtno"></div>
+      <div class="full"><label data-k="l_caseno"></label><input name="caseNumber" required data-ph="ph_caseno"></div>
+      <div><label data-k="l_petitioner"></label><input name="petitioner" data-ph="ph_petitioner"></div>
+      <div><label data-k="l_respondent"></label><input name="respondent" data-ph="ph_respondent"></div>
+      <div class="full"><label data-k="l_todayproc"></label><textarea name="todayProc" data-ph="ph_todayproc"></textarea></div>
+      <div><label data-k="l_ps"></label><input name="policeStation" data-ph="ph_ps"></div>
+      <div class="full">
+        <label data-k="l_uses"></label>
+        <select id="secPick" style="margin-bottom:6px"></select>
+        <input name="section" data-ph="ph_uses">
+        <p class="hint" data-k="h_uses"></p>
+      </div>
+      <div><label data-k="l_nextdate"></label><input name="nextDate" type="date"></div>
+      <div><label data-k="l_nextproc"></label><input name="nextProc" data-ph="ph_nextproc"></div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary><b data-k="g_client"></b></summary>
+    <div class="inner">
+      <div class="full"><label data-k="l_clientname"></label><input name="clientName" data-ph="ph_clientname"></div>
+      <div class="full"><label data-k="l_clientphones"></label><div id="cliPhones"></div><button class="mini" type="button" id="cliAdd" data-k="l_addphone"></button></div>
+      <div class="full"><label data-k="l_clientaddr"></label><input name="clientAddress" data-ph="ph_clientaddr"></div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary><b data-k="g_opp"></b></summary>
+    <div class="inner">
+      <div class="full"><label data-k="l_opppartyname"></label><input name="oppPartyName" data-ph="ph_opppartyname"></div>
+      <div class="full"><label data-k="l_opppartyphones"></label><div id="oppPartyPhones"></div><button class="mini" type="button" id="oppPartyAdd" data-k="l_addphone"></button></div>
+      <div class="full"><label data-k="l_opppartyaddr"></label><input name="oppPartyAddress" data-ph="ph_opppartyaddr"></div>
+      <div class="full"><label data-k="l_oppname"></label><input name="oppName" data-ph="ph_oppname"></div>
+      <div class="full"><label data-k="l_oppphones"></label><div id="oppPhones"></div><button class="mini" type="button" id="oppAdd" data-k="l_addphone"></button></div>
+      <div class="full"><label data-k="l_oppaddr"></label><input name="oppAddress" data-ph="ph_oppaddr"></div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary><b data-k="g_papers"></b></summary>
+    <div class="inner">
+      <div class="full">
+        <label data-k="l_photopdf"></label>
+        <input type="file" id="formFile" multiple accept="image/*,application/pdf">
+        <p class="hint" data-k="h_papers"></p>
+      </div>
+      <div class="full"><label data-k="l_docnotes"></label><textarea name="docNotes" data-ph="ph_docnotes"></textarea></div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary><b data-k="g_lib"></b></summary>
+    <div class="inner">
+      <div class="full">
+        <label data-k="l_libadd"></label>
+        <textarea id="libAdd" data-ph="ph_libadd"></textarea>
+        <button class="mini" type="button" id="libAddBtn" data-k="b_libadd"></button>
+        <button class="mini g" type="button" id="libReset" data-k="b_libreset"></button>
+        <p class="libnote" data-k="h_libnote"></p>
+      </div>
+      <div class="full"><div id="libList"></div></div>
+    </div>
+  </details>
+
   <div class="btnrow">
-    <button class="go" id="saveBtn">SAVE CASE</button>
-    <button class="cancelbtn" id="cancelBtn">Cancel</button>
+    <button class="go" type="button" id="saveBtn" data-k="b_savecase"></button>
+    <button class="cancelbtn" type="button" id="cancelBtn" data-k="b_cancel"></button>
   </div>
 </details>
 
-<!-- MODAL FOR DETAILS -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <span class="close-x" id="closeModal">×</span>
-    <h2 id="mTitle">Case Details</h2>
-    <div id="mContent"></div>
-    <div class="actions">
-      <a href="#" class="act-btn" id="mEdit">✏️ Edit</a>
-      <a href="#" class="act-btn del" id="mDel">🗑 Delete</a>
+<div class="modal-bg" id="mbg"><div class="modal" id="modal"></div></div>
+
+<div class="backup-pop" id="bp">
+  <div class="backup-card">
+    <h3 data-k="bp_title"></h3>
+    <p data-k="bp_msg"></p>
+    <div class="bk-row">
+      <button class="bk-btn bk-now" type="button" id="bpYes" data-k="bp_yes"></button>
+      <button class="bk-btn bk-later" type="button" id="bpNo" data-k="bp_no"></button>
     </div>
   </div>
 </div>
 
+<div class="prompt-pop" id="pp">
+  <div class="prompt-card">
+    <h3 id="ppTitle"></h3>
+    <p id="ppMsg"></p>
+    <div class="bk-row">
+      <button class="bk-btn bk-now" type="button" id="ppOk"></button>
+      <button class="bk-btn bk-later" type="button" id="ppNo"></button>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-pop" id="dp">
+  <div class="prompt-card">
+    <h3 id="dpTitle"></h3>
+    <p id="dpMsg" class="note" style="margin-bottom:10px"></p>
+    <input type="date" id="dpInput">
+    <div class="bk-row" style="margin-top:12px">
+      <button class="bk-btn bk-now" type="button" id="dpOk" data-k="save_now"></button>
+      <button class="bk-btn bk-later" type="button" id="dpNo" data-k="stay_cancel"></button>
+    </div>
+  </div>
+</div>
+
+<input type="date" id="nextPicker">
+
+<div class="settings-pop" id="sp">
+  <div class="settings-card">
+    <h3 data-k="s_title"></h3>
+
+    <div class="set-grp">
+      <h4 data-k="s_theme"></h4>
+      <label class="set-opt"><input type="radio" name="theme" value="day"> <span data-k="s_day"></span></label>
+      <label class="set-opt"><input type="radio" name="theme" value="night"> <span data-k="s_night"></span></label>
+      <label class="set-opt"><input type="radio" name="theme" value="system"> <span data-k="s_system"></span></label>
+    </div>
+
+    <div class="set-grp">
+      <h4 data-k="s_font"></h4>
+      <label class="set-opt"><input type="radio" name="fontSize" value="xs"> <span data-k="s_xs"></span></label>
+      <label class="set-opt"><input type="radio" name="fontSize" value="sm"> <span data-k="s_sm"></span></label>
+      <label class="set-opt"><input type="radio" name="fontSize" value="md"> <span data-k="s_md"></span></label>
+      <label class="set-opt"><input type="radio" name="fontSize" value="lg"> <span data-k="s_lg"></span></label>
+      <label class="set-opt"><input type="radio" name="fontSize" value="xl"> <span data-k="s_xl"></span></label>
+    </div>
+
+    <div class="set-grp">
+      <h4 data-k="s_boldh"></h4>
+      <label class="set-opt"><input type="checkbox" id="boldToggle"> <span data-k="s_boldon"></span></label>
+    </div>
+
+    <div class="set-grp">
+      <h4 data-k="s_langh"></h4>
+      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दी</label>
+      <label class="set-opt"><input type="radio" name="lang" value="en"> B. English</label>
+      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. द्विभाषी / Diglot</label>
+    </div>
+
+    <div class="set-grp">
+      <h4 data-k="s_hinduh"></h4>
+      <label class="set-opt"><input type="checkbox" id="vsToggle"> <span data-k="s_vsOn"></span></label>
+      <p class="gnote" data-k="s_vsNote"></p>
+    </div>
+
+    <div class="set-grp">
+      <h4 data-k="s_googleh"></h4>
+      <button class="gbtn g" type="button" id="gisBtn" data-k="s_signin"></button>
+      <button class="gbtn" type="button" id="drvBtn" data-k="s_savedrive"></button>
+      <p class="gnote" data-k="s_drivenote"></p>
+    </div>
+
+    <button class="set-save" type="button" id="setSave" data-k="s_apply"></button>
+  </div>
+</div>
+
 <script>
-// --- CONFIG ---
-var STORAGE_KEY = 'adam_diary_v3_stable';
-var cases = [];
-var currentDate = new Date();
-var selectedDateStr = formatDate(currentDate); // YYYY-MM-DD
-var editingId = null;
+window.onerror=function(m,s,l,c){try{alert('⚠️ Chhoti si ghalti: '+m+' (line '+l+')\nScreenshot bhej dena, main theek kar dunga. Data safe hai.')}catch(e){}return false;};
 
-// --- INIT ---
-function init() {
-  loadData();
-  renderCalendar();
-  renderTable();
-  
-  // Event Listeners
-  document.getElementById('prevMonth').onclick = () => changeMonth(-1);
-  document.getElementById('nextMonth').onclick = () => changeMonth(1);
-  document.getElementById('todayBtn').onclick = () => {
-    currentDate = new Date();
-    selectedDateStr = formatDate(currentDate);
-    renderCalendar();
-    renderTable();
-  };
-  
-  document.getElementById('saveBtn').onclick = saveCase;
-  document.getElementById('cancelBtn').onclick = resetForm;
-  document.getElementById('closeModal').onclick = closeModal;
-  document.getElementById('q').oninput = renderTable;
-  document.getElementById('clr').onclick = () => {
-    document.getElementById('q').value = '';
-    renderTable();
-  };
-  
-  // Modal Actions
-  document.getElementById('mEdit').onclick = editCase;
-  document.getElementById('mDel').onclick = deleteCase;
+var KEY='adam_diary_v1', SKEY='adam_sections_v1', IKEY='adam_intro_v1', BTKEY='adam_bk_time_v1', STKEY='adam_settings_v1', LGKEY='adam_lang_v1', THKEY='adam_theme_v1', DKEY='adam_draft_v1';
+var GOOGLE_CLIENT_ID='';
+
+var I18N={
+hi:{
+sub:"तारীখ-वार लॉगर • डेट सेल पर सिर्फ कैलेंडर • बाकी जगह टैप पर डिटेल • 🖨️ प्रिंट • ☁️ सेव • 100% ऑफ़लाइन",
+intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
+intro_tip:"💡 अब अगली तारीख वाले खाने पर क्लिक करते ही सिर्फ कैलेंडर/तारीख चुनेगा, पूरा फॉर्म नहीं खुलेगा। बाकी किसी भी कॉलम पर क्लिक करने पर केस की डिटेल खुलेगी, फिर Edit कर सकते हो। केस जिस तारीख पर सेव किया वहीं रहेगा; अगली तारीख डालने पर अगली तारीख पर नया रिकॉर्ड बनेगा, पुराना सुरक्षित रहेगा। कैलेंडर बंद हो तो ◀ ▶ दिन बदलेंगे, खुला हो तो महीना। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत्+पंचांग। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा। अधूरा केस हर 1 मिनट में अपने-आप सेव होता रहता है — फोन हैंग हो तो भी डेटा नहीं जाएगा।",
+intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC/अन्य एक्ट का नंबर व शीर्षक अपने कोड व नवीनतम संशोधन से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/PDF फोन की स्टोरेज में (बहुत बड़ी PDF छूट सकती है)।",
+intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
+search:"खोजें (इसी तारीख के केस में): केस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
+today:"आज",save_btn:"☁️ सेव",restore_btn:"⬇ रिस्टोर",print_btn:"🖨️ प्रिंट",jump_lbl:"किसी भी तारीख पर जाओ",
+c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",
+c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",
+pr_last:"पिछली तारीख",pr_court:"न्यायालय",pr_party:"वादी बनाम विपक्षी",pr_ps:"थाना",pr_next:"अगली तारीख",
+set_next:"अगली तारीख तय करो",moved:"अगली तारीख पर नया रिकॉर्ड बन गया:",safe_old:"पुराना रिकॉर्ड सुरक्षित:",saved_new:"नया केस इस तारीख पर सेव हुआ:",updated:"इस तारीख का रिकॉर्ड अपडेट हुआ:",
+dp_msg:"सिर्फ अगली तारीख चुनें। बाकी विवरण बाद में Edit से भर सकते हैं।",
+m_hist:"📅 तारीख-वार इतिहास / कार्यवाही",m_hist_empty:"कोई इतिहास नहीं।",
+fs_new:"➕ नया केस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी / Client",g_opp:"विपक्षी पक्ष और वकील",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
+l_lastdate:"↑ अंतिम तिथि (पिछली सुनवाई)",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही (इसी तारीख पर)",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली = अभी तय नहीं)",l_nextproc:"↓ अगली कार्यवाही",
+l_clientname:"वादी का नाम",l_clientphones:"वादी के नंबर",l_clientaddr:"वादी का पता",
+l_opppartyname:"विपक्षी पक्ष का नाम",l_opppartyphones:"विपक्षी पक्ष के नंबर",l_opppartyaddr:"विपक्षी पक्ष का पता",
+l_oppname:"विपक्षी वकील का नाम",l_oppphones:"विपक्षी वकील के नंबर",l_oppaddr:"विपक्षी वकील का पता / फर्म",
+l_addphone:"＋ और नंबर जोड़ो",
+l_photopdf:"असली फोटो / PDF चुनो",l_docnotes:"या सिर्फ लिख दो (एक लाइन में एक)",
+l_libadd:"नई धाराएँ जोड़ो (एक लाइन में एक)",b_libadd:"➕ सूची में जोड़ो",b_libreset:"↺ डिफ़ॉल्ट वापस",h_libnote:"जो जोड़ोगे वह इसी फोन में सेव होगा और धारा ड्रॉपडाउन में मिलेगा। ✕ से हटाओ।",
+b_savecase:"केस सेव करो",b_cancel:"रद्द करो",
+ph_pervious:"नया केस / नोटिस…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"राज्य",ph_respondent:"लाल व अन्य",ph_todayproc:"आरोप पत्र पढ़ा गया…",ph_ps:"बसई जगनेर",ph_uses:"उदा. धारा 302 IPC / BNS 103 / 138 एनआई एक्ट",h_uses:"जो लिखोगे वह सहेजा और खोज होगा।",ph_nextproc:"साक्ष्य…",ph_clientname:"राम स्वरूप",ph_clientaddr:"चैंबर / घर",ph_opppartyname:"राम लाल",ph_opppartyaddr:"पता / फर्म",ph_oppname:"वकील X",ph_oppaddr:"फर्म का पता",ph_docnotes:"वकालतनामा 12-10-2026\nएफआईआर कॉपी\nचेक रिटर्न मेमो",ph_libadd:"BNS 115 – चोट\nBNS 311 – चोरी\n(अपनी विश्वसनीय सूची पेस्ट करो)",
+m_client:"वादी",m_oppparty:"विपक्षी पक्ष",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / PDF)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/PDF नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
+s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत (Large)",s_xl:"अति बृहत (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिन्दू कैलेंडर",s_vsOn:"विक्रम संवत् + पंचांग दिखाएँ (हिन्दी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन पंचांग के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत् दिखेगा और पंचांग देखने का छोटा लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
+bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में सेव नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
+unsaved_title:"⚠️ बिना सेव किए बंद कर रहे हो?",unsaved_body:"यह डेटा अभी सेव नहीं हुआ। पहले सेव करें?",save_now:"हाँ, सेव करो",stay_cancel:"रहने दो",
+cancel_title:"बदलाव रद्द करें?",cancel_body:"अभी किया गया बदलाव रद्द हो जाएगा। पक्का?",cancel_ok:"हाँ, रद्द करो",cancel_no:"रहने दो",
+delete_title:"🗑 केस हटाएँ?",delete_body:"यह केस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
+msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"सेव फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ रिस्टोर से वापस आ जाएगी।",msg_badfile:"यह सही सेव फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की सेव फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूंगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहां से सेव कर लो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने-आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
+},
+en:{
+sub:"Date-wise ledger • date cell opens only calendar • other cells open details • auto-draft every 1 min • 🖨️ Print • ☁️ Save • 100% offline",
+intro_off:"Data saves only on this phone — no internet needed",
+intro_tip:"💡 Now tapping the next-date cell opens only the calendar/date picker, not the full form. Tapping any other column opens case details, then you can Edit. A case saved on a date stays there; giving a next date creates a new record on that next date, old record remains safe. Calendar closed: ◀ ▶ change DAY; open: change MONTH. ⚙️ for theme/font/language/Vikram Samvat+Panchang. Closing form without saving asks to save first. Half-typed case auto-saves every 1 minute — even if the phone hangs, your work is not lost.",
+intro_warn:"⚠️ Section list is only a shortcut. Confirm BNS/IPC/other Act number & title from your own code and latest amendment — not legal advice. Photos/PDFs save in phone storage (very large PDF may be skipped).",
+intro_ok:"✕ Got it (won't show again)",
+search:"Search (this date's cases): case no, party, court, section, PS, number…",
+today:"Today",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨️ Print",jump_lbl:"Jump to any date",
+c_sr:"Sr",c_last:"Last date",c_court:"Court",c_party:"Party (Plaintiff & Petitioner) vs party (Defendant & Respondent)",c_ps:"Police station",c_next:"Next date",
+c_last_s:"Previous proceeding",c_court_s:"Case number",c_party_s:"Today proceedings",c_ps_s:"Under Section",c_next_s:"Next proceeding",
+pr_last:"Last date",pr_court:"Court",pr_party:"Parties",pr_ps:"Police station",pr_next:"Next date",
+set_next:"Set next date",moved:"New record created on next date:",safe_old:"Old record safe on:",saved_new:"New case saved on:",updated:"Record updated on:",
+dp_msg:"Choose only the next date. You can fill other details later from Edit.",
+m_hist:"📅 Date-wise history / proceedings",m_hist_empty:"No history.",
+fs_new:"➕ Register new case",g_face:"Face • 6 columns",g_client:"Client",g_opp:"Opposition Party & Counsel",g_papers:"📎 Papers",g_lib:"📚 Section Library",
+l_lastdate:"↑ Last date (previous hearing)",l_pervious:"↓ Previous proceeding",l_courtname:"↑ Court (name)",l_courtno:"↑ Court No. (bench)",l_caseno:"↓ Case number",l_petitioner:"↑ Petitioner",l_respondent:"↑ Respondent",l_todayproc:"↓ Today proceedings (this date)",l_ps:"↑ Police station",l_uses:"↓ Under Section — pick or type",l_nextdate:"↑ Next date (blank = not set yet)",l_nextproc:"↓ Next proceeding",
+l_clientname:"Client name",l_clientphones:"Client numbers",l_clientaddr:"Client address",
+l_opppartyname:"Opposition party name",l_opppartyphones:"Opposition party numbers",l_opppartyaddr:"Opposition party address",
+l_oppname:"Opposition counsel name",l_oppphones:"Opposition counsel numbers",l_oppaddr:"Opposition counsel address / firm",
+l_addphone:"＋ add another number",
+l_photopdf:"Pick real photo / PDF",l_docnotes:"Or just type (one per line)",
+l_libadd:"Add sections (one per line)",b_libadd:"➕ Add to list",b_libreset:"↺ Reset default",h_libnote:"Whatever you add saves on this phone and appears in the section dropdown. Remove with ✕.",
+b_savecase:"Save case",b_cancel:"Cancel",
+ph_pervious:"New case / Notice…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"State",ph_respondent:"Lal and others",ph_todayproc:"Charge framed…",ph_ps:"Basai jagner",ph_uses:"e.g. U/S 302 IPC / BNS 103 / 138 NI Act",h_uses:"Whatever you type is what saves & searches.",ph_nextproc:"Evidence…",ph_clientname:"Ram Swaroop",ph_clientaddr:"Chamber / home",ph_opppartyname:"Ram Lal",ph_opppartyaddr:"Address / firm",ph_oppname:"Adv. X",ph_oppaddr:"Firm address",ph_docnotes:"Vakalatnama 12-10-2026\nFIR copy\nCheque return memo",ph_libadd:"BNS 115 – Hurt\nBNS 311 – Theft\n(paste your trusted list)",
+m_client:"Client",m_oppparty:"Opposition Party",m_opp:"Opposition Counsel",m_papers:"📎 Papers (photo / PDF)",m_edit:"✏️ Edit",m_del:"🗑 Delete",m_addfile:"➕ Add file",m_nonum:"No number. Edit to add.",m_nopdf:"No photo/PDF yet. Add below.",m_note:"Tap = open file • ✕ = remove.",
+s_title:"⚙️ Settings",s_theme:"Theme",s_day:"Day (Light)",s_night:"Night (Dark)",s_system:"According to device",s_font:"Font size",s_xs:"Extra Small",s_sm:"Small",s_md:"Medium",s_lg:"Large",s_xl:"Extra Large",s_boldh:"Bold text",s_boldon:"Bold ON (thicker letters)",s_langh:"Language",s_hinduh:"Hindu Calendar",s_vsOn:"Show Vikram Samvat + Panchang (Hindi/Diglot)",s_vsNote:"Needs internet for live panchang. If offline, approximate Vikram Samvat is shown and a small Panchang link appears. Turn OFF if not needed.",s_googleh:"Google / Cloud",s_signin:"🔑 Sign in with Google",s_savedrive:"☁️ Save to Drive",s_drivenote:"'Save to Drive' works without login — it sends the file straight to your Google Drive / Files app. 'Sign in with Google' (auto-sync) needs a one-time Google Cloud OAuth Client ID from a computer; then this button goes live.",s_apply:"✓ Apply & Save",s_close:"✕ Close",
+bp_title:"☁️ Secure your data?",bp_msg:"You haven't saved in the last 24 hours. A file will be made — keep it in Google Drive / Gmail / WhatsApp so your register travels with you to a new phone.",bp_yes:"Yes, save now",bp_no:"Later",
+unsaved_title:"⚠️ Closing without saving?",unsaved_body:"This data is not saved yet. Save it first?",save_now:"Yes, save",stay_cancel:"Stay",
+cancel_title:"Discard changes?",cancel_body:"Your current changes will be discarded. Sure?",cancel_ok:"Yes, discard",cancel_no:"Stay",
+delete_title:"🗑 Delete case?",delete_body:"This case will be permanently removed. Sure?",delete_ok:"Yes, delete",delete_no:"Cancel",
+msg_casereq:"Case number required",msg_memfull:"Phone memory full — remove some photo/PDF then save.",msg_nocase:"No case on this date. Register one with ➕ below.",msg_nosearch:"No case matched your search on this date.",msg_restored:"Restored. Total",msg_merge:"How to restore?\n\nOK = MERGE (keep old, add new)\nCancel = REPLACE (wipe and load backup)",msg_copy:"Save file created:",msg_copy2:"Now keep it in Google Drive / Gmail / WhatsApp — on a new phone ⬇ Restore brings it back.",msg_badfile:"This doesn't look like a valid Save file.",msg_readerr:"Could not read file. Is this an Adam's Court Diary Save file?",msg_pick:"— pick from list (or type below) —",msg_gisoff:"🔑 Auto-sync not enabled yet. For now use '☁️ Save to Drive' — it works without login. Full Google sync needs a one-time Google Cloud OAuth Client ID from a computer (I'll guide you).",msg_share:"✅ Sent to Drive / Files app — save it there.",msg_cases:"cases",msg_popup:"Popup blocked. Allow popups for this site in your browser.",h_papers:"📷 Photo auto-compresses. 📄 PDF larger than 2.5MB may be skipped."
+}
+};
+
+var LANG='hi', THEME={mode:'night'}, SETTINGS={size:'md',bold:false,vs:false};
+try{LANG=localStorage.getItem(LGKEY)||'hi';}catch(e){}
+try{var th0=localStorage.getItem(THKEY);if(th0)THEME.mode=th0;}catch(e){}
+try{var ss0=JSON.parse(localStorage.getItem(STKEY)||'null');if(ss0)SETTINGS=ss0;}catch(e){}
+if(['hi','en','bi'].indexOf(LANG)<0)LANG='hi';
+if(['day','night','system'].indexOf(THEME.mode)<0)THEME.mode='night';
+if(SETTINGS.size==='small')SETTINGS.size='sm';
+if(SETTINGS.size==='medium')SETTINGS.size='md';
+if(SETTINGS.size==='large')SETTINGS.size='lg';
+if(['xs','sm','md','lg','xl'].indexOf(SETTINGS.size)<0)SETTINGS.size='md';
+if(typeof SETTINGS.bold!=='boolean')SETTINGS.bold=false;
+if(typeof SETTINGS.vs!=='boolean')SETTINGS.vs=false;
+
+function txt(k){
+  var h=I18N.hi[k], e=I18N.en[k];
+  if(LANG==='bi'){ if(h!=null&&e!=null&&h!==e)return h+' / '+e; return h!=null?h:(e!=null?e:k); }
+  if(LANG==='en') return e!=null?e:(h!=null?h:k);
+  return h!=null?h:(e!=null?e:k);
+}
+function applyI18n(){
+  document.querySelectorAll('[data-k]').forEach(function(el){el.textContent=txt(el.getAttribute('data-k'));});
+  document.querySelectorAll('[data-ph]').forEach(function(el){el.placeholder=txt(el.getAttribute('data-ph'));});
+  document.documentElement.lang=(LANG==='en'?'en':'hi');
 }
 
-// --- DATA HELPERS ---
-function loadData() {
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) cases = JSON.parse(raw);
-  } catch(e) { cases = []; }
-}
+var SEED=[
+"BNS 61 – Common intention / shared liability (connect: IPC 34 / 120B – verify)",
+"BNS 62 – Unlawful assembly (connect: IPC 141 / 149 – verify)",
+"BNS 69 – Rape (connect: IPC 376)",
+"BNS 70 – Rape by public servant / police / hospital etc. (connect: IPC 376(2) – verify)",
+"BNS 71 – Rape of minor / vulnerable woman (connect: IPC 376 – verify)",
+"BNS 72 – Gang rape (connect: IPC 376D – verify)",
+"BNS 73 – Repeat rape offender (connect: IPC 376E – verify)",
+"BNS 74 – Sexual harassment (connect: IPC 354A)",
+"BNS 75 – Assault / criminal force to outrage modesty (connect: IPC 354)",
+"BNS 76 – Insult / annoyance to woman in decent manner (connect: IPC 509 – verify)",
+"BNS 78 – Voyeurism (connect: IPC 354C – verify)",
+"BNS 79 – Stalking (connect: IPC 354D – verify)",
+"BNS 85 – Cruelty by husband / relatives (connect: IPC 498A)",
+"BNS 103 – Murder (connect: IPC 302)",
+"BNS 105 – Culpable homicide not amounting to murder (connect: IPC 304)",
+"BNS 106 – Causing death by negligence (connect: IPC 304A)",
+"BNS 108 – Abetment of suicide (connect: IPC 306)",
+"BNS 109 – Attempt to murder (connect: IPC 307)",
+"BNS 110 – Attempt to commit culpable homicide (connect: IPC 308)",
+"BNS 111 – Attempt to commit suicide (connect: IPC 309)",
+"BNS 121 – Voluntarily causing hurt (connect: IPC 323)",
+"BNS 122 – Hurt by dangerous weapon / mode (connect: IPC 324)",
+"BNS 123 – Grievous hurt (connect: IPC 325)",
+"BNS 124 – Grievous hurt by dangerous weapon / mode (connect: IPC 326)",
+"BNS 125 – Hurt on grave and sudden provocation (connect: IPC 335 / 337 – verify)",
+"BNS 126 – Grievous hurt on grave and sudden provocation (connect: IPC 338 – verify)",
+"BNS 127 – Assault / criminal force (connect: IPC 339 / 349 / 350 / 351 / 352 – verify)",
+"BNS 128 – Wrongful restraint / confinement (connect: IPC 340 / 341 / 342 – verify)",
+"BNS 129 – Assault / criminal force to deter public servant (connect: IPC 332 / 353 – verify)",
+"BNS 308 – Theft (connect: IPC 379 – verify)",
+"BNS 309 – Robbery (connect: IPC 392 / 393 / 394 – verify)",
+"BNS 310 – Dacoity (connect: IPC 395 / 396 / 397 – verify)",
+"BNS 317 – Criminal breach of trust (connect: IPC 406 – verify)",
+"BNS 318 – Cheating / dishonestly inducing delivery (connect: IPC 420)",
+"BNS 336 – Forgery of valuable security / will (connect: IPC 467 – verify)",
+"BNS 337 – Forgery for cheating (connect: IPC 468 – verify)",
+"BNS 339 – Using forged document as genuine (connect: IPC 471 – verify)",
+"BNS 350 – Intentional insult to provoke breach of peace (connect: IPC 504 – verify)",
+"BNS 351 – Criminal intimidation (connect: IPC 506)",
+"BNS 356 – Obscene book / object / electronic transmission (connect: IPC 292 – verify)",
+"IPC 34 – Common intention ⇒ BNS 61 (verify)",
+"IPC 120B – Criminal conspiracy ⇒ BNS 61 (verify)",
+"IPC 141 – Unlawful assembly ⇒ BNS 62 (verify)",
+"IPC 149 – Offence by member of unlawful assembly ⇒ BNS 62 (verify)",
+"IPC 153A – Promoting enmity between groups",
+"IPC 186 – Obstructing public servant",
+"IPC 188 – Disobedience to order of public authority",
+"IPC 193 – False evidence",
+"IPC 200 – Fabricating false evidence",
+"IPC 211 – Fraudulent claim",
+"IPC 218 – Public servant framing incorrect record",
+"IPC 292 – Sale / distribution of obscene objects ⇒ BNS 356 (verify)",
+"IPC 302 – Murder ⇒ BNS 103",
+"IPC 304 – Culpable homicide not amounting to murder ⇒ BNS 105",
+"IPC 304A – Causing death by negligence ⇒ BNS 106",
+"IPC 306 – Abetment of suicide ⇒ BNS 108",
+"IPC 307 – Attempt to murder ⇒ BNS 109",
+"IPC 308 – Attempt to commit culpable homicide ⇒ BNS 110",
+"IPC 309 – Attempt to commit suicide ⇒ BNS 111",
+"IPC 312 – Causing miscarriage",
+"IPC 313 – Causing miscarriage without consent",
+"IPC 315 – Act to prevent child being born alive",
+"IPC 316 – Causing death of quick unborn child",
+"IPC 320 – Grievous hurt definition",
+"IPC 321 – Attempt to cause grievous hurt",
+"IPC 322 – Voluntarily causing grievous hurt",
+"IPC 323 – Voluntarily causing hurt ⇒ BNS 121",
+"IPC 324 – Hurt by dangerous weapon ⇒ BNS 122",
+"IPC 325 – Grievous hurt ⇒ BNS 123",
+"IPC 326 – Grievous hurt by dangerous weapon ⇒ BNS 124",
+"IPC 326A – Acid attack (BNS equivalent – verify)",
+"IPC 326B – Attempt to acid attack (BNS equivalent – verify)",
+"IPC 332 – Hurt to deter public servant ⇒ BNS 129 (verify)",
+"IPC 335 – Hurt on grave and sudden provocation ⇒ BNS 125 (verify)",
+"IPC 338 – Grievous hurt on grave and sudden provocation ⇒ BNS 126 (verify)",
+"IPC 339 – Assault or criminal force ⇒ BNS 127 (verify)",
+"IPC 340 – Criminal restraint ⇒ BNS 128 (verify)",
+"IPC 341 – Punishment for criminal restraint ⇒ BNS 128 (verify)",
+"IPC 342 – Wrongful confinement ⇒ BNS 128 (verify)",
+"IPC 349 – Assault ⇒ BNS 127 (verify)",
+"IPC 350 – Criminal force ⇒ BNS 127 (verify)",
+"IPC 351 – Assault definition ⇒ BNS 127 (verify)",
+"IPC 352 – Assault / criminal force without grave provocation ⇒ BNS 127 (verify)",
+"IPC 353 – Assault / criminal force to deter public servant ⇒ BNS 129 (verify)",
+"IPC 354 – Outraging modesty of woman ⇒ BNS 75",
+"IPC 354A – Sexual harassment ⇒ BNS 74",
+"IPC 354B – Disrobing woman",
+"IPC 354C – Voyeurism ⇒ BNS 78 (verify)",
+"IPC 354D – Stalking ⇒ BNS 79 (verify)",
+"IPC 363 – Kidnapping",
+"IPC 364 – Kidnapping for murder / ransom (verify)",
+"IPC 364A – Kidnapping for ransom",
+"IPC 365 – Kidnapping privately",
+"IPC 366 – Kidnapping to compel marriage / prostitution",
+"IPC 366A – Importation of girl from foreign country",
+"IPC 366B – Buying / disposing girl for prostitution",
+"IPC 370 – Trafficking of persons",
+"IPC 370A – Aggravated trafficking",
+"IPC 372 – Selling minor for prostitution",
+"IPC 373 – Buying minor for prostitution",
+"IPC 375 – Rape definition",
+"IPC 376 – Punishment for rape ⇒ BNS 69",
+"IPC 376A – Rape causing persistent vegetative state (verify)",
+"IPC 376B – Sexual intercourse by husband during separation",
+"IPC 376C – Sexual intercourse by public servant",
+"IPC 376D – Gang rape ⇒ BNS 72 (verify)",
+"IPC 376E – Repeat rape offender ⇒ BNS 73 (verify)",
+"IPC 377 – Unnatural offences",
+"IPC 378 – Theft definition",
+"IPC 379 – Punishment for theft ⇒ BNS 308 (verify)",
+"IPC 380 – Theft in dwelling ⇒ BNS 308 (verify)",
+"IPC 381 – Theft by clerk / servant ⇒ BNS 308 (verify)",
+"IPC 382 – Theft after preparation for violence ⇒ BNS 309 (verify)",
+"IPC 383 – Extortion definition",
+"IPC 384 – Punishment for extortion",
+"IPC 385 – Putting in fear of injury to extort",
+"IPC 386 – Extortion by kidnapping / confinement",
+"IPC 389 – Dishonestly inducing execution of deed",
+"IPC 392 – Punishment for robbery ⇒ BNS 309 (verify)",
+"IPC 393 – Attempt to robbery ⇒ BNS 309 (verify)",
+"IPC 394 – Hurt in committing robbery ⇒ BNS 309 (verify)",
+"IPC 395 – Punishment for dacoity ⇒ BNS 310 (verify)",
+"IPC 396 – Dacoity with murder ⇒ BNS 310 (verify)",
+"IPC 397 – Attempt to commit dacoity ⇒ BNS 310 (verify)",
+"IPC 403 – Dishonest misappropriation of property",
+"IPC 404 – Misappropriation by clerk / servant",
+"IPC 405 – Criminal breach of trust definition",
+"IPC 406 – Punishment for criminal breach of trust ⇒ BNS 317 (verify)",
+"IPC 407 – Criminal breach of trust by carrier / agent",
+"IPC 408 – Criminal breach of trust by clerk / servant",
+"IPC 409 – Criminal breach of trust by public servant",
+"IPC 411 – Dishonestly receiving stolen property",
+"IPC 412 – Receiving property stolen in dacoity",
+"IPC 413 – Habitually dealing in stolen property",
+"IPC 414 – Assisting concealment of stolen property",
+"IPC 415 – Cheating definition",
+"IPC 417 – Punishment for cheating",
+"IPC 418 – Cheating with knowledge of wrongful loss",
+"IPC 419 – Cheating by personation",
+"IPC 420 – Cheating and dishonestly inducing delivery ⇒ BNS 318",
+"IPC 425 – Mischief",
+"IPC 426 – Punishment for mischief",
+"IPC 427 – Mischief causing damage",
+"IPC 429 – Mischief by damage to public road / bridge",
+"IPC 435 – Mischief by fire / explosive substance",
+"IPC 441 – Criminal trespass definition",
+"IPC 442 – House-trespass definition",
+"IPC 447 – Punishment for criminal trespass",
+"IPC 448 – Punishment for house-trespass",
+"IPC 452 – House-trespass after preparation for hurt / assault",
+"IPC 454 – House-trespass in night to commit theft",
+"IPC 457 – House-trespass by night to commit serious offence",
+"IPC 463 – Forgery definition",
+"IPC 464 – Making false document",
+"IPC 465 – Punishment for forgery",
+"IPC 466 – Forgery of court record / public register",
+"IPC 467 – Forgery of valuable security / will ⇒ BNS 336 (verify)",
+"IPC 468 – Forgery for cheating ⇒ BNS 337 (verify)",
+"IPC 469 – Forgery for harming reputation",
+"IPC 471 – Using forged document as genuine ⇒ BNS 339 (verify)",
+"IPC 489A – Counterfeiting currency notes / bank notes",
+"IPC 489B – Using counterfeit currency as genuine",
+"IPC 489C – Possession of counterfeit currency",
+"IPC 499 – Defamation definition",
+"IPC 500 – Punishment for defamation",
+"IPC 504 – Intentional insult to provoke breach of peace ⇒ BNS 350 (verify)",
+"IPC 505 – Statements conducing to public mischief",
+"IPC 506 – Criminal intimidation ⇒ BNS 351",
+"IPC 509 – Word / gesture to outrage modesty ⇒ BNS 76 (verify)",
+"IPC 511 – Attempt to commit offences punishable with imprisonment",
+"CrPC 41 – Arrest by police ⇒ BNSS 35",
+"CrPC 41A – Notice to appear ⇒ BNSS 36 (verify)",
+"CrPC 125 – Maintenance ⇒ BNSS 144",
+"CrPC 156 – Investigation by police ⇒ BNSS 173 (verify)",
+"CrPC 156(3) – Magistrate direction to investigate ⇒ BNSS 175(3) (verify)",
+"CrPC 173 – Police report / charge sheet ⇒ BNSS 193",
+"CrPC 200 – Cognizance on complaint ⇒ BNSS 223",
+"CrPC 202 – Inquiry before issue of process ⇒ BNSS 225 (verify)",
+"CrPC 204 – Issue of process ⇒ BNSS 227 (verify)",
+"CrPC 207 – Committal to Sessions ⇒ BNSS 230 (verify)",
+"CrPC 239 – Discharge in warrant case ⇒ BNSS 250 (verify)",
+"CrPC 243 – Framing of charge ⇒ BNSS 254 (verify)",
+"CrPC 438 – Anticipatory bail ⇒ BNSS 478",
+"CrPC 439 – Regular bail by High Court / Sessions ⇒ BNSS 479",
+"BNSS 35 – Arrest by police (connect: CrPC 41)",
+"BNSS 36 – Notice to attend (connect: CrPC 41A – verify)",
+"BNSS 144 – Maintenance (connect: CrPC 125)",
+"BNSS 173 – Investigation (connect: CrPC 156 – verify)",
+"BNSS 193 – Police report (connect: CrPC 173)",
+"BNSS 223 – Cognizance of complaint (connect: CrPC 200)",
+"BNSS 225 – Inquiry before process (connect: CrPC 202 – verify)",
+"BNSS 230 – Committal (connect: CrPC 207 – verify)",
+"BNSS 250 – Discharge (connect: CrPC 239 – verify)",
+"BNSS 254 – Framing charge (connect: CrPC 243 – verify)",
+"BNSS 478 – Anticipatory bail (connect: CrPC 438)",
+"BNSS 479 – Regular bail (connect: CrPC 439)",
+"12DV Act Sec 2 – Definitions (PWDVA 2005)",
+"12DV Act Sec 3 – Rights of women in domestic relationship",
+"12DV Act Sec 12 – Application to Magistrate",
+"12DV Act Sec 13 – Interim and ex parte orders",
+"12DV Act Sec 14 – Assistance to aggrieved person",
+"12DV Act Sec 15 – Protection officer",
+"12DV Act Sec 16 – Service of notice",
+"12DV Act Sec 18 – Residence order",
+"12DV Act Sec 19 – Monetary relief",
+"12DV Act Sec 20 – Compensation and costs",
+"12DV Act Sec 23 – Procedure",
+"12DV Act Sec 25 – Penalty for breach of protection order",
+"NI Act Sec 138 – Dishonour of cheque",
+"NI Act Sec 139 – Presumption in favour of holder",
+"NI Act Sec 140 – Evidence of dishonour",
+"NI Act Sec 141 – Offence by companies",
+"NI Act Sec 142 – Cognizance of offence",
+"NI Act Sec 143 – Compounding of offence",
+"NI Act Sec 144 – Evidence on affidavit",
+"EC Act 1923 Sec 2 – Definitions",
+"EC Act 1923 Sec 4 – Employer's liability for compensation",
+"EC Act 1923 Sec 5 – Method of computing compensation",
+"EC Act 1923 Sec 7 – Procedure before Commissioner",
+"EC Act 1923 Sec 11 – Penalty for default",
+"NDPS Sec 2 – Definitions",
+"NDPS Sec 8 – Contravention in relation to narcotic drugs / psychotropic substances",
+"NDPS Sec 9 – Contravention in relation to opium poppy etc. (verify)",
+"NDPS Sec 11 – Punishment for contravention of Sec 8 (small quantity – verify)",
+"NDPS Sec 14 – Punishment for contravention relating to psychotropic substances (verify)",
+"NDPS Sec 15 – Punishment for commercial quantity",
+"NDPS Sec 18 – Punishment for contravention relating to prepared opium / cocaine / heroin etc. (verify)",
+"NDPS Sec 20 – Punishment for permitting premises for offence (verify)",
+"NDPS Sec 21 – Punishment for financing illicit traffic (verify)",
+"NDPS Sec 23 – Attempt and abetment (verify)",
+"NDPS Sec 25 – Punishment for certain offences (verify)",
+"NDPS Sec 27 – Burden of proof for certain offences (verify)",
+"NDPS Sec 30 – Jurisdiction and appellate authority (verify)",
+"NDPS Sec 37 – Offences to be cognizable and non-bailable (verify)",
+"NDPS Sec 50 – Search without warrant (verify)",
+"IT Act Sec 43 – Damage to computer / network",
+"IT Act Sec 65 – Tampering with computer source documents",
+"IT Act Sec 66 – Computer related offence",
+"IT Act Sec 66C – Identity theft",
+"IT Act Sec 66D – Cheating by personation using computer resource",
+"IT Act Sec 67 – Publishing obscene information in electronic form",
+"IT Act Sec 67A – Publishing sexually explicit material",
+"IT Act Sec 67B – Child pornography",
+"IT Act Sec 69 – Interception / monitoring",
+"IT Act Sec 79 – Intermediary exemption",
+"POCSO Sec 3 – Penetrative sexual assault",
+"POCSO Sec 4 – Sexual assault",
+"POCSO Sec 5 – Aggravated penetrative sexual assault",
+"POCSO Sec 6 – Aggravated sexual assault",
+"POCSO Sec 7 – Sexual harassment of child",
+"POCSO Sec 8 – Use of child for pornographic purposes",
+"POCSO Sec 9 – Publishing pornographic material involving child",
+"POCSO Sec 14 – Sentence for offences under Act (verify)",
+"SC/ST Act Sec 3(1) – Punishment for atrocities",
+"SC/ST Act Sec 3(2) – Offences under other laws (verify)",
+"SC/ST Act Sec 13 – Special Courts",
+"SC/ST Act Sec 14 – Punishment for neglect by public servant (verify)",
+"PMLA Sec 2 – Definitions",
+"PMLA Sec 3 – Offence of money laundering",
+"PMLA Sec 4 – Punishment for money laundering",
+"PMLA Sec 17 – Attachment of property",
+"PMLA Sec 45 – Cognizable / non-bailable nature (verify)",
+"RERA Sec 7 – Registration of real estate project",
+"RERA Sec 18 – Refund / interest / compensation by promoter",
+"RERA Sec 31 – Appeal to Appellate Tribunal",
+"RERA Sec 59 – Penalty for contravention (verify)",
+"Consumer Act 2019 Sec 2(47) – Unfair / restrictive trade practice",
+"Consumer Act 2019 Sec 35 – Filing of complaint",
+"Consumer Act 2019 Sec 84 – Penalties (verify)",
+"Companies Act Sec 186 – Loans / investments / guarantees by company",
+"Companies Act Sec 447 – Punishment for fraud",
+"Companies Act Sec 450 – Offence where no penalty specified (verify)",
+"Motor Vehicles Act Sec 184 – Dangerous driving",
+"Motor Vehicles Act Sec 185 – Driving under influence of alcohol / drug",
+"Motor Vehicles Act Sec 189 – Driving without licence (verify)",
+"Motor Vehicles Act Sec 196 – Hit and run / failure to stop (verify)",
+"CPC Sec 9 – Courts competent to try suits",
+"CPC Sec 151 – Inherent powers of Court",
+"CPC Order XXXIX Rule 1 – Temporary injunction",
+"CPC Order XXXVII – Summary suit",
+"CPC Order VII Rule 11 – Rejection of plaint",
+"CPC Order XLVII – Review",
+"Constitution Art 226 – Writ jurisdiction of High Court",
+"Constitution Art 227 – Power of superintendence",
+"Specific Relief Act Sec 38 – Perpetual injunction",
+"Arbitration Act Sec 9 – Interim measures by Court"
+];
 
-function saveData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cases));
-  } catch(e) { alert("Storage Full! Delete old photos/cases."); }
-}
+var cases=[]; try{cases=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){cases=[]}
 
-function formatDate(d) {
-  var y = d.getFullYear();
-  var m = String(d.getMonth() + 1).padStart(2, '0');
-  var day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
-
-function getDisplayDate(isoStr) {
-  if(!isoStr) return '-';
-  var parts = isoStr.split('-');
-  return `${parts[2]}/${parts[1]}/${parts[0]}`;
-}
-
-// --- CALENDAR LOGIC WITH BADGES ---
-function renderCalendar() {
-  var grid = document.getElementById('calGrid');
-  var label = document.getElementById('calLabel');
-  grid.innerHTML = '';
-  
-  var year = currentDate.getFullYear();
-  var month = currentDate.getMonth();
-  label.textContent = new Intl.DateTimeFormat('en-IN', {month:'short', year:'numeric'}).format(currentDate);
-  
-  // Weekdays Header
-  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(w => {
-    var div = document.createElement('div');
-    div.className = 'cal-wd';
-    div.textContent = w;
-    grid.appendChild(div);
-  });
-  
-  var firstDay = new Date(year, month, 1).getDay();
-  var daysInMonth = new Date(year, month + 1, 0).getDate();
-  
-  // Empty slots before start
-  for(let i=0; i<firstDay; i++) {
-    var blank = document.createElement('div');
-    blank.className = 'cal-c blank';
-    grid.appendChild(blank);
+function ensureLog(c){
+  if(!c.log)c.log={};
+  var base=c.holdingDate||c.nextDate||todayISO();
+  if(base && !c.log[base]){
+    var migrNext=(c.nextDate && c.nextDate!==base)?c.nextDate:'';
+    c.log[base]={prevDate:c.lastDate||'',prevProc:c.lastProc||'',todayProc:c.todayProc||'',nextDate:migrNext,nextProc:migrNext?(c.nextProc||''):''};
   }
-  
-  // Days
-  for(let d=1; d<=daysInMonth; d++) {
-    var dateObj = new Date(year, month, d);
-    var isoStr = formatDate(dateObj);
-    var cell = document.createElement('div');
-    cell.className = 'cal-c';
-    if(isoStr === selectedDateStr) cell.classList.add('sel');
-    if(isoStr === formatDate(new Date())) cell.classList.add('td');
-    
-    cell.onclick = () => {
-      selectedDateStr = isoStr;
-      renderCalendar();
-      renderTable();
-    };
-    
-    // Calculate Stats for this date
-    var dayCases = cases.filter(c => c.date === isoStr);
-    var count = dayCases.length;
-    var hasOverdue = false;
-    
-    // Check Overdue Logic
-    var todayIso = formatDate(new Date());
-    dayCases.forEach(c => {
-      if(c.nextDate && c.nextDate < todayIso) {
-        hasOverdue = true;
+  var bEntry=c.log[base];
+  if(bEntry && bEntry.nextDate && bEntry.nextDate!==base && !c.log[bEntry.nextDate]){
+    c.log[bEntry.nextDate]={prevDate:base,prevProc:bEntry.todayProc||'',todayProc:bEntry.nextProc||'',nextDate:'',nextProc:''};
+  }
+  return c.log;
+}
+function getEntry(c,date){
+  ensureLog(c);
+  if(!c.log[date])c.log[date]={prevDate:'',prevProc:'',todayProc:'',nextDate:'',nextProc:''};
+  return c.log[date];
+}
+function hasDate(c,date){ return !!(c && c.log && c.log[date]); }
+function caseDatesSet(){
+  var s={};
+  for(var i=0;i<cases.length;i++){
+    ensureLog(cases[i]);
+    var ks=Object.keys(cases[i].log);
+    for(var j=0;j<ks.length;j++)s[ks[j]]=1;
+  }
+  return s;
+}
+
+(function(){for(var i=0;i<cases.length;i++){var c=cases[i];
+  if(c.docs&&!c.files){c.files=[];c.notes=[];for(var j=0;j<c.docs.length;j++){var x=c.docs[j];if(typeof x==='string')c.notes.push(x);else c.files.push(x);}delete c.docs;}
+  if(!c.files)c.files=[]; if(!c.notes)c.notes=[];
+  if(!c.clientPhones){c.clientPhones=c.clientPhone?[c.clientPhone]:[];delete c.clientPhone;}
+  if(!c.oppPhones){c.oppPhones=c.oppPhone?[c.oppPhone]:[];delete c.oppPhone;}
+  if(!c.oppPartyPhones)c.oppPartyPhones=[];
+  if(!c.holdingDate)c.holdingDate=c.nextDate||todayISO();
+  ensureLog(c);
+}})();
+
+var OLD_DEFAULTS=[
+"IPC 302 – Murder","IPC 304 – Culpable homicide","IPC 307 – Attempt murder","IPC 323 – Hurt","IPC 354 – Modesty","IPC 376 – Rape","IPC 379 – Theft","IPC 392 – Robbery","IPC 406 – Breach of trust","IPC 420 – Cheating","IPC 467 – Forgery","IPC 468 – Forgery cheating","IPC 471 – Using forged doc","IPC 498A – Cruelty","IPC 504 – Insult","IPC 506 – Intimidation","IPC 34 – Common intention","IPC 149 – Unlawful assembly","BNS 103 – Murder","BNS 318 – Cheating","BNS 351 – Intimidation","NI Act 138 – Cheque","CrPC 173 – Police report","CPC O.39 R.1 – Injunction","CPC O.37 – Summary suit"
+];
+var LIB; (function(){
+  var old=null;
+  try{old=JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){}
+  var a=[];
+  if(old && old.length){
+    var drop={};
+    for(var d=0;d<OLD_DEFAULTS.length;d++)drop[OLD_DEFAULTS[d]]=1;
+    for(var i=0;i<old.length;i++){
+      if(!drop[old[i]] && a.indexOf(old[i])<0)a.push(old[i]);
+    }
+  }
+  for(var j=0;j<SEED.length;j++){
+    if(a.indexOf(SEED[j])<0)a.push(SEED[j]);
+  }
+  LIB=a;
+  try{localStorage.setItem(SKEY,JSON.stringify(LIB));}catch(e){}
+})();
+
+function saveCases(){try{localStorage.setItem(KEY,JSON.stringify(cases));return true;}catch(e){alert(txt('msg_memfull'));return false;}}
+function saveLib(){localStorage.setItem(SKEY,JSON.stringify(LIB))}
+function saveSettings(){localStorage.setItem(STKEY,JSON.stringify(SETTINGS));localStorage.setItem(LGKEY,LANG);localStorage.setItem(THKEY,THEME.mode);applySettings();applyTheme();}
+function applySettings(){
+  // Font Scale Updated: XS=11, SM=13, MD=16, LG=20, XL=24
+  var map={xs:11,sm:13,md:16,lg:20,xl:24};
+  var px=map[SETTINGS.size]||16;
+  document.documentElement.style.setProperty('--fs-base',px+'px');
+  if(SETTINGS.bold)document.body.classList.add('bold');else document.body.classList.remove('bold');
+}
+function applyTheme(){document.body.setAttribute('data-theme',THEME.mode);}
+applySettings();applyTheme();
+
+var q=document.getElementById('q'),clr=document.getElementById('clr'),list=document.getElementById('list'),count=document.getElementById('count');
+var autoStat=document.getElementById('autoStat');
+var saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),fsEl=document.getElementById('fs');
+var secPick=document.getElementById('secPick'),libAdd=document.getElementById('libAdd'),libAddBtn=document.getElementById('libAddBtn'),libReset=document.getElementById('libReset'),libList=document.getElementById('libList');
+var formFile=document.getElementById('formFile');
+var cliPhones=document.getElementById('cliPhones'),oppPhones=document.getElementById('oppPhones'),oppPartyPhones=document.getElementById('oppPartyPhones');
+var cliAdd=document.getElementById('cliAdd'),oppAdd=document.getElementById('oppAdd'),oppPartyAdd=document.getElementById('oppPartyAdd');
+var mbg=document.getElementById('mbg'),modal=document.getElementById('modal');
+var intro=document.getElementById('intro'),ix=document.getElementById('ix'),subEl=document.getElementById('sub');
+var cal=document.getElementById('cal'),calMid=document.getElementById('calMid'),calTitle=document.getElementById('calTitle'),calHindu=document.getElementById('calHindu'),calWd=document.getElementById('calWd'),calG=document.getElementById('calG'),jump=document.getElementById('jump');
+var bkNow=document.getElementById('bkNow'),rsBtn=document.getElementById('rsBtn'),rsFile=document.getElementById('rsFile'),prtBtn=document.getElementById('prtBtn');
+var bp=document.getElementById('bp'),bpYes=document.getElementById('bpYes'),bpNo=document.getElementById('bpNo');
+var pp=document.getElementById('pp'),ppTitle=document.getElementById('ppTitle'),ppMsg=document.getElementById('ppMsg'),ppOk=document.getElementById('ppOk'),ppNo=document.getElementById('ppNo');
+var nextPicker=document.getElementById('nextPicker');
+var dp=document.getElementById('dp'),dpTitle=document.getElementById('dpTitle'),dpMsg=document.getElementById('dpMsg'),dpInput=document.getElementById('dpInput'),dpOk=document.getElementById('dpOk'),dpNo=document.getElementById('dpNo');
+var pendingPick=null;
+var sp=document.getElementById('sp'),stBtn=document.getElementById('stBtn'),setSave=document.getElementById('setSave');
+var gisBtn=document.getElementById('gisBtn'),drvBtn=document.getElementById('drvBtn');
+var vsToggle=document.getElementById('vsToggle');
+var fontSizeRadios=document.querySelectorAll('[name="fontSize"]'),boldToggle=document.getElementById('boldToggle'),themeRadios=document.querySelectorAll('[name="theme"]'),langRadios=document.querySelectorAll('[name="lang"]');
+var form=document.querySelector('details.main');
+var formSummary=form.querySelector('summary');
+var editId=null, openId=null, openDate=null, calOpen=false;
+var formDirty=false, ppCallback=null, hinduReq=0;
+
+var MONTHS_HI=['जनवर','फ़रवर','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
+var MONTHS_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var WD_HI=['रवि','सोम','मंगल','बुध','गुरु','शुक्र','शनि'];
+var WD_EN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function pad2(n){return (n<10?'0':'')+n}
+function isoOf(y,m0,d){return y+'-'+pad2(m0+1)+'-'+pad2(d)}
+function todayISO(){var d=new Date();return isoOf(d.getFullYear(),d.getMonth(),d.getDate())}
+function parseISO(s){var p=(s||'').split('-');return {y:+p[0],m0:(+p[1])-1,d:+p[2]}}
+var selDate=todayISO(); var vv=parseISO(selDate); var viewY=vv.y, viewM=vv.m0;
+function fmtDate(iso){var p=parseISO(iso);if(!p.y)return '—';return pad2(p.d)+'/'+pad2(p.m0+1)+'/'+p.y;}
+function monthName(m0){if(LANG==='en')return MONTHS_EN[m0];if(LANG==='hi')return MONTHS_HI[m0];return MONTHS_HI[m0]+' '+MONTHS_EN[m0];}
+function wdNames(){if(LANG==='en')return WD_EN;if(LANG==='hi')return WD_HI;return WD_HI.map(function(h,i){return h+' '+WD_EN[i];});}
+function shiftDate(iso,n){var p=parseISO(iso);var dt=new Date(p.y,p.m0,p.d+n);return isoOf(dt.getFullYear(),dt.getMonth(),dt.getDate());}
+
+var TOP_FIELDS=['court','courtNo','caseNumber','petitioner','respondent','policeStation','section','clientName','clientAddress','oppPartyName','oppPartyAddress','oppName','oppAddress'];
+var ENTRY_FIELDS=['lastDate','lastProc','todayProc','nextDate','nextProc','docNotes'];
+function F(n){return form.querySelector('[name="'+n+'"]')}
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function hl(s,query){s=esc(s);if(!query)return s;var i=s.toLowerCase().indexOf(query.toLowerCase());if(i<0)return s;return s.slice(0,i)+'<mark>'+s.slice(i,i+query.length)+'</mark>'+s.slice(i+query.length)}
+function digits(v){return String(v||'').replace(/[^\d+]/g,'')}
+function waDigits(v){var d=String(v||'').replace(/\D/g,'');if(d.length===10)d='91'+d;return d;}
+function allPhones(c){return ((c.clientPhones||[]).concat(c.oppPartyPhones||[]).concat(c.oppPhones||[])).filter(Boolean).join(' ');}
+function hay(c){var f=(c.files||[]).map(function(x){return x.n||''}).join(' ');var nt=(c.notes||[]).join(' ');var lp='';if(c.log){var ks=Object.keys(c.log);for(var i=0;i<ks.length;i++){var e=c.log[ks[i]];lp+=' '+(e.prevProc||'')+' '+(e.todayProc||'')+' '+(e.nextProc||'');}}return [c.caseNumber,c.court,c.courtNo,c.petitioner,c.respondent,c.section,c.policeStation,c.clientName,c.oppPartyName,c.oppName,f,nt,lp,allPhones(c)].join(' ').toLowerCase()}
+function telLink(v){return v?('tel:'+digits(v)):'#';}
+function smsLink(v){return v?('sms:'+digits(v)):('#');}
+function waLink(v,msg){return v?('https://wa.me/'+waDigits(v)+(msg?('?text='+encodeURIComponent(msg)):'')):('#');}
+
+function setDirty(v){formDirty=!!v;}
+function isCaseField(el){
+  if(!el) return false;
+  if(el.id==='libAdd') return false;
+  if(el.closest && (el.closest('#libAdd')||el.closest('#libList'))) return false;
+  if(el.name || el.classList.contains('ph-input') || el.id==='formFile' || el.id==='secPick') return true;
+  return false;
+}
+form.addEventListener('input',function(e){ if(isCaseField(e.target)) setDirty(true); });
+form.addEventListener('change',function(e){ if(isCaseField(e.target)) setDirty(true); });
+
+function showPrompt(tk,bk,okk,nok,onOk){
+  ppTitle.textContent=txt(tk);
+  ppMsg.textContent=txt(bk);
+  ppOk.textContent=txt(okk);
+  ppNo.textContent=txt(nok);
+  ppCallback=onOk;
+  pp.classList.add('on');
+}
+ppOk.addEventListener('click',function(){pp.classList.remove('on');var cb=ppCallback;ppCallback=null;if(cb)cb();});
+ppNo.addEventListener('click',function(){pp.classList.remove('on');ppCallback=null;});
+
+function buildPicker(){
+  secPick.innerHTML='';
+  var o0=document.createElement('option');
+  o0.value='';
+  o0.textContent=txt('msg_pick');
+  secPick.appendChild(o0);
+  var groups={};
+  LIB.forEach(function(s){
+    var key=String(s).split(' ')[0];
+    var map={'IPC':'IPC','BNS':'BNS','CrPC':'CrPC','BNSS':'BNSS','12DV':'12DV Act','NI':'NI Act','EC':'EC Act','NDPS':'NDPS Act','IT':'IT Act','POCSO':'POCSO Act','SC/ST':'SC/ST Act','PMLA':'PMLA','RERA':'RERA','Consumer':'Consumer Act','Companies':'Companies Act','Motor':'Motor Vehicles Act','CPC':'CPC','Constitution':'Constitution','Specific':'Specific Relief Act','Arbitration':'Arbitration Act'};
+    var g=map[key]||'Other';
+    if(!groups[g])groups[g]=[];
+    groups[g].push(s);
+  });
+  var order=['BNS','IPC','BNSS','CrPC','12DV Act','NI Act','EC Act','NDPS Act','IT Act','POCSO Act','SC/ST Act','PMLA','RERA','Consumer Act','Companies Act','Motor Vehicles Act','CPC','Constitution','Specific Relief Act','Arbitration Act','Other'];
+  order.forEach(function(g){
+    if(groups[g] && groups[g].length){
+      var og=document.createElement('optgroup');
+      og.label=g;
+      groups[g].sort().forEach(function(s){
+        var o=document.createElement('option');o.value=s;o.textContent=s;og.appendChild(o);
+      });
+      secPick.appendChild(og);
+      delete groups[g];
+    }
+  });
+  Object.keys(groups).forEach(function(g){
+    if(groups[g] && groups[g].length){
+      var og=document.createElement('optgroup');og.label=g;
+      groups[g].sort().forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;og.appendChild(o);});
+      secPick.appendChild(og);
+    }
+  });
+}
+function renderLib(){libList.innerHTML='';if(!LIB.length){var n=document.createElement('div');n.className='libnote';n.textContent=txt('h_libnote');libList.appendChild(n);return;}LIB.forEach(function(s){var d=document.createElement('div');d.className='libitem';var t=document.createElement('span');t.textContent=s;var b=document.createElement('button');b.className='rm';b.type='button';b.textContent='✕';b.setAttribute('data-val',s);d.appendChild(t);d.appendChild(b);libList.appendChild(d);});}
+function phoneBoxHtml(val){return '<div class="phrow"><input class="ph-input" type="tel" placeholder="+91…" value="'+esc(val)+'"><button type="button" class="ph-del" title="remove">−</button></div>';}
+function renderPhoneBoxes(el,arr){el.innerHTML='';for(var i=0;i<arr.length;i++){el.insertAdjacentHTML('beforeend',phoneBoxHtml(arr[i]||''));}}
+function ensureTwo(arr){arr=arr||[];while(arr.length<2)arr.push('');return arr;}
+function readPhoneBoxes(el){var out=[];var ins=el.querySelectorAll('.ph-input');for(var i=0;i<ins.length;i++){out.push(ins[i].value.trim());}return out;}
+
+/* ---- AUTO-DRAFT (har 1 min me adhoora case save; koi refresh nahi) ---- */
+function formSnapshot(){
+  var o={_t:Date.now(),_editId:editId,_openDate:openDate||selDate};
+  TOP_FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value:'';});
+  ENTRY_FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value:'';});
+  o._cli=readPhoneBoxes(cliPhones);
+  o._oppParty=readPhoneBoxes(oppPartyPhones);
+  o._opp=readPhoneBoxes(oppPhones);
+  return o;
+}
+function snapshotDraft(){try{localStorage.setItem(DKEY,JSON.stringify(formSnapshot()));}catch(e){}}
+function clearDraft(){try{localStorage.removeItem(DKEY);}catch(e){} if(autoStat){autoStat.hidden=true;autoStat.textContent='';}}
+function showAutoStat(msg){if(!autoStat)return;autoStat.hidden=false;autoStat.textContent=msg;}
+function loadDraft(){
+  var raw=null;try{raw=localStorage.getItem(DKEY);}catch(e){}
+  if(!raw)return;
+  var o=null;try{o=JSON.parse(raw);}catch(e){return;}
+  if(!o)return;
+  editId=o._editId||null;
+  openDate=o._openDate||selDate;
+  TOP_FIELDS.forEach(function(k){var el=F(k);if(el&&o[k]!=null)el.value=o[k];});
+  ENTRY_FIELDS.forEach(function(k){var el=F(k);if(el&&o[k]!=null)el.value=o[k];});
+  renderPhoneBoxes(cliPhones,ensureTwo((o._cli||[]).slice()));
+  renderPhoneBoxes(oppPartyPhones,ensureTwo((o._oppParty||[]).slice()));
+  renderPhoneBoxes(oppPhones,ensureTwo((o._opp||[]).slice()));
+  try{secPick.value=LIB.indexOf(o.section)>=0?o.section:'';}catch(e){}
+  formDirty=true;
+  if(editId){fsEl.textContent='✏️ '+txt('fs_new');}
+  form.setAttribute('open','');
+  showAutoStat('💾 '+(LANG==='en'?'Half-typed case restored — save to finish.':'पिछली बार का अधूरा केस लोड हुआ — सेव करने पर पूरा होगा।'));
+}
+function startAutoSave(){
+  setInterval(function(){
+    if(formDirty){
+      snapshotDraft();
+      var d=new Date();
+      showAutoStat('💾 '+(LANG==='en'?'Auto-saved draft ':'अधूरा केस अपने-आप सेव ')+pad2(d.getHours())+':'+pad2(d.getMinutes()));
+    }
+  },60000);
+}
+/* ------------------------------------------------------------------------ */
+
+function fillForm(c,date){
+  date=date||selDate;
+  var e=getEntry(c,date);
+  TOP_FIELDS.forEach(function(k){var el=F(k);if(el)el.value=c[k]||'';});
+  F('lastDate').value=e.prevDate||'';
+  F('lastProc').value=e.prevProc||'';
+  F('todayProc').value=e.todayProc||'';
+  F('nextDate').value=e.nextDate||'';
+  F('nextProc').value=e.nextProc||'';
+  F('docNotes').value=(c.notes||[]).join('\n');
+  renderPhoneBoxes(cliPhones,ensureTwo((c.clientPhones||[]).slice()));
+  renderPhoneBoxes(oppPartyPhones,ensureTwo((c.oppPartyPhones||[]).slice()));
+  renderPhoneBoxes(oppPhones,ensureTwo((c.oppPhones||[]).slice()));
+  formFile.value='';
+  try{secPick.value=LIB.indexOf(c.section)>=0?c.section:'';}catch(err){}
+  setDirty(false);
+  clearDraft();
+}
+function clearForm(){
+  form.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='file'&&!el.classList.contains('ph-input'))el.value=''});
+  renderPhoneBoxes(cliPhones,['','']);
+  renderPhoneBoxes(oppPartyPhones,['','']);
+  renderPhoneBoxes(oppPhones,['','']);
+  formFile.value='';
+  secPick.value='';
+  setDirty(false);
+}
+function openAllGroups(){form.querySelectorAll('.grp').forEach(function(g){g.setAttribute('open','');});}
+function resetGroups(){var gs=form.querySelectorAll('.grp');gs.forEach(function(g,i){if(i===0)g.setAttribute('open','');else g.removeAttribute('open');});}
+function closeFormUI(){form.removeAttribute('open');}
+function cell(u,d,query,bold,pill){var tx=pill?('<span class="pill">'+hl(u,query)+'</span>'):hl(u,query);return '<span class="u'+(bold?' val b':'')+'">'+tx+'</span><span class="d">'+hl(d,query)+'</span>';}
+function phoneActs(arr,msg){var html='';var got=false;for(var i=0;i<arr.length;i++){var v=arr[i];if(!v)continue;got=true;html+='<div class="numline"><div class="nl">'+esc(v)+'</div><div class="actrow"><a class="abtn call" href="'+telLink(v)+'">📞</a><a class="abtn wa" href="'+waLink(v,msg)+'" target="_blank" rel="noopener">💬</a><a class="abtn" href="'+smsLink(v)+'">✉️</a></div></div>';}if(!got)html='<div class="note">'+txt('m_nonum')+'</div>';return html;}
+function waMsg(c){return 'Case '+c.caseNumber+' ('+([c.court,c.courtNo].filter(Boolean).join(' ')||'—')+')\n'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'\n— Adam\'s Court Diary';}
+function docItemHtml(it,idx){if(it&&it.d&&it.t&&it.t.indexOf('image')===0){return '<div class="docwrap"><img class="thumb" src="'+it.d+'" data-act="opendoc" data-i="'+idx+'" alt="'+esc(it.n||'photo')+'"><button class="rmx" type="button" data-act="rmdoc" data-i="'+idx+'">✕</button></div>';}if(it&&it.d){return '<div class="docwrap"><div class="pdfcard" data-act="opendoc" data-i="'+idx+'"><span class="ic">📄</span><span class="nm">'+esc(it.n||'PDF')+'</span></div><button class="rmx" type="button" data-act="rmdoc" data-i="'+idx+'">✕</button></div>';}return '';}
+function openModal(id,date){
+  var c=getCase(id);if(!c)return;
+  openId=id;
+  openDate=date||selDate;
+  ensureLog(c);
+  var e=getEntry(c,openDate);
+  var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
+  var files=c.files||[], notes=c.notes||[];
+  var gal=files.length?('<div class="docgrid">'+files.map(docItemHtml).join('')+'</div>'):'<div class="note">'+txt('m_nopdf')+'</div>';
+  var noteChips=notes.length?('<div class="chips">'+notes.map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>'):'';
+  var histKeys=Object.keys(c.log||{}).sort();
+  var hist='';
+  for(var hi=0;hi<histKeys.length;hi++){
+    var hd=histKeys[hi];
+    var he=c.log[hd];
+    hist+='<div class="numline"><div class="nl">'+fmtDate(hd)+'</div><div class="dl">'
+      +'<div><span>'+txt('c_last')+' :</span> '+(he.prevDate?fmtDate(he.prevDate):'—')+'</div>'
+      +'<div><span>'+txt('c_last_s')+' :</span> '+(he.prevProc?esc(he.prevProc):'—')+'</div>'
+      +'<div><span>'+txt('c_party_s')+' :</span> '+(he.todayProc?esc(he.todayProc):'—')+'</div>'
+      +'<div><span>'+txt('c_next')+' :</span> '+(he.nextDate?fmtDate(he.nextDate):'—')+'</div>'
+      +'<div><span>'+txt('c_next_s')+' :</span> '+(he.nextProc?esc(he.nextProc):'—')+'</div>'
+      +'</div></div>';
+  }
+  modal.innerHTML='<div class="mh"><div><h2>'+esc(c.caseNumber||'—')+'</h2><div class="mc">'+esc(cd)+'<br>'+(c.petitioner||'—')+' v/s '+(c.respondent||'—')+'<br>'+txt('c_next')+': '+(e.nextDate?fmtDate(e.nextDate):txt('set_next'))+'</div></div><button class="x" type="button" data-act="close">✕</button></div>'
+    +'<div class="sec"><h3>'+txt('m_client')+'</h3><div class="dl"><div><span>'+txt('l_clientname')+' :</span> '+(c.clientName?esc(c.clientName):'—')+'</div><div><span>'+txt('l_clientaddr')+' :</span> '+(c.clientAddress?esc(c.clientAddress):'—')+'</div></div>'+phoneActs(c.clientPhones||[],waMsg(c))+'</div>'
+    +'<div class="sec"><h3>'+txt('m_oppparty')+'</h3><div class="dl"><div><span>'+txt('l_opppartyname')+' :</span> '+(c.oppPartyName?esc(c.oppPartyName):'—')+'</div><div><span>'+txt('l_opppartyaddr')+' :</span> '+(c.oppPartyAddress?esc(c.oppPartyAddress):'—')+'</div></div>'+phoneActs(c.oppPartyPhones||[],null)+'</div>'
+    +'<div class="sec"><h3>'+txt('m_opp')+'</h3><div class="dl"><div><span>'+txt('l_oppname')+' :</span> '+(c.oppName?esc(c.oppName):'—')+'</div><div><span>'+txt('l_oppaddr')+' :</span> '+(c.oppAddress?esc(c.oppAddress):'—')+'</div></div>'+phoneActs(c.oppPhones||[],null)+'</div>'
+    +'<div class="sec"><h3>'+txt('m_hist')+'</h3>'+(hist||'<div class="note">'+txt('m_hist_empty')+'</div>')+'</div>'
+    +'<div class="sec"><h3>'+txt('m_papers')+'</h3>'+gal+noteChips+'<label class="addfile">'+txt('m_addfile')+'<input type="file" multiple accept="image/*,application/pdf" data-role="addfile"></label><p class="note">'+txt('m_note')+'</p></div>'
+    +'<div class="mrow"><button class="mbtn e" type="button" data-act="edit">'+txt('m_edit')+'</button><button class="mbtn d" type="button" data-act="del">'+txt('m_del')+'</button></div>';
+  mbg.classList.add('on');
+}
+function closeModal(){mbg.classList.remove('on');openId=null;modal.innerHTML='';}
+function getCase(id){for(var i=0;i<cases.length;i++){if(cases[i].id===id)return cases[i];}return null;}
+
+function setNextDateOnly(caseId, fromDate, nextDate){
+  var c=getCase(caseId); if(!c)return;
+  ensureLog(c);
+  var e=getEntry(c,fromDate);
+  e.nextDate=nextDate;
+  if(nextDate && nextDate!==fromDate && !c.log[nextDate]){
+    c.log[nextDate]={prevDate:fromDate, prevProc:e.todayProc||'', todayProc:'', nextDate:'', nextProc:''};
+  }
+  if(saveCases()){
+    render();
+    alert('✅ '+txt('moved')+' '+fmtDate(nextDate)+'\n'+txt('safe_old')+' '+fmtDate(fromDate));
+  }
+}
+function openMiniDate(){
+  if(!pendingPick)return;
+  var c=getCase(pendingPick.caseId); if(!c)return;
+  var e=getEntry(c,pendingPick.fromDate);
+  dpTitle.textContent=txt('set_next');
+  dpMsg.textContent=txt('dp_msg');
+  dpInput.value=e.nextDate||'';
+  dpInput.min=shiftDate(pendingPick.fromDate,1);
+  dp.classList.add('on');
+}
+function startPickNext(caseId, fromDate){
+  var c=getCase(caseId); if(!c)return;
+  var e=getEntry(c,fromDate);
+  pendingPick={caseId:caseId, fromDate:fromDate};
+  nextPicker.value=e.nextDate||'';
+  nextPicker.min=shiftDate(fromDate,1);
+  var ok=false;
+  try{
+    if(nextPicker.showPicker){ nextPicker.focus(); nextPicker.showPicker(); ok=true; }
+  }catch(err){ ok=false; }
+  if(!ok){
+    try{ nextPicker.focus(); nextPicker.click(); ok=true; }catch(err2){ ok=false; }
+  }
+  if(!ok){ openMiniDate(); }
+}
+nextPicker.addEventListener('change', function(){
+  if(!pendingPick) return;
+  var val=nextPicker.value;
+  var p=pendingPick;
+  pendingPick=null;
+  if(val && val!==p.fromDate){ setNextDateOnly(p.caseId,p.fromDate,val); }
+});
+dpOk.addEventListener('click', function(){
+  if(!pendingPick){ dp.classList.remove('on'); return; }
+  var val=dpInput.value;
+  var p=pendingPick;
+  dp.classList.remove('on');
+  pendingPick=null;
+  if(val && val!==p.fromDate){ setNextDateOnly(p.caseId,p.fromDate,val); }
+});
+dpNo.addEventListener('click', function(){
+  dp.classList.remove('on');
+  pendingPick=null;
+});
+
+function compressImage(file,maxDim,quality){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(e){var img=new Image();img.onload=function(){var w=img.width,h=img.height,sc=Math.min(1,maxDim/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);var cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);res({n:file.name,t:'image/jpeg',d:cv.toDataURL('image/jpeg',quality)});};img.onerror=rej;img.src=e.target.result;};r.onerror=rej;r.readAsDataURL(file);});}
+function readPdf(file){return new Promise(function(res,rej){if(file.size>2.5*1024*1024){rej('badi');return;}var r=new FileReader();r.onload=function(e){res({n:file.name,t:file.type||'application/pdf',d:e.target.result});};r.onerror=rej;r.readAsDataURL(file);});}
+function readOne(file){if(file.type&&file.type.indexOf('image')===0)return compressImage(file,1000,0.6);if(file.type&&file.type.indexOf('pdf')>=0)return readPdf(file);return Promise.reject('type');}
+function addFilesToCase(l,c,done){var ps=[];for(var i=0;i<l.length;i++){(function(f){ps.push(readOne(f).catch(function(){return null;}));})(l[i]);}Promise.all(ps).then(function(arr){var added=0;for(var k=0;k<arr.length;k++){if(arr[k]){c.files.push(arr[k]);added++;}}if(added)saveCases();done&&done();});}
+
+function saveCurrentCase(){
+  var need=F('caseNumber');
+  if(!need.value.trim()){need.focus();alert(txt('msg_casereq'));return false;}
+  var entryDate=openDate||selDate;
+  var c=editId?getCase(editId):null;
+  var isNew=!c;
+  if(isNew){
+    c={id:Date.now()+''+Math.floor(Math.random()*9999)};
+    cases.unshift(c);
+  }
+  ensureLog(c);
+  TOP_FIELDS.forEach(function(k){var el=F(k);c[k]=el?el.value.trim():'';});
+  c.notes=F('docNotes').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+  c.clientPhones=readPhoneBoxes(cliPhones).filter(Boolean);
+  c.oppPartyPhones=readPhoneBoxes(oppPartyPhones).filter(Boolean);
+  c.oppPhones=readPhoneBoxes(oppPhones).filter(Boolean);
+  if(!c.files)c.files=[];
+  var e=getEntry(c,entryDate);
+  e.prevDate=F('lastDate').value.trim();
+  e.prevProc=F('lastProc').value.trim();
+  e.todayProc=F('todayProc').value.trim();
+  e.nextDate=F('nextDate').value.trim();
+  e.nextProc=F('nextProc').value.trim();
+  var madeFuture=false;
+  if(e.nextDate && e.nextDate!==entryDate && !c.log[e.nextDate]){
+    c.log[e.nextDate]={prevDate:entryDate,prevProc:e.todayProc,todayProc:e.nextProc,nextDate:'',nextProc:''};
+    madeFuture=true;
+  }
+  var picked=formFile.files;
+  var finish=function(){
+    if(saveCases()){
+      editId=null; openDate=null;
+      fsEl.textContent=txt('fs_new');
+      clearForm(); resetGroups(); closeFormUI();
+      clearDraft();
+      render();
+      if(madeFuture){
+        alert('✅ '+txt('moved')+' '+fmtDate(e.nextDate)+'\n'+txt('safe_old')+' '+fmtDate(entryDate));
+      }else if(isNew){
+        alert('✅ '+txt('saved_new')+' '+fmtDate(entryDate));
+      }else{
+        alert('✅ '+txt('updated')+' '+fmtDate(entryDate));
       }
-    });
-    
-    // Render Content
-    cell.innerHTML = `<span>${d}</span>`;
-    
-    if(count > 0) {
-      var badge = document.createElement('div');
-      badge.className = 'badge-count';
-      badge.textContent = count;
-      cell.appendChild(badge);
+      return true;
     }
-    
-    if(hasOverdue) {
-      var overBadge = document.createElement('div');
-      overBadge.className = 'badge-overdue';
-      overBadge.textContent = '!';
-      cell.appendChild(overBadge);
-    }
-    
-    grid.appendChild(cell);
-  }
-}
-
-function changeMonth(dir) {
-  currentDate.setMonth(currentDate.getMonth() + dir);
-  renderCalendar();
-}
-
-// --- TABLE LOGIC ---
-function renderTable() {
-  var tbody = document.getElementById('listBody');
-  tbody.innerHTML = '';
-  
-  var query = document.getElementById('q').value.toLowerCase();
-  
-  // Filter by Selected Date AND Search Query
-  var filtered = cases.filter(c => {
-    var matchDate = c.date === selectedDateStr;
-    var matchQuery = !query || 
-                     (c.caseNo && c.caseNo.toLowerCase().includes(query)) ||
-                     (c.party && c.party.toLowerCase().includes(query)) ||
-                     (c.court && c.court.toLowerCase().includes(query));
-    return matchDate && matchQuery;
-  });
-  
-  if(filtered.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty-msg">No cases found for this date.</td></tr>';
-    return;
-  }
-  
-  filtered.forEach((c, index) => {
-    var tr = document.createElement('tr');
-    tr.onclick = () => openModal(c.id);
-    
-    // Highlight Next Date if Overdue
-    var nextDateStyle = "";
-    if(c.nextDate && c.nextDate < formatDate(new Date())) {
-       nextDateStyle = "color:var(--danger); font-weight:bold;";
-    }
-    
-    tr.innerHTML = `
-      <td>${index+1}</td>
-      <td><strong>${esc(c.court)}</strong><br><small>${esc(c.caseNo)}</small></td>
-      <td>${esc(c.party)}</td>
-      <td><small>${esc(c.proc)}</small></td>
-      <td style="${nextDateStyle}">${getDisplayDate(c.nextDate)}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-// --- FORM LOGIC ---
-function saveCase() {
-  var caseNo = document.getElementById('fCaseNo').value.trim();
-  if(!caseNo) { alert("Case Number is Required"); return; }
-  
-  var newCase = {
-    id: editingId || Date.now(),
-    date: selectedDateStr, // Saves to currently selected calendar date
-    court: document.getElementById('fCourt').value,
-    caseNo: caseNo,
-    party: document.getElementById('fParty').value,
-    proc: document.getElementById('fProc').value,
-    nextDate: document.getElementById('fNext').value,
-    sec: document.getElementById('fSec').value
+    return false;
   };
-  
-  if(editingId) {
-    var idx = cases.findIndex(c => c.id == editingId);
-    if(idx !== -1) cases[idx] = newCase;
-  } else {
-    cases.push(newCase);
+  if(picked&&picked.length){ addFilesToCase(picked,c,finish); return true; }
+  return finish();
+}
+
+// --- SMART PANCHANG LOGIC START ---
+function approxVS(iso){var p=parseISO(iso); var y=p.y + (p.m0>=2?57:56); return (LANG==='en'?'Vikram Samvat ':'विक्रम संवत् ')+y;}
+function loadHc(){
+  try{return new Function('return import("https://cdn.jsdelivr.net/npm/hindu-calendar@latest/+esm")')();}
+  catch(e){return Promise.reject(e);}
+}
+function hv(x){if(!x)return '';if(typeof x==='string')return x;return x.english||x.name||x.sanskrit||x.transliteration||x.in||'';}
+function hp(res){
+  var a=[];
+  var m=hv(res.masa), p=hv(res.paksha), t=hv(res.tithi);
+  if(m||p||t)a.push([m,p,t].filter(Boolean).join(' '));
+  var v=hv(res.vaar); if(v)a.push(v);
+  var n=hv(res.nakshatra); if(n)a.push(n);
+  var y=hv(res.yoga); if(y)a.push(y);
+  var k=hv(res.karana); if(k)a.push(k);
+  return a.filter(Boolean).join(' • ');
+}
+function getHinduInfo(iso){
+  return new Promise(function(resolve){
+    var vs=approxVS(iso);
+    // Construct Google Search URL for fallback
+    var qq=(LANG==='en'?'Panchang ':'पंचांग ')+fmtDate(iso);
+    var url='https://www.google.com/search?q='+encodeURIComponent(qq);
+    
+    var cachedKey='adam_hindu_panchang_'+iso+'_'+(new Date().getTimezoneOffset());
+    try{var cc=JSON.parse(localStorage.getItem(cachedKey)); if(cc && cc.text){resolve(cc);return;}}catch(e){}
+    
+    loadHc().then(function(mod){
+      var fn=mod.getDetails || (mod.default && mod.default.getDetails);
+      if(!fn) throw 0;
+      var p=parseISO(iso); var d=new Date(p.y,p.m0,p.d,12,0,0);
+      var tz=-d.getTimezoneOffset()/60;
+      var res=fn(d,{lat:28.6139,lng:77.2090,timezone:tz});
+      var samvat=res.samvat||res.vikramSamvat||res.vikram||{};
+      var vsYear=(samvat.vikram&&samvat.vikram.year)||samvat.year||(res.vikramSamvat&&res.vikramSamvat.year)||(res.vikram&&res.vikram.year);
+      if(vsYear) vs=(LANG==='en'?'Vikram Samvat ':'विक्रम संवत् ')+vsYear;
+      var pc=hp(res||{});
+      
+      // If we got detailed info, cache it WITHOUT the google link
+      if(pc){
+         var out={text: vs + (' • '+pc), url: '', ok: true};
+         try{localStorage.setItem(cachedKey,JSON.stringify(out));}catch(e){}
+         resolve(out);
+      } else {
+         // Fallback: Just VS year + Google Link
+         resolve({text:vs, url:url, ok:false});
+      }
+    }).catch(function(){ 
+       // Network Error / Library Fail: Show VS Year + Google Link Button
+       resolve({text:vs, url:url, ok:false}); 
+    });
+  });
+}
+function updateHindu(){
+  if(!calHindu)return;
+  if(!calOpen || LANG==='en' || !SETTINGS.vs){calHindu.innerHTML='';return;}
+  var req=++hinduReq;
+  calHindu.innerHTML='⏳ '+(LANG==='en'?'Loading Panchang…':'पंचांग लोड…');
+  getHinduInfo(selDate).then(function(info){
+    if(req!==hinduReq)return;
+    var html=esc(info.text||'');
+    if(info.url){
+      // This is the "Smart Backup": If online calc failed, show big clickable link
+      html+=' <a href="'+info.url+'" target="_blank" rel="noopener" style="display:inline-block;margin-left:8px;background:var(--acc2);color:#06283d;padding:2px 8px;border-radius:6px;font-weight:700;">📅 '+(LANG==='en'?'View Panchang':'पंचांग देखें')+'</a>';
+    }
+    calHindu.innerHTML=html;
+  }).catch(function(){ if(req===hinduReq)calHindu.innerHTML=''; });
+}
+// --- SMART PANCHANG LOGIC END ---
+
+function renderCal(){
+  calMid.textContent='📅 '+fmtDate(selDate)+(calOpen?' ▾':'');
+  calTitle.textContent=monthName(viewM)+' '+viewY;
+  jump.value=selDate;
+  var has=caseDatesSet(), tis=todayISO();
+  var first=new Date(viewY,viewM,1).getDay();
+  var dim=new Date(viewY,viewM+1,0).getDate();
+  var h='';
+  for(var i=0;i<first;i++)h+='<div class="cal-c blank"></div>';
+  for(var d=1;d<=dim;d++){var iso=isoOf(viewY,viewM,d);var cls='cal-c';if(iso===selDate)cls+=' sel';if(iso===tis)cls+=' td';h+='<div class="'+cls+'" data-date="'+iso+'"><span>'+d+'</span>'+(has[iso]?'<i class="dot"></i>':'')+'</div>';}
+  calG.innerHTML=h;
+  updateHindu();
+}
+function renderWd(){var names=wdNames();calWd.innerHTML='';for(var i=0;i<7;i++){var div=document.createElement('div');div.textContent=names[i];calWd.appendChild(div);}}
+function render(){
+  renderCal();renderWd();
+  var query=q.value.trim();
+  var day=cases.filter(function(c){return hasDate(c,selDate)});
+  var data=day.filter(function(c){return !query||hay(c).indexOf(query.toLowerCase())>=0});
+  count.textContent=fmtDate(selDate)+' • '+(query?(data.length+' '+txt('msg_cases')+' "'+query+'"'):(data.length+' '+txt('msg_cases')));
+  if(!data.length){list.innerHTML='<tr><td colspan="6" class="empty">'+(query?txt('msg_nosearch'):txt('msg_nocase'))+'</td></tr>';return}
+  list.innerHTML=data.map(function(c){
+    ensureLog(c);
+    var e=c.log[selDate]||getEntry(c,selDate);
+    var sr=cases.indexOf(c)+1;
+    var cd=[c.court,c.courtNo].filter(Boolean).join(' ')||'—';
+    var pt=(c.petitioner||'—')+' v/s '+(c.respondent||'—');
+    var nd=e.nextDate;
+    var nextHtml = nd
+      ? '<span class="pill">'+hl(fmtDate(nd),query)+'</span><span class="d">'+hl(e.nextProc||'—',query)+'</span>'
+      : '<span class="setnext">＋ '+txt('set_next')+'</span><span class="d">—</span>';
+    return '<tr data-id="'+c.id+'">'
+      +'<td class="sr">'+sr+'</td>'
+      +'<td>'+cell(fmtDate(e.prevDate), e.prevProc||'—', query)+'</td>'
+      +'<td>'+cell(cd,c.caseNumber||'—',query,true)+'</td>'
+      +'<td>'+cell(pt,e.todayProc||'—',query)+'</td>'
+      +'<td>'+cell(c.policeStation||'—',c.section||'—',query)+'</td>'
+      +'<td class="nextcell" data-act="picknext">'+nextHtml+'</td>'
+      +'</tr>';
+  }).join('');
+}
+function refreshAll(){applyI18n();buildPicker();renderLib();render();if(openId&&mbg.classList.contains('on'))openModal(openId,openDate||selDate);}
+
+calMid.addEventListener('click',function(){calOpen=!calOpen;if(calOpen)cal.classList.add('open');else cal.classList.remove('open');renderCal();});
+cal.addEventListener('click',function(e){
+  var nav=e.target.closest('[data-nav]');
+  if(nav){
+    var n=+nav.getAttribute('data-nav');
+    if(n===0){selDate=todayISO();var t2=parseISO(selDate);viewY=t2.y;viewM=t2.m0;calOpen=false;cal.classList.remove('open');render();return;}
+    if(calOpen){ viewM+=n; if(viewM<0){viewM=11;viewY--;} if(viewM>11){viewM=0;viewY++;} renderCal(); return; }
+    selDate=shiftDate(selDate,n); var v=parseISO(selDate); viewY=v.y; viewM=v.m0; render(); return;
   }
-  
-  saveData();
-  resetForm();
-  renderCalendar();
-  renderTable();
-  alert("Saved Successfully!");
-}
+  var dc=e.target.closest('[data-date]');
+  if(dc){selDate=dc.getAttribute('data-date');var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}
+});
+jump.addEventListener('change',function(){if(jump.value){selDate=jump.value;var p=parseISO(selDate);viewY=p.y;viewM=p.m0;calOpen=false;cal.classList.remove('open');render();}});
+cliAdd.addEventListener('click',function(){cliPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));setDirty(true);});
+oppPartyAdd.addEventListener('click',function(){oppPartyPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));setDirty(true);});
+oppAdd.addEventListener('click',function(){oppPhones.insertAdjacentHTML('beforeend',phoneBoxHtml(''));setDirty(true);});
+function delPhoneHandler(el){el.addEventListener('click',function(e){var b=e.target.closest('.ph-del');if(!b)return;if(el.querySelectorAll('.ph-input').length<=2){return;}b.parentElement.remove();setDirty(true);});}
+delPhoneHandler(cliPhones);delPhoneHandler(oppPartyPhones);delPhoneHandler(oppPhones);
+secPick.addEventListener('change',function(){if(secPick.value){F('section').value=secPick.value;setDirty(true);}});
+libAddBtn.addEventListener('click',function(){var lines=libAdd.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);lines.forEach(function(s){if(LIB.indexOf(s)<0)LIB.push(s);});saveLib();buildPicker();renderLib();libAdd.value='';});
+libReset.addEventListener('click',function(){if(confirm(txt('b_libreset')+'?')){LIB=SEED.slice();saveLib();buildPicker();renderLib();}});
+libList.addEventListener('click',function(e){var b=e.target.closest('.rm');if(!b)return;var v=b.getAttribute('data-val');LIB=LIB.filter(function(s){return s!==v});saveLib();buildPicker();renderLib();});
 
-function resetForm() {
-  editingId = null;
-  document.getElementById('fCourt').value = '';
-  document.getElementById('fCaseNo').value = '';
-  document.getElementById('fParty').value = '';
-  document.getElementById('fProc').value = '';
-  document.getElementById('fNext').value = '';
-  document.getElementById('fSec').value = '';
-  document.querySelector('details.main').removeAttribute('open');
-}
-
-// --- MODAL LOGIC ---
-function openModal(id) {
-  var c = cases.find(x => x.id == id);
-  if(!c) return;
-  
-  document.getElementById('mTitle').textContent = c.caseNo;
-  
-  var html = `
-    <div class="info-row"><span class="info-label">Court:</span> ${esc(c.court)}</div>
-    <div class="info-row"><span class="info-label">Parties:</span> ${esc(c.party)}</div>
-    <div class="info-row"><span class="info-label">Proceeding:</span> ${esc(c.proc)}</div>
-    <div class="info-row"><span class="info-label">Section:</span> ${esc(c.sec)}</div>
-    <div class="info-row"><span class="info-label">Hearing Date:</span> ${getDisplayDate(c.date)}</div>
-    <div class="info-row"><span class="info-label">Next Date:</span> <strong>${getDisplayDate(c.nextDate)}</strong></div>
-  `;
-  
-  document.getElementById('mContent').innerHTML = html;
-  document.getElementById('modalBg').classList.add('on');
-  
-  // Store ID for Edit/Delete buttons
-  document.getElementById('mEdit').dataset.id = id;
-  document.getElementById('mDel').dataset.id = id;
-}
-
-function closeModal() {
-  document.getElementById('modalBg').classList.remove('on');
-}
-
-function editCase(e) {
-  e.preventDefault();
-  var id = parseInt(this.dataset.id);
-  var c = cases.find(x => x.id == id);
-  if(!c) return;
-  
-  editingId = id;
-  selectedDateStr = c.date; // Switch calendar to that date
-  
-  document.getElementById('fCourt').value = c.court;
-  document.getElementById('fCaseNo').value = c.caseNo;
-  document.getElementById('fParty').value = c.party;
-  document.getElementById('fProc').value = c.proc;
-  document.getElementById('fNext').value = c.nextDate;
-  document.getElementById('fSec').value = c.sec;
-  
-  document.querySelector('details.main').setAttribute('open', '');
-  closeModal();
-  renderCalendar();
-  renderTable();
-}
-
-function deleteCase(e) {
-  e.preventDefault();
-  if(confirm("Are you sure?")) {
-    var id = parseInt(this.dataset.id);
-    cases = cases.filter(c => c.id != id);
-    saveData();
-    closeModal();
-    renderCalendar();
-    renderTable();
+saveBtn.addEventListener('click',function(){saveCurrentCase();});
+cancelBtn.addEventListener('click',function(){
+  if(formDirty){
+    showPrompt('cancel_title','cancel_body','cancel_ok','cancel_no',function(){
+      editId=null; openDate=null; fsEl.textContent=txt('fs_new'); clearForm(); resetGroups(); closeFormUI(); clearDraft();
+    });
+  }else{
+    editId=null; openDate=null; fsEl.textContent=txt('fs_new'); clearForm(); resetGroups(); closeFormUI(); clearDraft();
   }
-}
+});
+formSummary.addEventListener('click',function(e){
+  if(form.hasAttribute('open') && formDirty){
+    e.preventDefault();
+    showPrompt('unsaved_title','unsaved_body','save_now','stay_cancel',function(){ saveCurrentCase(); });
+  }
+});
+window.addEventListener('beforeunload',function(e){ if(formDirty){ snapshotDraft(); e.preventDefault(); e.returnValue=''; } });
 
-// --- UTILS ---
-function esc(str) {
-  if(!str) return '';
-  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
+list.addEventListener('click',function(e){
+  var pn=e.target.closest('[data-act="picknext"]');
+  if(pn){ e.stopPropagation(); var tr0=pn.closest('tr[data-id]'); if(tr0) startPickNext(tr0.dataset.id, selDate); return; }
+  var tr=e.target.closest('tr[data-id]'); if(tr) openModal(tr.dataset.id, selDate);
+});
+mbg.addEventListener('click',function(e){
+  if(e.target===mbg){closeModal();return;}
+  var od=e.target.closest('[data-act="opendoc"]');
+  if(od){var c=getCase(openId);var idx=+od.getAttribute('data-i');var it=c&&c.files&&c.files[idx];if(it&&it.d){var a=document.createElement('a');a.href=it.d;a.target='_blank';a.rel='noopener';if(it.n)a.download=it.n;document.body.appendChild(a);a.click();document.body.removeChild(a);}return;}
+  var rm=e.target.closest('[data-act="rmdoc"]');
+  if(rm){var c2=getCase(openId);var i2=+rm.getAttribute('data-i');if(c2&&c2.files){c2.files.splice(i2,1);if(saveCases()){openModal(openId,openDate||selDate);render();}}return;}
+  var b=e.target.closest('[data-act]'); if(!b)return; var a=b.getAttribute('data-act');
+  if(a==='close'){closeModal();return;}
+  if(a==='edit'){var c3=getCase(openId);if(!c3)return;editId=openId;fillForm(c3, openDate||selDate);openAllGroups();fsEl.textContent='✏️ '+txt('fs_new');form.setAttribute('open','');closeModal();form.scrollIntoView({behavior:'smooth'});return;}
+  if(a==='del'){showPrompt('delete_title','delete_body','delete_ok','delete_no',function(){cases=cases.filter(function(c){return c.id!==openId});saveCases();closeModal();render();});return;}
+});
+mbg.addEventListener('change',function(e){var fi=e.target.closest('[data-role="addfile"]');if(fi&&fi.files&&fi.files.length){var c=getCase(openId);if(c){addFilesToCase(fi.files,c,function(){openModal(openId,openDate||selDate);render();});}}});
+q.addEventListener('input',render);
+clr.addEventListener('click',function(){q.value='';render();q.focus()});
 
-// Start App
-init();
+function printRegister(){
+  var day=cases.filter(function(c){return hasDate(c,selDate)});
+  var w=window.open('','_blank');if(!w){alert(txt('msg_popup'));return;}
+  var rows=day.map(function(c,i){
+    var e=getEntry(c,selDate);
+    var cd=[c.court,c.courtNo].filter(Boolean).join(' ');
+    return '<tr><td>'+(i+1)+'</td>'
+      +'<td>'+esc(fmtDate(e.prevDate))+'<br>'+esc(e.prevProc||'')+'</td>'
+      +'<td>'+esc(cd)+'<br>'+esc(c.caseNumber||'')+'</td>'
+      +'<td>'+esc(c.petitioner||'')+' v/s '+esc(c.respondent||'')+'<br>'+esc(e.todayProc||'')+'</td>'
+      +'<td>'+esc(c.policeStation||'')+'<br>'+esc(c.section||'')+'</td>'
+      +'<td>'+esc(e.nextDate?fmtDate(e.nextDate):'—')+'<br>'+esc(e.nextProc||'')+'</td></tr>';
+  }).join('');
+  var html='<!doctype html><html lang="'+(LANG==='en'?'en':'hi')+'"><head><meta charset="utf-8"><title>Print '+fmtDate(selDate)+'</title><style>body{font-family:Georgia,serif;color:#000;padding:18px}h1{font-size:16px;margin:0 0 2px}.d{font-size:12px;color:#444;margin:0 0 10px}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #333;padding:5px 6px;vertical-align:top;text-align:left}th{background:#eee;font-size:10px;text-transform:uppercase}.f{font-size:9px;color:#666;margin-top:14px}@media print{body{padding:0}}</style></head><body>';
+  html+='<h1>⚖️ Adam\'s Court Diary</h1><div class="d">'+fmtDate(selDate)+'</div>';
+  html+='<table><thead><tr><th>'+txt('c_sr')+'</th><th>'+txt('pr_last')+' / '+txt('c_last_s')+'</th><th>'+txt('pr_court')+' / '+txt('c_court_s')+'</th><th>'+txt('pr_party')+' / '+txt('c_party_s')+'</th><th>'+txt('pr_ps')+' / '+txt('c_ps_s')+'</th><th>'+txt('pr_next')+' / '+txt('c_next_s')+'</th></tr></thead><tbody>';
+  html+= rows || ('<tr><td colspan="6" style="text-align:center;color:#888">'+txt('msg_nocase')+'</td></tr>');
+  html+='</tbody></table><div class="f">Printed '+new Date().toLocaleString()+' — Adam\'s Court Diary</div></body></html>';
+  w.document.write(html);w.document.close();setTimeout(function(){w.print();},400);
+}
+prtBtn.addEventListener('click',printRegister);
+
+function makeBackupJson(){return JSON.stringify({schemaVersion:2,appName:"Adam's Court Diary",exportedAt:new Date().toISOString(),lang:LANG,theme:THEME.mode,sections:LIB,cases:cases,settings:SETTINGS},null,2);}
+function backupName(){var ts=new Date();return 'Adams_Court_Diary_Save_'+ts.getFullYear()+pad2(ts.getMonth()+1)+pad2(ts.getDate())+'_'+pad2(ts.getHours())+pad2(ts.getMinutes())+'.json';}
+function triggerDownload(filename,text){var blob=new Blob([text],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},1500);}
+function doSave(showToast){var fn=backupName();triggerDownload(fn,makeBackupJson());localStorage.setItem(BTKEY,String(Date.now()));if(showToast!==false)alert('✅ '+txt('msg_copy')+' '+fn+'\n\n'+txt('msg_copy2'));}
+function saveToDrive(){var text=makeBackupJson();var fn=backupName();try{var file=new File([text],fn,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:'Adam Court Diary Save'}).then(function(){localStorage.setItem(BTKEY,String(Date.now()));alert('✅ '+txt('msg_share'));}).catch(function(){doSave(true);});return;}}catch(e){}doSave(true);}
+bkNow.addEventListener('click',function(){doSave(true);});
+drvBtn.addEventListener('click',function(){saveToDrive();});
+rsBtn.addEventListener('click',function(){rsFile.click();});
+rsFile.addEventListener('change',function(){var f=rsFile.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(ev){try{var obj=JSON.parse(ev.target.result);if(!obj||!Array.isArray(obj.cases)){alert(txt('msg_badfile'));rsFile.value='';return;}var mode=confirm(txt('msg_merge'));if(mode){var map={};for(var i=0;i<cases.length;i++)map[cases[i].id]=cases[i];for(var j=0;j<obj.cases.length;j++){var nc=obj.cases[j];if(nc&&nc.id)map[nc.id]=nc;}cases=[];for(var k in map)cases.push(map[k]);}else{cases=obj.cases.slice();}for(var z=0;z<cases.length;z++){var cz=cases[z];if(!cz.holdingDate)cz.holdingDate=cz.nextDate||todayISO();if(!cz.files)cz.files=[];if(!cz.notes)cz.notes=[];if(!cz.clientPhones)cz.clientPhones=[];if(!cz.oppPhones)cz.oppPhones=[];if(!cz.oppPartyPhones)cz.oppPartyPhones=[];ensureLog(cz);}if(Array.isArray(obj.sections)&&obj.sections.length){LIB=obj.sections.slice();saveLib();}if(obj.settings){SETTINGS=obj.settings;if(SETTINGS.size==='small')SETTINGS.size='sm';if(SETTINGS.size==='medium')SETTINGS.size='md';if(SETTINGS.size==='large')SETTINGS.size='lg';if(typeof SETTINGS.vs!=='boolean')SETTINGS.vs=false;}if(obj.lang){LANG=obj.lang;}if(obj.theme){THEME.mode=obj.theme;}saveSettings();refreshAll();alert('✅ '+txt('msg_restored')+' '+cases.length+'.');}catch(err){alert(txt('msg_readerr'));}rsFile.value='';};rd.onerror=function(){alert(txt('msg_readerr'));rsFile.value='';};rd.readAsText(f);});
+function maybeEveningPrompt(){var now=new Date();var hr=now.getHours();if(hr<20||hr>23)return;var last=parseInt(localStorage.getItem(BTKEY)||'0',10);var DAY=24*60*60*1000;if(last&&(Date.now()-last)<DAY)return;if(sessionStorage.getItem('adam_bp_shown'))return;sessionStorage.setItem('adam_bp_shown','1');bp.classList.add('on');}
+bpYes.addEventListener('click',function(){bp.classList.remove('on');doSave(true);});
+bpNo.addEventListener('click',function(){bp.classList.remove('on');});
+
+function loadGis(cb){if(window.google&&window.google.accounts&&window.google.accounts.oauth2){cb();return;}var s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=cb;s.onerror=function(){alert('Google script load nahi hui. Internet check karo.');};document.head.appendChild(s);}
+gisBtn.addEventListener('click',function(){if(!GOOGLE_CLIENT_ID){alert(txt('msg_gisoff'));return;}loadGis(function(){try{google.accounts.oauth2.initTokenClient({client_id:GOOGLE_CLIENT_ID,scope:'https://www.googleapis.com/auth/drive.file',callback:function(resp){var text=makeBackupJson();var fn=backupName();var fd=new FormData();fd.append('metadata',new Blob([JSON.stringify({name:fn,mimeType:'application/json'})],{type:'application/json'}));fd.append('file',new Blob([text],{type:'application/json'}));fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',{method:'POST',headers:{'Authorization':'Bearer '+resp.access_token},body:fd}).then(function(r){return r.json();}).then(function(){localStorage.setItem(BTKEY,String(Date.now()));alert('✅ Google Drive me save ho gaya.');}).catch(function(){alert('Drive upload error.');});}}).requestAccessToken();}catch(e){alert('GIS error: '+e.message);}});});
+
+function syncSettingsUI(){
+  for(var i=0;i<fontSizeRadios.length;i++)fontSizeRadios[i].checked=(fontSizeRadios[i].value===SETTINGS.size);
+  boldToggle.checked=!!SETTINGS.bold;
+  vsToggle.checked=!!SETTINGS.vs;
+  for(var j=0;j<themeRadios.length;j++)themeRadios[j].checked=(themeRadios[j].value===THEME.mode);
+  for(var k=0;k<langRadios.length;k++)langRadios[k].checked=(langRadios[k].value===LANG);
+}
+stBtn.addEventListener('click',function(){syncSettingsUI();sp.classList.add('on');});
+sp.addEventListener('click',function(e){if(e.target===sp)sp.classList.remove('on');});
+setSave.addEventListener('click',function(){
+  var sz='md';for(var i=0;i<fontSizeRadios.length;i++){if(fontSizeRadios[i].checked){sz=fontSizeRadios[i].value;break;}}
+  var th='night';for(var j=0;j<themeRadios.length;j++){if(themeRadios[j].checked){th=themeRadios[j].value;break;}}
+  var lg='hi';for(var k=0;k<langRadios.length;k++){if(langRadios[k].checked){lg=langRadios[k].value;break;}}
+  SETTINGS={size:sz,bold:boldToggle.checked,vs:vsToggle.checked};THEME.mode=th;LANG=lg;
+  saveSettings();sp.classList.remove('on');refreshAll();
+});
+
+(function(){if(!localStorage.getItem(IKEY)){intro.removeAttribute('hidden');if(subEl)subEl.removeAttribute('hidden');localStorage.setItem(IKEY,'1');}if(ix)ix.addEventListener('click',function(){intro.setAttribute('hidden','');if(subEl)subEl.setAttribute('hidden','');});})();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+
+applyI18n();buildPicker();renderLib();clearForm();loadDraft();render();maybeEveningPrompt();startAutoSave();
 </script>
 </body>
 </html>
