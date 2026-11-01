@@ -69,15 +69,12 @@ h1{font-size:calc(var(--fs-base) + 6px);margin:0 0 2px;font-weight:700}
 .cal-jump input{flex:1;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:6px 8px;border-radius:8px;font-size:calc(var(--fs-base) - 1px);font-family:inherit}
 .cal-wd,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
 .cal-wd div{text-align:center;font-size:calc(var(--fs-base) - 4px);color:var(--mut);padding:2px 0;line-height:1.2}
-.cal-c{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--soft);border:1px solid transparent;border-radius:8px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;color:var(--txt)}
+.cal-c{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--soft);border:1px solid transparent;border-radius:8px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;color:var(--txt)}
 .cal-c.blank{background:transparent;cursor:default}
 .cal-c.td{border-color:var(--line)}
 .cal-c.sel{background:var(--acc2);color:#06283d;font-weight:700}
 .cal-c .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
 .cal-c.sel .dot{background:#052e16}
-/* New Style for Mini Panchang Text inside Cell */
-.cal-c .mini-panchang{font-size:calc(var(--fs-base) - 5px); color:var(--mut); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:90%; line-height:1;}
-.cal-c.sel .mini-panchang{color:#06283d; opacity:0.8;}
 details.main{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
 details.main>summary{padding:11px 12px;font-weight:600;cursor:pointer;list-style:none;font-size:calc(var(--fs-base) + 1px);text-align:center}
 details.main>summary::-webkit-details-marker{display:none}
@@ -430,25 +427,25 @@ mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
 <script>
 window.onerror=function(m,s,l,c){try{alert('⚠️ Chhoti si ghalti: '+m+' (line '+l+')\nScreenshot bhej dena, main theek kar dunga. Data safe hai.')}catch(e){}return false;};
 
-var KEY='adam_diary_v1', SKEY='adam_sections_v1', IKEY='adam_intro_v1', BTKEY='adam_bk_time_v1', STKEY='adam_settings_v1', LGKEY='adam_lang_v1', THKEY='adam_theme_v1', DKEY='adam_draft_v1', PCACHE_KEY='adam_panchang_cache_v1';
+var KEY='adam_diary_v1', SKEY='adam_sections_v1', IKEY='adam_intro_v1', BTKEY='adam_bk_time_v1', STKEY='adam_settings_v1', LGKEY='adam_lang_v1', THKEY='adam_theme_v1', DKEY='adam_draft_v1';
 var GOOGLE_CLIENT_ID=''; 
 
 var I18N={
 hi:{
 sub:"तारীख-वार लॉगर • डेट सेल पर सिर्फ कैलेंडर • बाकी जगह टैप पर डिटेल • 🖨️ प्रिंट • ☁️ सेव • 100% ऑफ़लाइन",
 intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
-intro_tip:"💡 अब अगलī तारīkh वाले खाने पर क्लिक करते ही सिर्फ कैलेंडर/तारीख चुनेगा, पूरा फॉर्म नहीं खुलेगा। बाकी किसी भी कॉलम पर क्लिक करने पर केस की डिटेल खुलेगी, फिर Edit कर सकते हो। कैस जिस तारीख पर सेव किया वहीं रहेगा; अगली तारीख डालने पर अगली तारीख पर नया रिकॉर्ड बनेगा, पुराना सुरक्षित रहेगा। कैलेंडर बंद हो तो ◀ ▶ दिन बदलेंगे, खुला हो तो महीना। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत्+पंचांग। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा। अधूरा कैस हर 1 मिनट में अपने-आप सेव होता रहता है — फोन हैंग हो तो भी डेटा नहीं जाएगा।",
+intro_tip:"💡 अब अगली तारीख वाले खाने पर क्लिक करते ही सिर्फ कैलेंडर/तारीख चुनेगा, पूरा फॉर्म नहीं खुलेगा। बाकी किसी भी कॉलम पर क्लिक करने पर केस की डिटेल खुलेगी, फिर Edit कर सकते हो। केस जिस तारीख पर सेव किया वहीं रहेगा; अगली तारीख डालने पर अगली तारीख पर नया रिकॉर्ड बनेगा, पुराना सुरक्षित रहेगा। कैलेंडर बंद हो तो ◀ ▶ दिन बदलेंगे, खुला हो तो महीना। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत्+पंचांग। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा। अधूरा केस हर 1 मिनट में अपने-आप सेव होता रहता है — फोन हैंग हो तो भी डेटा नहीं जाएगा।",
 intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC/अन्य एक्ट का नंबर व शीर्षक अपने कोड व नवीनतम संशोधन से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/PDF फोन की स्टोरेज में (बहुत बड़ी PDF छूट सकती है)।",
 intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
-search:"खोजें (इसी तारीख के कैस में): कैस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
+search:"खोजें (इसी तारीख के केस में): केस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
 today:"आज",save_btn:"☁️ सेव",restore_btn:"⬇ रिस्टोर",print_btn:"🖨️ प्रिंट",jump_lbl:"किसी भी तारीख पर जाओ",
 c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",
 c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",
 pr_last:"पिछली तारीख",pr_court:"न्यायालय",pr_party:"वादी बनाम विपक्षी",pr_ps:"थाना",pr_next:"अगली तारीख",
-set_next:"अगली तारीख तय करो",moved:"अगली तारीख पर नया रिकॉर्ड बन गया:",safe_old:"पुराना रिकॉर्ड सुरक्षित:",saved_new:"नया कैस इस तारीख पर सेव हुआ:",updated:"इस तारीख का रिकॉर्ड अपडेट हुआ:",
+set_next:"अगली तारीख तय करो",moved:"अगली तारीख पर नया रिकॉर्ड बन गया:",safe_old:"पुराना रिकॉर्ड सुरक्षित:",saved_new:"नया केस इस तारीख पर सेव हुआ:",updated:"इस तारीख का रिकॉर्ड अपडेट हुआ:",
 dp_msg:"सिर्फ अगली तारीख चुनें। बाकी विवरण बाद में Edit से भर सकते हैं।",
 m_hist:"📅 तारीख-वार इतिहास / कार्यवाही",m_hist_empty:"कोई इतिहास नहीं।",
-fs_new:"➕ नया कैस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी / Client",g_opp:"विपक्षी पक्ष और वकील",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
+fs_new:"➕ नया केस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी / Client",g_opp:"विपक्षी पक्ष और वकील",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
 l_lastdate:"↑ अंतिम तिथि (पिछली सुनवाई)",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही (इसी तारीख पर)",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली = अभी तय नहीं)",l_nextproc:"↓ अगली कार्यवाही",
 l_clientname:"वादी का नाम",l_clientphones:"वादी के नंबर",l_clientaddr:"वादी का पता",
 l_opppartyname:"विपक्षी पक्ष का नाम",l_opppartyphones:"विपक्षी पक्ष के नंबर",l_opppartyaddr:"विपक्षी पक्ष का पता",
@@ -456,557 +453,15 @@ l_oppname:"विपक्षी वकील का नाम",l_oppphones:"व
 l_addphone:"＋ और नंबर जोड़ो",
 l_photopdf:"असली फोटो / PDF चुनो",l_docnotes:"या सिर्फ लिख दो (एक लाइन में एक)",
 l_libadd:"नई धाराएँ जोड़ो (एक लाइन में एक)",b_libadd:"➕ सूची में जोड़ो",b_libreset:"↺ डिफ़ॉल्ट वापस",h_libnote:"जो जोड़ोगे वह इसी फोन में सेव होगा और धारा ड्रॉपडाउन में मिलेगा। ✕ से हटाओ।",
-b_savecase:"कैस सेव करो",b_cancel:"रद्द करो",
-ph_pervious:"नया कैस / नोटिस…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"राज्य",ph_respondent:"लाल व अन्य",ph_todayproc:"आरोप पत्र पढ़ा गया…",ph_ps:"बसई जगनेर",ph_uses:"उदा. धारा 302 IPC / BNS 103 / 138 एनआई एक्ट",h_uses:"जो लिखोगे वह सहेजा और खोज होगा।",ph_nextproc:"साक्ष्य…",ph_clientname:"राम स्वरूप",ph_clientaddr:"चैंबर / घर",ph_opppartyname:"राम लाल",ph_opppartyaddr:"पता / फर्म",ph_oppname:"वकील X",ph_oppaddr:"फर्म का पता",ph_docnotes:"वकालतनामा 12-10-2026\nएफआईआर कॉपी\nचेक रिटर्न मेमो",ph_libadd:"BNS 115 – चोट\nBNS 311 – चोरी\n(अपनी विश्वसनीय सूची पेस्ट करो)",
+b_savecase:"केस सेव करो",b_cancel:"रद्द करो",
+ph_pervious:"नया केस / नोटिस…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"राज्य",ph_respondent:"लाल व अन्य",ph_todayproc:"आरोप पत्र पढ़ा गया…",ph_ps:"बसई जगनेर",ph_uses:"उदा. धारा 302 IPC / BNS 103 / 138 एनआई एक्ट",h_uses:"जो लिखोगे वह ही सेव और खोज होगा।",ph_nextproc:"साक्ष्य…",ph_clientname:"राम स्वरूप",ph_clientaddr:"चैंबर / घर",ph_opppartyname:"राम लाल",ph_opppartyaddr:"पता / फर्म",ph_oppname:"वकील X",ph_oppaddr:"फर्म का पता",ph_docnotes:"वकालतनामा 12-10-2026\nएफआईआर कॉपी\nचेक रिटर्न मेमो",ph_libadd:"BNS 115 – चोट\nBNS 311 – चोरी\n(अपनी विश्वसनीय सूची पेस्ट करो)",
 m_client:"वादी",m_oppparty:"विपक्षी पक्ष",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / PDF)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/PDF नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
-s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत (Large)",s_xl:"अति बृहत (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिन्दू कैलेंडर",s_vsOn:"विक्रम संवत् + पंचांग दिखाएं (हिन्दी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन पंचांग के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत दिखेगा और पंचांग देखने का छोटा लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
+s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत (Large)",s_xl:"अति बृहत (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिन्दू कैलेंडर",s_vsOn:"विक्रम संवत् + पंचांग दिखाएं (हिन्दी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन पंचांग के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत् दिखेगा और पंचांग देखने का छोटा लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
 bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में सेव नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
 unsaved_title:"⚠️ बिना सेव किए बंद कर रहे हो?",unsaved_body:"यह डेटा अभी सेव नहीं हुआ। पहले सेव करें?",save_now:"हाँ, सेव करो",stay_cancel:"रहने दो",
 cancel_title:"बदलाव रद्द करें?",cancel_body:"अभी किया गया बदलाव रद्द हो जाएगा। पक्का?",cancel_ok:"हाँ, रद्द करो",cancel_no:"रहने दो",
-delete_title:"🗑 कैस हटाएं?",delete_body:"यह कैस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
-msg_casereq:"कैस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई कैस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई कैस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"सेव फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ रिस्टोर से वापस आ जाएगी।",msg_badfile:"यह सही सेव फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की सेव फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूंगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहां से सेव कर लो।",msg_cases:"कैस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने-आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
-},
-en:{
-sub:"Date-wise ledger • date cell opens only calendar • other cells open details • auto-draft every 1 min • 🖨️ Print • ☁️ Save • 100% offline",
-intro_off:"Data saves only on this phone — no internet needed",
-intro_tip:"💡 Now tapping the next-date cell opens only the calendar/date picker, not the full form. Tapping any other column opens case details, then you can Edit. A case saved on a date stays there; giving a next date creates a new record on that next date, old record remains safe. Calendar closed: ◀ ▶ change DAY; open: change MONTH. ⚙️ for theme/font/language/Vikram Samvat+Panchang. Closing form without saving asks to save first. Half-typed case auto-saves every 1 minute — even if the phone hangs, your work is not lost.",
-intro_warn:"⚠️ Section list is only a shortcut. Confirm BNS/IPC/other Act number & title from your own code and latest amendment — not legal advice. Photos/PDFs save in phone storage (very large PDF may be skipped).",
-intro_ok:"✕ Got it (won't show again)",
-search:"Search (this date's cases): case no, party, court, section, PS, number…",
-today:"Today",save_btn:"☁️ Save",restore_btn:"⬇ Restore",print_btn:"🖨️ Print",jump_lbl:"Jump to any date",
-c_sr:"Sr",c_last:"Last date",c_court:"Court",c_party:"Party (Plaintiff & Petitioner) vs party (Defendant & Respondent)",c_ps:"Police station",c_next:"Next date",
-c_last_s:"Previous proceeding",c_court_s:"Case number",c_party_s:"Today proceedings",c_ps_s:"Under Section",c_next_s:"Next proceeding",
-pr_last:"Last date",pr_court:"Court",pr_party:"Parties",pr_ps:"Police station",pr_next:"Next date",
-set_next:"Set next date",moved:"New record created on next date:",safe_old:"Old record safe on:",saved_new:"New case saved on:",updated:"Record updated on:",
-dp_msg:"Choose only the next date. You can fill other details later from Edit.",
-m_hist:"📅 Date-wise history / proceedings",m_hist_empty:"No history.",
-fs_new:"➕ Register new case",g_face:"Face • 6 columns",g_client:"Client",g_opp:"Opposition Party & Counsel",g_papers:"📎 Papers",g_lib:"📚 Section Library",
-l_lastdate:"↑ Last date (previous hearing)",l_pervious:"↓ Previous proceeding",l_courtname:"↑ Court (name)",l_courtno:"↑ Court No. (bench)",l_caseno:"↓ Case number",l_petitioner:"↑ Petitioner",l_respondent:"↑ Respondent",l_todayproc:"↓ Today proceedings (this date)",l_ps:"↑ Police station",l_uses:"↓ Under Section — pick or type",l_nextdate:"↑ Next date (blank = not set yet)",l_nextproc:"↓ Next proceeding",
-l_clientname:"Client name",l_clientphones:"Client numbers",l_clientaddr:"Client address",
-l_opppartyname:"Opposition party name",l_opppartyphones:"Opposition party numbers",l_opppartyaddr:"Opposition party address",
-l_oppname:"Opposition counsel name",l_oppphones:"Opposition counsel numbers",l_oppaddr:"Opposition counsel address / firm",
-l_addphone:"＋ add another number",
-l_photopdf:"Pick real photo / PDF",l_docnotes:"Or just type (one per line)",
-l_libadd:"Add sections (one per line)",b_libadd:"➕ Add to list",b_libreset:"↺ Reset default",h_libnote:"Whatever you add saves on this phone and appears in the section dropdown. Remove with ✕.",
-b_savecase:"Save case",b_cancel:"Cancel",
-ph_pervious:"New case / Notice…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"State",ph_respondent:"Lal and others",ph_todayproc:"Charge framed…",ph_ps:"Basai jagner",ph_uses:"e.g. U/S 302 IPC / BNS 103 / 138 NI Act",h_uses:"Whatever you type is what saves & searches.",ph_nextproc:"Evidence…",ph_clientname:"Ram Swaroop",ph_clientaddr:"Chamber / home",ph_opppartyname:"Ram Lal",ph_opppartyaddr:"Address / firm",ph_oppname:"Adv. X",ph_oppaddr:"Firm address",ph_docnotes:"Vakalatnama 12-10-2026\nFIR copy\nCheque return memo",ph_libadd:"BNS 115 – Hurt\nBNS 311 –Bhai, tu bahut smart soch raha hai. Tere dono sawaal ka jawab main **seedha aur imaandaar** dunga taaki tu galat faansi me na pade.
-
----
-
-### 1. Panchang: "Ek baar fetch karo, phir offline chale" (Batch Mode)
-Haan, ye **100% possible hai**. Isse app fast bhi hoga aur net ki tension bhi nahi hogi.
-
-**Kaise kaam karega?**
-- Jab tu pehli baar internet par app kholega, wo background me aaj se lekar agle **6 mahine (180 din)** tak ka pura data download kar lega.
-- Us data ko tera phone `localStorage` me save kar dega.
-- Uske baad jab bhi tu calendar kholenga, wo seedha saved data padhega → **Zero loading time**, **No internet needed**.
-- Agar koi date miss ho gayi (jaise 2 mahine baad), to wo us din hi automatically update ho jayega.
-
-Main is feature ko code me daal deta hoon. Ye **"Smart Cache"** system kehlata hai.
-
----
-
-### 2. Google OAuth Client ID: Free hai ya Paid? Kya fayda/nukshan?
-
-#### ❓ **Cost:**
-- **Google Cloud Console account banana FREE hai.**
-- **OAuth Client ID banana FREE hai.**
-- **Data Store karna (Drive API usage) FREE hai** (jab tak tu normal user level data store karta hai, jo tere court diary ke liye bahut kam hai).
-- **Nuksaan sirf tab hota hai agar tu lakho users bana de**, lekin tere personal use ke liye ye **bilkul free** rahega.
-
-#### ✅ **Fayde (Pros):**
-1. **True Backup:** Phone toot gaya, format ho gaya, ya sim change ho gayi — tera saara data teri Gmail/Drive me safe hai. Naye phone par login karte hi sab wapas aa jayega.
-2. **Multi-Device Access:** Tu apne laptop, tablet, ya dusre phone par bhi same data access kar sakta hai.
-3. **Security:** Google ka security standard world-class hai. Teri local file hack hone ka dar nahi.
-
-#### ⚠️ **Nukshan / Chinta (Cons/Risks):**
-1. **Privacy Concern:** Data Google ke server par jaayega. Halanki wo encrypted hota hai, lekin technically "cloud" me hai. Agar tu chahta hai ki data *sirf* tere paas rahe, to cloud sync mat karo.
-2. **Setup Complexity:** Ek baar setup karna padta hai (Client ID copy-paste karna). Wo thoda technical lag sakta hai, lekin main step-by-step guide dunga.
-3. **Internet Dependency for Sync:** Login aur Sync ke liye internet zaroori hai (lekin daily use offline chalega).
-
-#### 🎯 **Meri Salah:**
-Agar tera data important hai (court cases), to **Cloud Sync LENA CHAHIYE**. Local storage akela risky hai (phone crash/format = data loss).
-Lekin, pehle hum **Panchang Batch Download** wala feature dalte hain, kyunki wo abhi ke liye zyada useful aur simple hai. Cloud Sync ke liye alag se ek proper "Setup Guide" banunga jab tu ready ho.
-
----
-
-## Ab Code Update: Smart Panchang (Batch Fetch)
-
-Maine code badla hai taaki:
-1. Pehli baar online hone par **180 din ka data** download ho.
-2. Phir har baar **offline hi chale**.
-3. Calendar me har date ke neeche chhota text dikhega (Tithi/Nakshatra).
-
-Ye raha poora updated code. Bas **Select All → Paste → Commit**.
-
-```html
-<!doctype html>
-<html lang="hi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0f172a">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/svg+xml" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
-<title>Adam's Court Diary</title>
-<style>
-:root{
-  --bg:#0f172a;--card:#1e293b;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;
-  --acc:#22c55e;--acc2:#38bdf8;--danger:#f87171;--pill:#78350f;--pillt:#fbbf24;
-  --wa:#25d366;--inp:#0f172a;--soft:#0f172a66;--soft2:#0f172a88;--soft3:#0f172a55;
-  --ov:rgba(2,6,23,.78);--ov2:rgba(2,6,23,.85);--fs-base:13px;
-}
-body[data-theme="day"]{
-  --bg:#eef2f7;--card:#ffffff;--line:#cbd5e1;--txt:#0f172a;--mut:#475569;
-  --acc:#15803d;--acc2:#0369a1;--danger:#b91c1c;--pill:#fef3c7;--pillt:#92400e;
-  --inp:#f8fafc;--soft:#e2e8f0aa;--soft2:#e2e8f0cc;--soft3:#f1f5f9aa;
-  --ov:rgba(15,23,42,.45);--ov2:rgba(15,23,42,.55);
-}
-@media (prefers-color-scheme: light){
-  body[data-theme="system"]{
-    --bg:#eef2f7;--card:#ffffff;--line:#cbd5e1;--txt:#0f172a;--mut:#475569;
-    --acc:#15803d;--acc2:#0369a1;--danger:#b91c1c;--pill:#fef3c7;--pillt:#92400e;
-    --inp:#f8fafc;--soft:#e2e8f0aa;--soft2:#e2e8f0cc;--soft3:#f1f5f9aa;
-    --ov:rgba(15,23,42,.45);--ov2:rgba(15,23,42,.55);
-  }
-}
-body.bold,body.bold *{font-weight:700!important}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);padding:8px;font-size:var(--fs-base)}
-h1{font-size:calc(var(--fs-base) + 6px);margin:0 0 2px;font-weight:700}
-.sub{color:var(--mut);font-size:calc(var(--fs-base) - 1px);margin:0 0 8px}
-#intro{margin:0 0 8px}
-.off{display:inline-flex;align-items:center;gap:6px;background:#14532d55;color:#86efac;font-size:calc(var(--fs-base) - 2px);padding:3px 8px;border-radius:999px;margin-bottom:6px}
-.off i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
-.tip{color:var(--acc2);font-size:calc(var(--fs-base) - 2px);margin:0 0 6px}
-.warn{color:#fca5a5;font-size:calc(var(--fs-base) - 2px);margin:0 0 6px;line-height:1.4}
-.ix{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:8px;padding:4px 10px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;margin-top:2px}
-.bar{display:flex;gap:6px;margin-bottom:6px}
-.bar input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:9px 10px;border-radius:10px;font-size:calc(var(--fs-base) + 1px)}
-.bar button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:0 12px;font-size:calc(var(--fs-base) + 3px);cursor:pointer}
-.count{color:var(--mut);font-size:calc(var(--fs-base) - 1px);margin:0 0 4px}
-.autostat{color:var(--acc);font-size:calc(var(--fs-base) - 2px);margin:0 0 8px}
-.cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 8px;margin-bottom:10px}
-.cal-head{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-.cal-head button{background:var(--inp);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;flex:0 0 auto}
-.cal-head .cal-today{color:var(--acc);font-weight:700}
-.cal-mid{flex:1;min-width:92px;background:var(--inp);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 6px;font-size:calc(var(--fs-base) - 1px);font-weight:700;text-align:center;cursor:pointer}
-.cloud-mini{display:flex;gap:4px;flex:0 0 auto;flex-wrap:wrap}
-.cbtn{border-radius:8px;padding:6px 7px;font-size:calc(var(--fs-base) - 2px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);display:inline-flex;align-items:center;gap:4px}
-.cbtn.dl{color:#86efac;border-color:#166534}
-.cbtn.up{color:#fde68a;border-color:#b45309}
-.cbtn.pr{color:#c4b5fd;border-color:#6d28d9}
-.cbtn.st{color:var(--acc2);border-color:var(--line)}
-.cal-body{display:none;margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
-.cal.open .cal-body{display:block}
-.cal-title{text-align:center;font-weight:700;font-size:calc(var(--fs-base) - 1px);color:var(--acc2);margin-bottom:4px}
-.cal-hindu{text-align:center;font-size:calc(var(--fs-base) - 2px);color:var(--acc);margin:0 0 7px;min-height:16px;line-height:1.35}
-.cal-hindu a{color:var(--acc2);text-decoration:none;font-weight:700}
-.cal-jump{display:flex;align-items:center;gap:6px;margin-bottom:7px}
-.cal-jump label{font-size:calc(var(--fs-base) - 3px);color:var(--mut)}
-.cal-jump input{flex:1;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:6px 8px;border-radius:8px;font-size:calc(var(--fs-base) - 1px);font-family:inherit}
-.cal-wd,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-wd div{text-align:center;font-size:calc(var(--fs-base) - 4px);color:var(--mut);padding:2px 0;line-height:1.2}
-.cal-c{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--soft);border:1px solid transparent;border-radius:8px;font-size:calc(var(--fs-base) - 1px);cursor:pointer;color:var(--txt)}
-.cal-c.blank{background:transparent;cursor:default}
-.cal-c.td{border-color:var(--line)}
-.cal-c.sel{background:var(--acc2);color:#06283d;font-weight:700}
-.cal-c .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--acc)}
-.cal-c.sel .dot{background:#052e16}
-/* New Style for Mini Panchang Text inside Cell */
-.cal-c .mini-panchang{font-size:calc(var(--fs-base) - 5px); color:var(--mut); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:90%; line-height:1;}
-.cal-c.sel .mini-panchang{color:#06283d; opacity:0.8;}
-details.main{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
-details.main>summary{padding:11px 12px;font-weight:600;cursor:pointer;list-style:none;font-size:calc(var(--fs-base) + 1px);text-align:center}
-details.main>summary::-webkit-details-marker{display:none}
-details.main>summary span.ar{float:right;color:var(--acc2)}
-.grp{border:1px solid var(--line);border-radius:10px;margin:0 12px 8px;overflow:hidden}
-.grp>summary{padding:9px 11px;font-weight:600;cursor:pointer;background:var(--soft2);list-style:none;font-size:calc(var(--fs-base) - 1px);text-align:left}
-.grp>summary::-webkit-details-marker{display:none}
-.grp>summary b{color:var(--acc2)}
-.inner{padding:9px 11px 11px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.inner .full{grid-column:1/-1}
-label{font-size:calc(var(--fs-base) - 3px);color:var(--mut);display:block;margin-bottom:2px}
-input,textarea,select{width:100%;background:var(--inp);border:1px solid var(--line);color:var(--txt);padding:8px;border-radius:8px;font-size:calc(var(--fs-base) - 1px);font-family:inherit}
-input[type=file]{padding:6px;font-size:calc(var(--fs-base) - 2px)}
-textarea{resize:vertical;min-height:40px}
-.phrow{display:flex;gap:6px;align-items:center;margin-bottom:6px}
-.phrow input{flex:1}
-.phrow button{flex:0 0 auto;background:var(--inp);border:1px solid var(--line);color:var(--mut);border-radius:8px;width:34px;height:36px;font-size:16px;cursor:pointer}
-.btnrow{display:flex;gap:8px;padding:0 12px 12px}
-.go{flex:1;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:calc(var(--fs-base) + 1px);cursor:pointer}
-.cancelbtn{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;padding:11px 14px;font-size:var(--fs-base);cursor:pointer}
-table.reg{width:100%;border-collapse:collapse;table-layout:fixed;font-size:calc(var(--fs-base) - 3px);background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:10px}
-table.reg thead td{border:1px solid var(--line);padding:3px 4px;vertical-align:bottom}
-table.reg thead tr:first-child td{color:var(--txt);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-size:calc(var(--fs-base) - 4px)}
-table.reg thead tr:last-child td{color:var(--mut);text-transform:uppercase;letter-spacing:.3px;font-size:calc(var(--fs-base) - 5px)}
-table.reg tbody tr{cursor:pointer}
-table.reg tbody tr:active{background:var(--inp)}
-table.reg tbody td{border:1px solid var(--line);padding:3px 4px;vertical-align:top;word-break:break-word}
-td.sr{text-align:center;font-weight:700;color:var(--acc2);font-size:calc(var(--fs-base) - 2px)}
-td.nextcell{cursor:pointer}
-td.nextcell:active{background:var(--inp)}
-.u,.d{display:block;line-height:1.3}
-.d{border-top:1px dashed var(--line);margin-top:2px;padding-top:2px}
-.val.b{font-weight:700;color:var(--acc2)}
-.pill{display:inline-block;background:var(--pill);color:var(--pillt);border:1px solid #b45309;padding:1px 5px;border-radius:7px;font-weight:700}
-.setnext{background:var(--inp);border:1px dashed var(--acc2);color:var(--acc2);border-radius:7px;padding:2px 6px;font-size:calc(var(--fs-base) - 3px);font-weight:700;cursor:pointer;line-height:1.3}
-.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:calc(var(--fs-base) - 1px)}
-mark{background:#7c2d12;color:#fed7aa;border-radius:3px;padding:0 1px}
-.modal-bg{position:fixed;inset:0;background:var(--ov);display:none;align-items:flex-start;justify-content:center;padding:12px;z-index:60;overflow-y:auto}
-.modal-bg.on{display:flex}
-.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:480px;width:100%;margin:auto;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
-.modal .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
-.modal .mh h2{margin:0;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700}
-.modal .mh .mc{font-size:calc(var(--fs-base) - 1px);color:var(--mut);margin-top:2px;line-height:1.4}
-.modal .x{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:9px;padding:5px 10px;font-size:calc(var(--fs-base) + 1px);cursor:pointer;flex:0 0 auto}
-.sec{border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin-bottom:10px;background:var(--soft3)}
-.sec h3{margin:0 0 7px;font-size:calc(var(--fs-base) - 2px);color:var(--acc);text-transform:uppercase;letter-spacing:.4px;font-weight:700}
-.dl{font-size:var(--fs-base);line-height:1.7}
-.dl span{color:var(--mut)}
-.dl a{color:var(--acc2);text-decoration:none}
-.numline{margin:6px 0;padding:6px 0;border-top:1px dashed var(--line)}
-.numline:first-of-type{border-top:0}
-.numline .nl{font-size:calc(var(--fs-base) - 1px);color:var(--acc2);font-weight:700;margin-bottom:3px}
-.actrow{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
-.abtn{flex:1;min-width:80px;border-radius:9px;padding:8px 6px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);text-decoration:none;text-align:center;display:inline-block}
-.abtn.wa{background:var(--wa);color:#04331a;border-color:var(--wa)}
-.abtn.call{color:var(--acc)}
-.docgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px}
-.docwrap{position:relative}
-.thumb{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:9px;display:block;background:var(--inp);cursor:pointer}
-.pdfcard{width:100%;aspect-ratio:1/1;border:1px solid var(--line);border-radius:9px;background:var(--inp);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:5px;text-align:center}
-.pdfcard .ic{font-size:22px}
-.pdfcard .nm{font-size:calc(var(--fs-base) - 3px);color:var(--mut);word-break:break-all;line-height:1.2}
-.rmx{position:absolute;top:-5px;right:-5px;background:#7f1d1d;color:#fff;border:0;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-.chip{background:var(--inp);border:1px solid var(--line);color:var(--txt);font-size:calc(var(--fs-base) - 2px);padding:3px 8px;border-radius:7px}
-.addfile{display:inline-flex;align-items:center;gap:6px;background:var(--inp);border:1px dashed var(--acc2);color:var(--acc2);border-radius:9px;padding:7px 11px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;margin-top:7px}
-.addfile input{display:none}
-.note{font-size:calc(var(--fs-base) - 2px);color:var(--mut);margin-top:5px;line-height:1.4}
-.mrow{display:flex;gap:8px;margin-top:4px}
-.mbtn{flex:1;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp)}
-.mbtn.e{color:var(--acc2)}
-.mbtn.d{color:var(--danger);border-color:#7f1d1d}
-.libitem{display:flex;justify-content:space-between;align-items:center;gap:6px;background:var(--inp);border:1px solid var(--line);border-radius:7px;padding:4px 7px;font-size:calc(var(--fs-base) - 2px);margin-bottom:4px;word-break:break-word}
-.rm{background:transparent;border:1px solid #7f1d1d;color:var(--danger);border-radius:6px;padding:2px 7px;font-size:calc(var(--fs-base) - 2px);cursor:pointer;flex:0 0 auto}
-.libnote{font-size:calc(var(--fs-base) - 2px);color:var(--mut);margin:4px 0 8px;line-height:1.4}
-.mini{background:var(--acc2);color:#06283d;border:0;border-radius:8px;padding:7px 12px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;margin-top:6px}
-.mini.g{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:600}
-.hint{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:3px}
-.backup-pop,.settings-pop,.prompt-pop{position:fixed;inset:0;background:var(--ov2);display:none;align-items:center;justify-content:center;padding:16px;z-index:80}
-.backup-pop.on,.settings-pop.on,.prompt-pop.on{display:flex}
-.backup-card,.settings-card,.prompt-card{background:var(--card);border:1px solid var(--acc2);border-radius:16px;max-width:420px;width:100%;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.6);max-height:90vh;overflow-y:auto}
-.backup-card,.prompt-card{text-align:center}
-.backup-card h3,.settings-card h3,.prompt-card h3{margin:0 0 14px;font-size:calc(var(--fs-base) + 3px);color:var(--acc2);font-weight:700;text-align:center}
-.backup-card p,.prompt-card p{margin:0 0 14px;font-size:calc(var(--fs-base) - 1px);color:var(--mut);line-height:1.5}
-.bk-row{display:flex;gap:8px}
-.bk-btn{flex:1;border-radius:10px;padding:11px;font-size:var(--fs-base);font-weight:700;cursor:pointer;border:0}
-.bk-now{background:var(--acc);color:#052e16}
-.bk-later{background:transparent;border:1px solid var(--line);color:var(--mut)}
-.set-grp{margin-bottom:14px;border-top:1px solid var(--line);padding-top:12px}
-.set-grp h4{margin:0 0 8px;font-size:calc(var(--fs-base) - 1px);color:var(--txt);font-weight:700}
-.set-opt{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;font-size:calc(var(--fs-base) - 1px)}
-.set-opt input[type=radio],.set-opt input[type=checkbox]{accent-color:var(--acc2);width:18px;height:18px;cursor:pointer}
-.set-save{width:100%;background:var(--acc);color:#052e16;border:0;padding:11px;border-radius:10px;font-weight:700;font-size:calc(var(--fs-base) + 1px);cursor:pointer;margin-top:6px}
-.gbtn{width:100%;border-radius:10px;padding:10px;font-size:calc(var(--fs-base) - 1px);font-weight:700;cursor:pointer;border:1px solid var(--line);background:var(--inp);color:var(--acc2);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px}
-.gbtn.g{border-color:#1d4ed8;color:#93c5fd}
-.gnote{font-size:calc(var(--fs-base) - 3px);color:var(--mut);margin-top:6px;line-height:1.4}
-#nextPicker{position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0.01;border:0;padding:0;margin:0;z-index:-1}
-@media(orientation:landscape){
-  table.reg{font-size:calc(var(--fs-base) - 1px)}
-  td.sr{font-size:var(--fs-base)}
-  table.reg thead tr:first-child td{font-size:calc(var(--fs-base) - 2px)}
-  table.reg thead tr:last-child td{font-size:calc(var(--fs-base) - 3px)}
-  .cal-c{font-size:var(--fs-base)}
-}
-@media(max-width:380px){
-  .inner{grid-template-columns:1fr}
-  .docgrid{grid-template-columns:repeat(2,1fr)}
-  .cal-mid{min-width:82px}
-}
-</style>
-</head>
-<body data-theme="night">
-<h1>⚖️ Adam's Court Diary</h1>
-<p class="sub" id="sub" hidden data-k="sub"></p>
-
-<div id="intro" hidden>
-  <div class="off"><i></i> <span data-k="intro_off"></span></div>
-  <p class="tip" data-k="intro_tip"></p>
-  <p class="warn" data-k="intro_warn"></p>
-  <button class="ix" type="button" id="ix" data-k="intro_ok"></button>
-</div>
-
-<div class="bar">
-  <input id="q" type="search" data-ph="search">
-  <button id="clr" title="Clear">✕</button>
-</div>
-<p class="count" id="count"></p>
-<p class="autostat" id="autoStat" hidden></p>
-
-<div class="cal" id="cal">
-  <div class="cal-head">
-    <button type="button" class="cal-today" data-nav="0" data-k="today"></button>
-    <button class="cbtn dl" type="button" id="bkNow" data-k="save_btn"></button>
-    <button type="button" data-nav="-1">◀</button>
-    <button type="button" class="cal-mid" id="calMid">📅 —</button>
-    <button type="button" data-nav="1">▶</button>
-    <button class="cbtn up" type="button" id="rsBtn" data-k="restore_btn"></button>
-    <button class="cbtn pr" type="button" id="prtBtn" data-k="print_btn"></button>
-    <button class="cbtn st" type="button" id="stBtn" title="Settings">⚙️</button>
-    <input type="file" id="rsFile" accept=".json,application/json" style="display:none">
-  </div>
-  <div class="cal-body">
-    <div class="cal-title" id="calTitle">—</div>
-    <div class="cal-hindu" id="calHindu"></div>
-    <div class="cal-jump">
-      <label data-k="jump_lbl"></label>
-      <input type="date" id="jump">
-    </div>
-    <div class="cal-wd" id="calWd"></div>
-    <div class="cal-g" id="calG"></div>
-  </div>
-</div>
-
-<table class="reg" id="tbl">
-  <colgroup>
-    <col style="width:5%">
-    <col style="width:15%">
-    <col style="width:16%">
-    <col style="width:30%">
-    <col style="width:16%">
-    <col style="width:18%">
-  </colgroup>
-  <thead>
-    <tr>
-      <td class="sr" data-k="c_sr"></td>
-      <td data-k="c_last"></td>
-      <td data-k="c_court"></td>
-      <td data-k="c_party"></td>
-      <td data-k="c_ps"></td>
-      <td data-k="c_next"></td>
-    </tr>
-    <tr>
-      <td class="sr"></td>
-      <td data-k="c_last_s"></td>
-      <td data-k="c_court_s"></td>
-      <td data-k="c_party_s"></td>
-      <td data-k="c_ps_s"></td>
-      <td data-k="c_next_s"></td>
-    </tr>
-  </thead>
-  <tbody id="list"></tbody>
-</table>
-
-<details class="main">
-  <summary><span id="fs" data-k="fs_new"></span> <span class="ar">▾</span></summary>
-
-  <details class="grp" open>
-    <summary><b data-k="g_face"></b></summary>
-    <div class="inner">
-      <div><label data-k="l_lastdate"></label><input name="lastDate" type="date"></div>
-      <div><label data-k="l_pervious"></label><input name="lastProc" data-ph="ph_pervious"></div>
-      <div><label data-k="l_courtname"></label><input name="court" data-ph="ph_court"></div>
-      <div><label data-k="l_courtno"></label><input name="courtNo" data-ph="ph_courtno"></div>
-      <div class="full"><label data-k="l_caseno"></label><input name="caseNumber" required data-ph="ph_caseno"></div>
-      <div><label data-k="l_petitioner"></label><input name="petitioner" data-ph="ph_petitioner"></div>
-      <div><label data-k="l_respondent"></label><input name="respondent" data-ph="ph_respondent"></div>
-      <div class="full"><label data-k="l_todayproc"></label><textarea name="todayProc" data-ph="ph_todayproc"></textarea></div>
-      <div><label data-k="l_ps"></label><input name="policeStation" data-ph="ph_ps"></div>
-      <div class="full">
-        <label data-k="l_uses"></label>
-        <select id="secPick" style="margin-bottom:6px"></select>
-        <input name="section" data-ph="ph_uses">
-        <p class="hint" data-k="h_uses"></p>
-      </div>
-      <div><label data-k="l_nextdate"></label><input name="nextDate" type="date"></div>
-      <div><label data-k="l_nextproc"></label><input name="nextProc" data-ph="ph_nextproc"></div>
-    </div>
-  </details>
-
-  <details class="grp">
-    <summary><b data-k="g_client"></b></summary>
-    <div class="inner">
-      <div class="full"><label data-k="l_clientname"></label><input name="clientName" data-ph="ph_clientname"></div>
-      <div class="full"><label data-k="l_clientphones"></label><div id="cliPhones"></div><button class="mini" type="button" id="cliAdd" data-k="l_addphone"></button></div>
-      <div class="full"><label data-k="l_clientaddr"></label><input name="clientAddress" data-ph="ph_clientaddr"></div>
-    </div>
-  </details>
-
-  <details class="grp">
-    <summary><b data-k="g_opp"></b></summary>
-    <div class="inner">
-      <div class="full"><label data-k="l_opppartyname"></label><input name="oppPartyName" data-ph="ph_opppartyname"></div>
-      <div class="full"><label data-k="l_opppartyphones"></label><div id="oppPartyPhones"></div><button class="mini" type="button" id="oppPartyAdd" data-k="l_addphone"></button></div>
-      <div class="full"><label data-k="l_opppartyaddr"></label><input name="oppPartyAddress" data-ph="ph_opppartyaddr"></div>
-      <div class="full"><label data-k="l_oppname"></label><input name="oppName" data-ph="ph_oppname"></div>
-      <div class="full"><label data-k="l_oppphones"></label><div id="oppPhones"></div><button class="mini" type="button" id="oppAdd" data-k="l_addphone"></button></div>
-      <div class="full"><label data-k="l_oppaddr"></label><input name="oppAddress" data-ph="ph_oppaddr"></div>
-    </div>
-  </details>
-
-  <details class="grp">
-    <summary><b data-k="g_papers"></b></summary>
-    <div class="inner">
-      <div class="full">
-        <label data-k="l_photopdf"></label>
-        <input type="file" id="formFile" multiple accept="image/*,application/pdf">
-        <p class="hint" data-k="h_papers"></p>
-      </div>
-      <div class="full"><label data-k="l_docnotes"></label><textarea name="docNotes" data-ph="ph_docnotes"></textarea></div>
-    </div>
-  </details>
-
-  <details class="grp">
-    <summary><b data-k="g_lib"></b></summary>
-    <div class="inner">
-      <div class="full">
-        <label data-k="l_libadd"></label>
-        <textarea id="libAdd" data-ph="ph_libadd"></textarea>
-        <button class="mini" type="button" id="libAddBtn" data-k="b_libadd"></button>
-        <button class="mini g" type="button" id="libReset" data-k="b_libreset"></button>
-        <p class="libnote" data-k="h_libnote"></p>
-      </div>
-      <div class="full"><div id="libList"></div></div>
-    </div>
-  </details>
-
-  <div class="btnrow">
-    <button class="go" type="button" id="saveBtn" data-k="b_savecase"></button>
-    <button class="cancelbtn" type="button" id="cancelBtn" data-k="b_cancel"></button>
-  </div>
-</details>
-
-<div class="modal-bg" id="mbg"><div class="modal" id="modal"></div></div>
-
-<div class="backup-pop" id="bp">
-  <div class="backup-card">
-    <h3 data-k="bp_title"></h3>
-    <p data-k="bp_msg"></p>
-    <div class="bk-row">
-      <button class="bk-btn bk-now" type="button" id="bpYes" data-k="bp_yes"></button>
-      <button class="bk-btn bk-later" type="button" id="bpNo" data-k="bp_no"></button>
-    </div>
-  </div>
-</div>
-
-<div class="prompt-pop" id="pp">
-  <div class="prompt-card">
-    <h3 id="ppTitle"></h3>
-    <p id="ppMsg"></p>
-    <div class="bk-row">
-      <button class="bk-btn bk-now" type="button" id="ppOk"></button>
-      <button class="bk-btn bk-later" type="button" id="ppNo"></button>
-    </div>
-  </div>
-</div>
-
-<div class="prompt-pop" id="dp">
-  <div class="prompt-card">
-    <h3 id="dpTitle"></h3>
-    <p id="dpMsg" class="note" style="margin-bottom:10px"></p>
-    <input type="date" id="dpInput">
-    <div class="bk-row" style="margin-top:12px">
-      <button class="bk-btn bk-now" type="button" id="dpOk" data-k="save_now"></button>
-      <button class="bk-btn bk-later" type="button" id="dpNo" data-k="stay_cancel"></button>
-    </div>
-  </div>
-</div>
-
-<input type="date" id="nextPicker">
-
-<div class="settings-pop" id="sp">
-  <div class="settings-card">
-    <h3 data-k="s_title"></h3>
-
-    <div class="set-grp">
-      <h4 data-k="s_theme"></h4>
-      <label class="set-opt"><input type="radio" name="theme" value="day"> <span data-k="s_day"></span></label>
-      <label class="set-opt"><input type="radio" name="theme" value="night"> <span data-k="s_night"></span></label>
-      <label class="set-opt"><input type="radio" name="theme" value="system"> <span data-k="s_system"></span></label>
-    </div>
-
-    <div class="set-grp">
-      <h4 data-k="s_font"></h4>
-      <label class="set-opt"><input type="radio" name="fontSize" value="xs"> <span data-k="s_xs"></span></label>
-      <label class="set-opt"><input type="radio" name="fontSize" value="sm"> <span data-k="s_sm"></span></label>
-      <label class="set-opt"><input type="radio" name="fontSize" value="md"> <span data-k="s_md"></span></label>
-      <label class="set-opt"><input type="radio" name="fontSize" value="lg"> <span data-k="s_lg"></span></label>
-      <label class="set-opt"><input type="radio" name="fontSize" value="xl"> <span data-k="s_xl"></span></label>
-    </div>
-
-    <div class="set-grp">
-      <h4 data-k="s_boldh"></h4>
-      <label class="set-opt"><input type="checkbox" id="boldToggle"> <span data-k="s_boldon"></span></label>
-    </div>
-
-    <div class="set-grp">
-      <h4 data-k="s_langh"></h4>
-      <label class="set-opt"><input type="radio" name="lang" value="hi"> A. हिन्दी</label>
-      <label class="set-opt"><input type="radio" name="lang" value="en"> B. English</label>
-      <label class="set-opt"><input type="radio" name="lang" value="bi"> C. द्विभाषी / Diglot</label>
-    </div>
-
-    <div class="set-grp">
-      <h4 data-k="s_hinduh"></h4>
-      <label class="set-opt"><input type="checkbox" id="vsToggle"> <span data-k="s_vsOn"></span></label>
-      <p class="gnote" data-k="s_vsNote"></p>
-    </div>
-
-    <div class="set-grp">
-      <h4 data-k="s_googleh"></h4>
-      <button class="gbtn g" type="button" id="gisBtn" data-k="s_signin"></button>
-      <button class="gbtn" type="button" id="drvBtn" data-k="s_savedrive"></button>
-      <p class="gnote" data-k="s_drivenote"></p>
-    </div>
-
-    <button class="set-save" type="button" id="setSave" data-k="s_apply"></button>
-  </div>
-</div>
-
-<script>
-window.onerror=function(m,s,l,c){try{alert('⚠️ Chhoti si ghalti: '+m+' (line '+l+')\nScreenshot bhej dena, main theek kar dunga. Data safe hai.')}catch(e){}return false;};
-
-var KEY='adam_diary_v1', SKEY='adam_sections_v1', IKEY='adam_intro_v1', BTKEY='adam_bk_time_v1', STKEY='adam_settings_v1', LGKEY='adam_lang_v1', THKEY='adam_theme_v1', DKEY='adam_draft_v1', PCACHE_KEY='adam_panchang_cache_v1';
-var GOOGLE_CLIENT_ID=''; 
-
-var I18N={
-hi:{
-sub:"तारীख-वार लॉगर • डेट सेल पर सिर्फ कैलेंडर • बाकी जगह टैप पर डिटेल • 🖨️ प्रिंट • ☁️ सेव • 100% ऑफ़लाइन",
-intro_off:"डेटा सिर्फ इसी फोन में सेव होता है — इंटरनेट की जरूरत नहीं",
-intro_tip:"💡 अब अगलī तारīkh वाले खाने पर क्लिक करते ही सिर्फ कैलेंडर/तारीख चुनेगा, पूरा फॉर्म नहीं खुलेगा। बाकी किसी भी कॉलम पर क्लिक करने पर केस की डिटेल खुलेगी, फिर Edit कर सकते हो। कैस जिस तारीख पर सेव किया वहीं रहेगा; अगली तारीख डालने पर अगली तारीख पर नया रिकॉर्ड बनेगा, पुराना सुरक्षित रहेगा। कैलेंडर बंद हो तो ◀ ▶ दिन बदलेंगे, खुला हो तो महीना। ⚙️ से थीम/फ़ॉन्ट/भाषा/विक्रम संवत्+पंचांग। बिना सेव किए फॉर्म बंद करोगे तो पहले सेव करने को पूछेगा। अधूरा कैस हर 1 मिनट में अपने-आप सेव होता रहता है — फोन हैंग हो तो भी डेटा नहीं जाएगा।",
-intro_warn:"⚠️ धारा-सूची सिर्फ शॉर्टकट है। BNS/IPC/अन्य एक्ट का नंबर व शीर्षक अपने कोड व नवीनतम संशोधन से पुष्टि करो — यह कानूनी सलाह नहीं। फोटो/PDF फोन की स्टोरेज में (बहुत बड़ी PDF छूट सकती है)।",
-intro_ok:"✕ समझ गया (फिर नहीं दिखेगा)",
-search:"खोजें (इसी तारीख के कैस में): कैस नं., पक्ष, न्यायालय, धारा, थाना, नंबर…",
-today:"आज",save_btn:"☁️ सेव",restore_btn:"⬇ रिस्टोर",print_btn:"🖨️ प्रिंट",jump_lbl:"किसी भी तारीख पर जाओ",
-c_sr:"क्र.",c_last:"अंतिम तिथि",c_court:"न्यायालय",c_party:"वादी बनाम विपक्षी",c_ps:"थाना",c_next:"अगली तिथि",
-c_last_s:"पिछली कार्यवाही",c_court_s:"केस नंबर",c_party_s:"आज की कार्यवाही",c_ps_s:"धारा",c_next_s:"अगली कार्यवाही",
-pr_last:"पिछली तारीख",pr_court:"न्यायालय",pr_party:"वादी बनाम विपक्षी",pr_ps:"थाना",pr_next:"अगली तारीख",
-set_next:"अगली तारीख तय करो",moved:"अगली तारीख पर नया रिकॉर्ड बन गया:",safe_old:"पुराना रिकॉर्ड सुरक्षित:",saved_new:"नया कैस इस तारीख पर सेव हुआ:",updated:"इस तारीख का रिकॉर्ड अपडेट हुआ:",
-dp_msg:"सिर्फ अगली तारीख चुनें। बाकी विवरण बाद में Edit से भर सकते हैं।",
-m_hist:"📅 तारीख-वार इतिहास / कार्यवाही",m_hist_empty:"कोई इतिहास नहीं।",
-fs_new:"➕ नया कैस दर्ज करो",g_face:"मुख्य • 6 कॉलम",g_client:"वादी / Client",g_opp:"विपक्षी पक्ष और वकील",g_papers:"📎 कागजात",g_lib:"📚 धारा-सूची",
-l_lastdate:"↑ अंतिम तिथि (पिछली सुनवाई)",l_pervious:"↓ पिछली कार्यवाही",l_courtname:"↑ न्यायालय (नाम)",l_courtno:"↑ न्यायालय क्र. (बेंच)",l_caseno:"↓ केस नंबर",l_petitioner:"↑ वादी / Petitioner",l_respondent:"↑ विपक्षी / Respondent",l_todayproc:"↓ आज की कार्यवाही (इसी तारीख पर)",l_ps:"↑ थाना",l_uses:"↓ धारा — चुनो या लिखो",l_nextdate:"↑ अगली तिथि (खाली = अभी तय नहीं)",l_nextproc:"↓ अगली कार्यवाही",
-l_clientname:"वादी का नाम",l_clientphones:"वादी के नंबर",l_clientaddr:"वादी का पता",
-l_opppartyname:"विपक्षी पक्ष का नाम",l_opppartyphones:"विपक्षी पक्ष के नंबर",l_opppartyaddr:"विपक्षी पक्ष का पता",
-l_oppname:"विपक्षी वकील का नाम",l_oppphones:"विपक्षी वकील के नंबर",l_oppaddr:"विपक्षी वकील का पता / फर्म",
-l_addphone:"＋ और नंबर जोड़ो",
-l_photopdf:"असली फोटो / PDF चुनो",l_docnotes:"या सिर्फ लिख दो (एक लाइन में एक)",
-l_libadd:"नई धाराएँ जोड़ो (एक लाइन में एक)",b_libadd:"➕ सूची में जोड़ो",b_libreset:"↺ डिफ़ॉल्ट वापस",h_libnote:"जो जोड़ोगे वह इसी फोन में सेव होगा और धारा ड्रॉपडाउन में मिलेगा। ✕ से हटाओ।",
-b_savecase:"कैस सेव करो",b_cancel:"रद्द करो",
-ph_pervious:"नया कैस / नोटिस…",ph_court:"ACJM",ph_courtno:"3",ph_caseno:"383/2026",ph_petitioner:"राज्य",ph_respondent:"लाल व अन्य",ph_todayproc:"आरोप पत्र पढ़ा गया…",ph_ps:"बसई जगनेर",ph_uses:"उदा. धारा 302 IPC / BNS 103 / 138 एनआई एक्ट",h_uses:"जो लिखोगे वह सहेजा और खोज होगा।",ph_nextproc:"साक्ष्य…",ph_clientname:"राम स्वरूप",ph_clientaddr:"चैंबर / घर",ph_opppartyname:"राम लाल",ph_opppartyaddr:"पता / फर्म",ph_oppname:"वकील X",ph_oppaddr:"फर्म का पता",ph_docnotes:"वकालतनामा 12-10-2026\nएफआईआर कॉपी\nचेक रिटर्न मेमो",ph_libadd:"BNS 115 – चोट\nBNS 311 – चोरी\n(अपनी विश्वसनीय सूची पेस्ट करो)",
-m_client:"वादी",m_oppparty:"विपक्षी पक्ष",m_opp:"विपक्षी वकील",m_papers:"📎 कागजात (फोटो / PDF)",m_edit:"✏️ बदलो",m_del:"🗑 हटाओ",m_addfile:"➕ फाइल जोड़ो",m_nonum:"कोई नंबर नहीं। बदलकर जोड़ो।",m_nopdf:"अभी कोई फोटो/PDF नहीं। नीचे से जोड़ो।",m_note:"टैप = पूरी फाइल • ✕ = हटाओ।",
-s_title:"⚙️ सेटिंग्स",s_theme:"थीम",s_day:"दिन (Light)",s_night:"रात (Dark)",s_system:"डिवाइस के अनुसार",s_font:"फ़ॉन्ट साइज़",s_xs:"अति लघु (Extra Small)",s_sm:"लघु (Small)",s_md:"मध्यम (Medium)",s_lg:"बृहत (Large)",s_xl:"अति बृहत (Extra Large)",s_boldh:"बोल्ड टेक्स्ट",s_boldon:"बोल्ड चालू (मोटे अक्षर)",s_langh:"भाषा / Language",s_hinduh:"हिन्दू कैलेंडर",s_vsOn:"विक्रम संवत् + पंचांग दिखाएं (हिन्दी/द्विभाषी में)",s_vsNote:"यह विकल्प ऑनलाइन पंचांग के लिए नेट चाहता है। नेट न हो तो अनुमानित विक्रम संवत दिखेगा और पंचांग देखने का छोटा लिंक खुलेगा। जो नहीं चाहता, OFF रखे।",s_googleh:"Google / क्लाउड",s_signin:"🔑 Google से साइन इन",s_savedrive:"☁️ Drive में सेव",s_drivenote:"'Drive में सेव' बिना लॉगिन के काम करता है — फाइल सीधे Google Drive / Files ऐप को भेज देता है। 'Google से साइन इन' (स्वतः सिंक) के लिए एक बार कंप्यूटर से Google Cloud OAuth Client ID बनाना होगा; तब यह बटन जीवंत हो जाएगा।",s_apply:"✓ लागू करो और सेव",s_close:"✕ बंद करो",
-bp_title:"☁️ अपना डेटा सुरक्षित करो?",bp_msg:"तुमने पिछले 24 घंटे में सेव नहीं लिया। एक फाइल बनेगी — Google Drive / Gmail / WhatsApp में रख लो, ताकि फोन बदलने पर भी रजिस्टर साथ जाए।",bp_yes:"हाँ, अभी लो",bp_no:"बाद में",
-unsaved_title:"⚠️ बिना सेव किए बंद कर रहे हो?",unsaved_body:"यह डेटा अभी सेव नहीं हुआ। पहले सेव करें?",save_now:"हाँ, सेव करो",stay_cancel:"रहने दो",
-cancel_title:"बदलाव रद्द करें?",cancel_body:"अभी किया गया बदलाव रद्द हो जाएगा। पक्का?",cancel_ok:"हाँ, रद्द करो",cancel_no:"रहने दो",
-delete_title:"🗑 कैस हटाएं?",delete_body:"यह कैस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
-msg_casereq:"कैस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई कैस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई कैस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिटाकर बैकअप से भरेगा)",msg_copy:"सेव फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ रिस्टोर से वापस आ जाएगी।",msg_badfile:"यह सही सेव फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की सेव फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूंगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहां से सेव कर लो।",msg_cases:"कैस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने-आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
+delete_title:"🗑 केस हटाएं?",delete_body:"यह केस हमेशा के लिए हट जाएगा। पक्का?",delete_ok:"हाँ, हटाओ",delete_no:"रद्द करो",
+msg_casereq:"केस नंबर जरूरी है",msg_memfull:"फोन की मेमोरी भर गई — कुछ फोटो/PDF हटाकर सेव करो।",msg_nocase:"इस तारीख पर कोई केस नहीं। नीचे ➕ से दर्ज करो।",msg_nosearch:"इस तारीख पर खोज से कोई केस नहीं मिला।",msg_restored:"रिस्टोर हो गया। कुल",msg_merge:"रिस्टोर कैसे करें?\n\nठीक = जोड़ें (पुराने बचेंगे, नए जुड़ेंगे)\nरद्द = बदलें (मिताकर बैकअप से भरेगा)",msg_copy:"सेव फाइल बन गई:",msg_copy2:"अब इसे Google Drive / Gmail / WhatsApp में रख लो — नए फोन पर ⬇ रिस्टोर से वापस आ जाएगी।",msg_badfile:"यह सही सेव फाइल नहीं लग रही।",msg_readerr:"फाइल पढ़ी नहीं जा सकी। क्या यह Adam's Court Diary की सेव फाइल है?",msg_pick:"— सूची से चुनो (या नीचे लिखो) —",msg_gisoff:"🔑 स्वतः सिंक अभी चालू नहीं है। फिलहाल '☁️ Drive में सेव' बटन इस्तेमाल करो — वह बिना लॉगिन के काम करता है। पूर्ण Google सिंक के लिए कंप्यूटर से एक बार Google Cloud OAuth Client ID बनाना होगा (मैं स्टेप दूंगा)।",msg_share:"✅ Drive / Files ऐप को भेज दिया — वहां से सेव कर लो।",msg_cases:"केस",msg_popup:"पॉपअप ब्लॉक हो गया। ब्राउज़र में इस साइट को पॉपअप की अनुमति दो।",h_papers:"📷 फोटो अपने-आप कॉम्प्रेस होगी। 📄 2.5MB से बड़ी PDF छूट सकती है।"
 },
 en:{
 sub:"Date-wise ledger • date cell opens only calendar • other cells open details • auto-draft every 1 min • 🖨️ Print • ☁️ Save • 100% offline",
@@ -1422,6 +877,7 @@ function saveCases(){try{localStorage.setItem(KEY,JSON.stringify(cases));return 
 function saveLib(){localStorage.setItem(SKEY,JSON.stringify(LIB))}
 function saveSettings(){localStorage.setItem(STKEY,JSON.stringify(SETTINGS));localStorage.setItem(LGKEY,LANG);localStorage.setItem(THKEY,THEME.mode);applySettings();applyTheme();}
 function applySettings(){
+  // Font Scale Updated: XS=11, SM=13, MD=16, LG=20, XL=24
   var map={xs:11,sm:13,md:16,lg:20,xl:24};
   var px=map[SETTINGS.size]||16;
   document.documentElement.style.setProperty('--fs-base',px+'px');
@@ -1545,7 +1001,7 @@ function renderPhoneBoxes(el,arr){el.innerHTML='';for(var i=0;i<arr.length;i++){
 function ensureTwo(arr){arr=arr||[];while(arr.length<2)arr.push('');return arr;}
 function readPhoneBoxes(el){var out=[];var ins=el.querySelectorAll('.ph-input');for(var i=0;i<ins.length;i++){out.push(ins[i].value.trim());}return out;}
 
-/* ---- AUTO-DRAFT ---- */
+/* ---- AUTO-DRAFT (har 1 min me adhoora case save; koi refresh nahi) ---- */
 function formSnapshot(){
   var o={_t:Date.now(),_editId:editId,_openDate:openDate||selDate};
   TOP_FIELDS.forEach(function(k){var el=F(k);o[k]=el?el.value:'';});
@@ -1770,10 +1226,7 @@ function saveCurrentCase(){
   return finish();
 }
 
-// --- SMART BATCH PANCHANG LOGIC START ---
-var panchangCache = {};
-try{ panchangCache = JSON.parse(localStorage.getItem(PCACHE_KEY)||'{}'); }catch(e){ panchangCache={}; }
-
+// --- SIMPLE PANCHANG LOGIC (No Async/Await to avoid crashes) ---
 function approxVS(iso){var p=parseISO(iso); var y=p.y + (p.m0>=2?57:56); return (LANG==='en'?'Vikram Samvat ':'विक्रम संवत् ')+y;}
 function loadHc(){
   try{return new Function('return import("https://cdn.jsdelivr.net/npm/hindu-calendar@latest/+esm")')();}
@@ -1790,122 +1243,53 @@ function hp(res){
   var k=hv(res.karana); if(k)a.push(k);
   return a.filter(Boolean).join(' • ');
 }
-function calculateSingleDate(iso){
+function getHinduInfo(iso){
   return new Promise(function(resolve){
-     var vs=approxVS(iso);
-     var qq=(LANG==='en'?'Panchang ':'पंचांग ')+fmtDate(iso);
-     var url='https://www.google.com/search?q='+encodeURIComponent(qq);
-     
-     // Try library first
-     loadHc().then(function(mod){
-       var fn=mod.getDetails || (mod.default && mod.default.getDetails);
-       if(!fn) throw 0;
-       var p=parseISO(iso); var d=new Date(p.y,p.m0,p.d,12,0,0);
-       var tz=-d.getTimezoneOffset()/60;
-       var res=fn(d,{lat:28.6139,lng:77.2090,timezone:tz});
-       var samvat=res.samvat||res.vikramSamvat||res.vikram||{};
-       var vsYear=(samvat.vikram&&samvat.vikram.year)||samvat.year||(res.vikramSamvat&&res.vikramSamvat.year)||(res.vikram&&res.vikram.year);
-       if(vsYear) vs=(LANG==='en'?'Vikram Samvat ':'विक्रम संवत् ')+vsYear;
-       var pc=hp(res||{});
-       
-       if(pc){
-          resolve({text: vs + (' • '+pc), url: '', ok: true});
-       } else {
-          resolve({text:vs, url:url, ok:false});
-       }
-     }).catch(function(){ 
-        resolve({text:vs, url:url, ok:false}); 
-     });
+    var vs=approxVS(iso);
+    var qq=(LANG==='en'?'Panchang ':'पंचांग ')+fmtDate(iso);
+    var url='https://www.google.com/search?q='+encodeURIComponent(qq);
+    
+    var cachedKey='adam_hindu_panchang_'+iso+'_'+(new Date().getTimezoneOffset());
+    try{var cc=JSON.parse(localStorage.getItem(cachedKey)); if(cc && cc.text){resolve(cc);return;}}catch(e){}
+    
+    loadHc().then(function(mod){
+      var fn=mod.getDetails || (mod.default && mod.default.getDetails);
+      if(!fn) throw 0;
+      var p=parseISO(iso); var d=new Date(p.y,p.m0,p.d,12,0,0);
+      var tz=-d.getTimezoneOffset()/60;
+      var res=fn(d,{lat:28.6139,lng:77.2090,timezone:tz});
+      var samvat=res.samvat||res.vikramSamvat||res.vikram||{};
+      var vsYear=(samvat.vikram&&samvat.vikram.year)||samvat.year||(res.vikramSamvat&&res.vikramSamvat.year)||(res.vikram&&res.vikram.year);
+      if(vsYear) vs=(LANG==='en'?'Vikram Samvat ':'विक्रम संवत् ')+vsYear;
+      var pc=hp(res||{});
+      
+      if(pc){
+         var out={text: vs + (' • '+pc), url: '', ok: true};
+         try{localStorage.setItem(cachedKey,JSON.stringify(out));}catch(e){}
+         resolve(out);
+      } else {
+         resolve({text:vs, url:url, ok:false});
+      }
+    }).catch(function(){ 
+       resolve({text:vs, url:url, ok:false}); 
+    });
   });
 }
-
-async function batchFetchPanchang(startDateIso, daysCount){
-   if(!navigator.onLine) return; // Skip if offline
-   
-   // Check which dates are missing in cache
-   var missingDates = [];
-   var curr = startDateIso;
-   for(var i=0; i<daysCount; i++){
-      if(!panchangCache[curr]){
-         missingDates.push(curr);
-      }
-      curr = shiftDate(curr, 1);
-   }
-   
-   if(missingDates.length === 0) return; // All cached
-   
-   console.log('Fetching Panchang for '+missingDates.length+' dates...');
-   
-   // Fetch in chunks to avoid freezing UI
-   const CHUNK_SIZE = 10;
-   let index = 0;
-   
-   async function processChunk(){
-      if(index >= missingDates.length) return;
-      
-      var chunk = missingDates.slice(index, index + CHUNK_SIZE);
-      var promises = chunk.map(date => calculateSingleDate(date));
-      
-      try {
-         var results = await Promise.all(promises);
-         for(var j=0; j<results.length; j++){
-            var dateStr = chunk[j];
-            var resultObj = results[j];
-            
-            // Only cache successful detailed results OR fallback strings
-            if(resultObj.ok || resultObj.text){
-               panchangCache[dateStr] = resultObj;
-            }
-         }
-         
-         // Save to localStorage periodically
-         try{ localStorage.setItem(PCACHE_KEY, JSON.stringify(panchangCache)); }catch(e){}
-         
-         index += CHUNK_SIZE;
-         
-         // Yield to UI thread briefly
-         await new Promise(r => setTimeout(r, 50));
-         
-         // Continue next chunk
-         processChunk();
-      } catch(e){
-         console.error('Batch fetch error', e);
-      }
-   }
-   
-   processChunk();
-}
-
-function getPanchangForDate(iso){
-   if(panchangCache[iso]) return panchangCache[iso];
-   return null;
-}
-
 function updateHindu(){
   if(!calHindu)return;
   if(!calOpen || LANG==='en' || !SETTINGS.vs){calHindu.innerHTML='';return;}
-  
-  var info = getPanchangForDate(selDate);
-  
-  if(info){
-     var html = esc(info.text||'');
-     if(info.url){
-        html += ' <a href="'+info.url+'" target="_blank" rel="noopener" style="display:inline-block;margin-left:8px;background:var(--acc2);color:#06283d;padding:2px 8px;border-radius:6px;font-weight:700;">📅 '+(LANG==='en'?'View Panchang':'पंचांग देखें')+'</a>';
-     }
-     calHindu.innerHTML = html;
-  } else {
-     // Not in cache yet, trigger fetch for this specific range around selected date
-     // But since we want batch, let's just show loading or approximate VS immediately
-     var vsApprox = approxVS(selDate);
-     calHindu.innerHTML = esc(vsApprox) + ' <span style="color:var(--mut)">• लोडिंग...</span>';
-     
-     // Trigger batch fetch starting from today (or slightly before) covering +/- 3 months
-     // We do this asynchronously so UI doesn't block
-     var startRange = shiftDate(todayISO(), -30); // Go back 1 month
-     batchFetchPanchang(startRange, 180); // Fetch next 6 months total roughly
-  }
+  var req=++hinduReq;
+  calHindu.innerHTML='⏳ '+(LANG==='en'?'Loading Panchang…':'पंचांग लोड…');
+  getHinduInfo(selDate).then(function(info){
+    if(req!==hinduReq)return;
+    var html=esc(info.text||'');
+    if(info.url){
+      html+=' <a href="'+info.url+'" target="_blank" rel="noopener" style="display:inline-block;margin-left:8px;background:var(--acc2);color:#06283d;padding:2px 8px;border-radius:6px;font-weight:700;">📅 '+(LANG==='en'?'View Panchang':'पंचांग देखें')+'</a>';
+    }
+    calHindu.innerHTML=html;
+  }).catch(function(){ if(req===hinduReq)calHindu.innerHTML=''; });
 }
-// --- SMART BATCH PANCHANG LOGIC END ---
+// ---------------------------------------------------------------
 
 function renderCal(){
   calMid.textContent='📅 '+fmtDate(selDate)+(calOpen?' ▾':'');
@@ -1916,25 +1300,7 @@ function renderCal(){
   var dim=new Date(viewY,viewM+1,0).getDate();
   var h='';
   for(var i=0;i<first;i++)h+='<div class="cal-c blank"></div>';
-  for(var d=1;d<=dim;d++){
-     var iso=isoOf(viewY,viewM,d);
-     var cls='cal-c';
-     if(iso===selDate)cls+=' sel';
-     if(iso===tis)cls+=' td';
-     
-     // Get mini panchang text if available
-     var pInfo = getPanchangForDate(iso);
-     var miniText = '';
-     if(pInfo && pInfo.ok && pInfo.text){
-        // Extract just Tithi part for brevity? Or short summary
-        // Let's take the whole string but CSS will truncate it nicely
-        miniText = '<div class="mini-panchang">'+esc(pInfo.text.replace(/^[^•]+•\s*/, '').substring(0, 15))+'…</div>';
-     } else if (pInfo && pInfo.url) {
-         miniText = '<div class="mini-panchang" style="color:var(--acc2)">?</div>';
-     }
-
-     h+='<div class="'+cls+'" data-date="'+iso+'"><span>'+d+'</span>'+(has[iso]?'<i class="dot"></i>':'')+miniText+'</div>';
-  }
+  for(var d=1;d<=dim;d++){var iso=isoOf(viewY,viewM,d);var cls='cal-c';if(iso===selDate)cls+=' sel';if(iso===tis)cls+=' td';h+='<div class="'+cls+'" data-date="'+iso+'"><span>'+d+'</span>'+(has[iso]?'<i class="dot"></i>':'')+'</div>';}
   calG.innerHTML=h;
   updateHindu();
 }
@@ -2088,14 +1454,6 @@ setSave.addEventListener('click',function(){
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 
 applyI18n();buildPicker();renderLib();clearForm();loadDraft();render();maybeEveningPrompt();startAutoSave();
-
-// Initial Batch Fetch Trigger when app loads
-if(navigator.onLine && SETTINGS.vs){
-   setTimeout(function(){
-      var startRange = shiftDate(todayISO(), -30);
-      batchFetchPanchang(startRange, 180);
-   }, 2000); // Wait 2 seconds after load
-}
 </script>
 </body>
 </html>
